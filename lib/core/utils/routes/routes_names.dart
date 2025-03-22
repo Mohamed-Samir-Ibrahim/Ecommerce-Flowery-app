@@ -3,5 +3,27 @@ class RoutesNames {
   static const String loginScreen='login_screen.dart';
   static const String registerScreen='register_screen.dart';
   static const String forgetPassword='forget_password_screen.dart';
-
+  static const String emailVerification = 'emailVerification';
+  static const String resetPassWord = 'resetPassWord';
+  static const String changePassWord = 'changePassWord';
+  static const String homeScreen = 'homeScreen';
+  static const String occasionScreen = 'occasionScreen';
+  static const String categoriesView = 'categoriesView';
+  static const String productsDetailsView = 'productsDetailsView';
+  static const String mostSellingScreen = 'mostSellingScreen';
+  static const String profileMainScreen = 'profileMainScreen';
+  static const String aboutAppView = 'aboutAppView';
+  static const String termsAndConditionsPage = 'TermsAndConditionsPage';
+  static const String savedAddressScreen = 'savedAddressScreen';
+  static const String addressScreen = 'addressScreen';
+  static const String orderView = 'orderView';
+  static const String profileView = "profileView";
+  static const String resetPasswordProfileView = 'resetPasswordProfileView';
+  static const String checkoutScreen = 'checkoutScreen';
+  static const String mapView = 'mapView';
+  static const String searchView = 'searchView';
+  static const String notificationView = 'notificationView';
+  static const String cartScreen = 'cartScreen';
+  static const String placeOrderSuccess= 'placeOrderSuccess';
+  static const String trackOrder = 'trackOrder';
 }

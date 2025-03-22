@@ -76,6 +76,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                 )
               : const SizedBox(),
           Container(
+            height: 56.h,
             margin: const EdgeInsets.only(top: MarginManager.m5),
             decoration: BoxDecoration(
               color: widget.backgroundColor ??
@@ -86,7 +87,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                       widget.borderBackgroundColor ?? ColorManager.primary),
             ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: TextFormField(
+            child: 
+            TextFormField(
               maxLines: widget.maxLines ?? 1,
               controller: widget.controller,
               focusNode: widget.focusNode,
