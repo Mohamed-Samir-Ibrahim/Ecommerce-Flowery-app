@@ -2,10 +2,10 @@ import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/core/utils/resources/custom_elevated_button.dart';
 import 'package:flowery/core/utils/resources/main_text_field.dart';
 import 'package:flowery/core/utils/resources/string_manager.dart';
+import 'package:flowery/core/utils/resources/styles_manager.dart';
 import 'package:flowery/core/utils/resources/validator_manager.dart';
 import 'package:flowery/core/utils/resources/values_manager.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
-import 'package:flowery/utils/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

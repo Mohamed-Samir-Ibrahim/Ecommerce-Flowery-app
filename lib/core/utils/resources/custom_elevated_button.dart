@@ -1,5 +1,5 @@
 import 'package:flowery/core/utils/resources/color_manager.dart';
-import 'package:flowery/utils/resources/styles_manager.dart';
+import 'package:flowery/core/utils/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
