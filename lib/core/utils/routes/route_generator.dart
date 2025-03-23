@@ -1,7 +1,10 @@
-import 'package:flowery/presentation/screen/auth_screen/login/login_screen.dart';
-import 'package:flowery/presentation/screen/home_screen/layout_view.dart';
-import 'package:flutter/material.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
+
+import 'package:flutter/material.dart';
+
+import '../../../presentation/auth/screens/login_screen.dart';
+import '../../../presentation/home/layout_view.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {

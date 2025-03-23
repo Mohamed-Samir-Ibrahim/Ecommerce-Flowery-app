@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: SizeManager.s10.h),
                           CustomElevatedButton(
                             isStadiumBorder: false,
-                            label: StringManager.continueasguest,
+                            label: StringManager.continueAsGuest,
                             backgroundColor: const Color.fromARGB(
                               255,
                               255,

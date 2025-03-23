@@ -1,5 +1,5 @@
 import 'package:flowery/di/injetible_intinalizer.dart';
-import 'package:flowery/presentation/screen/auth_screen/login/login_screen.dart';
+import 'package:flowery/presentation/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
