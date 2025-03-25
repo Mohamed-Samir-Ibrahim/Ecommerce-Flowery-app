@@ -1,4 +1,5 @@
 import 'package:flowery/core/utils/routes/routes_names.dart';
+import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,13 @@ class RouteGenerator {
               (context) => LoginScreen(),
           settings: settings,
         );
+      case RoutesNames.registerScreen:
+        return MaterialPageRoute(
+          builder:
+              (context) => SignUpScreen(),
+          settings: settings,
+        );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const LayoutView(),
