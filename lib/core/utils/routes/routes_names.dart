@@ -1,8 +1,8 @@
 class RoutesNames {
   static const String layout = "/";
-  static const String loginScreen='login_screen.dart';
-  static const String registerScreen='register_screen.dart';
-  static const String forgetPassword='forget_password_screen.dart';
+  static const String loginScreen = 'login_screen.dart';
+  static const String registerScreen = 'register_screen.dart';
+  static const String forgetPassword = 'forget_password_screen.dart';
   static const String emailVerification = 'emailVerification';
   static const String resetPassWord = 'resetPassWord';
   static const String changePassWord = 'changePassWord';
@@ -24,6 +24,7 @@ class RoutesNames {
   static const String searchView = 'searchView';
   static const String notificationView = 'notificationView';
   static const String cartScreen = 'cartScreen';
-  static const String placeOrderSuccess= 'placeOrderSuccess';
+  static const String placeOrderSuccess = 'placeOrderSuccess';
   static const String trackOrder = 'trackOrder';
+  static const String bottomNavScreen = 'bottomNavScreen';
 }
