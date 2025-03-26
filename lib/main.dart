@@ -1,3 +1,4 @@
+import 'package:flowery/core/utils/routes/route_generator.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/screens/login_screen.dart';
@@ -28,9 +29,10 @@ class MyApp extends StatelessWidget {
       title: 'Ecommerce Flowery',
       debugShowCheckedModeBanner: false,
       theme:ThemeData.light(),
+      // home: LoginScreen(),
+      onGenerateRoute: RouteGenerator.generateRoutes,
       initialRoute: RoutesNames.loginScreen,
       //ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
-      onGenerateRoute: RouteGenerator.generateRoutes,
     ),
   );
   }
