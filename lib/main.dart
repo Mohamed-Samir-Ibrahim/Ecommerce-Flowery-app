@@ -5,6 +5,8 @@ import 'package:flowery/presentation/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'core/utils/routes/route_generator.dart';
 void main() async {
  // configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +31,8 @@ class MyApp extends StatelessWidget {
       theme:ThemeData.light(),
       // home: LoginScreen(),
       onGenerateRoute: RouteGenerator.generateRoutes,
-        initialRoute: RoutesNames.forgetPassword,
+      initialRoute: RoutesNames.loginScreen,
       //ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
-      //onGenerateRoute: RouteGenerator.generateRoutes,
     ),
   );
   }
