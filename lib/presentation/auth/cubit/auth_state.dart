@@ -25,6 +25,7 @@ class AuthState extends Equatable{
     Status? status,
     ForgetPasswordResponse? forgetPassword,
     VerifyResetResponse? verifyReset,
+
     Exception? exception,
     String? loadingMessage,
   }) {
