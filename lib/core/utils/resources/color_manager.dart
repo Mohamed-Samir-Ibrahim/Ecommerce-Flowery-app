@@ -5,6 +5,7 @@ abstract class ColorManager {
   static Color appBarTitleColor = const Color(0xFF06004F);
   static Color primaryDark = const Color(0xFF06004F);
   static Color darkGrey = const Color(0xff525252);
+  static Color white60 = const Color(0xffCFCFCF);
   static Color grey = const Color(0xff737477);
   static Color lightGrey = const Color(0xff9E9E9E);
   static Color black = const Color(0xff000000);
