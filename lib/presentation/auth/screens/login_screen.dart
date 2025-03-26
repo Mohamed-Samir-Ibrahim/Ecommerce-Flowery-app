@@ -131,7 +131,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: ColorManager.black,
                               fontSize: SizeManager.s18,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                RoutesNames.bottomNavScreen,
+                              );
+                            },
                           ),
                         ],
                       ),
