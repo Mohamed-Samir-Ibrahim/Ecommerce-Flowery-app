@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: AuthRepositoryContract)
 
 class AuthRepositoryImplementation extends AuthRepositoryContract{
-  AuthRemoteDataSourceContract _authRemoteDataSourceContract;
+  final AuthRemoteDataSourceContract _authRemoteDataSourceContract;
   AuthRepositoryImplementation(this._authRemoteDataSourceContract);
   @override
   Future<ApiResult<ForgetPasswordResponse>> forgetPassword({required ForgetPasswordRequest email})async {
@@ -22,4 +22,5 @@ class AuthRepositoryImplementation extends AuthRepositoryContract{
     return await _authRemoteDataSourceContract.verifyReset(resetCode: resetCode);
 
   }
+
 }

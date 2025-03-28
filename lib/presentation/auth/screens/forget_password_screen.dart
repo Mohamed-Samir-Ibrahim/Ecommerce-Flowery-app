@@ -65,8 +65,8 @@ class ForgetPassword extends StatelessWidget {
                   SizedBox(height: 20.h),
                   CustomTextFormField(
                     controller: authViewModel.emailController,
-                    hint: "Enter your email",
-                    label: "Email",
+                    hintText: "Enter your email",
+                    labelText: "Email",
                   ),
                   SizedBox(height: 48.h),
 

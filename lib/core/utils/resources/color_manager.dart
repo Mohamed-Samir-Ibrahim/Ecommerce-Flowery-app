@@ -17,5 +17,5 @@ abstract class ColorManager {
   static Color yellow = const Color(0xFFFDD835);
   static Color darkPrimary = const Color(0xffd17d11);
   static Color lightPrimary = const Color(0xCCd17d11); // color with 80% opacity
-  static Color error = const Color(0xffe61f34); // red color
+  static Color red = const Color(0xffe61f34); // red color
 }
