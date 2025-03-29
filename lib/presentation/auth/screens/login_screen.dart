@@ -44,20 +44,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextFormField(
-                    hint: 'Enter your email address',
-                    backgroundColor: ColorManager.white,
-                    label: StringManager.email,
-                    validation: ValidatorManager.validateEmail,
-                    textInputType: TextInputType.emailAddress,
+                    hintText: 'Enter your email address',
+                    labelText: StringManager.email,
+                    validator: ValidatorManager.validateEmail,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: SizeManager.s28.h),
                   CustomTextFormField(
-                    hint: 'Enter password',
-                    backgroundColor: ColorManager.white,
-                    label: 'Password',
-                    validation: ValidatorManager.validatePassword,
-                    isObscured: true,
-                    textInputType: TextInputType.visiblePassword,
+                    hintText: 'Enter password',
+                    labelText: 'Password',
+                    validator: ValidatorManager.validatePassword,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: SizeManager.s8.h),
                   Row(
@@ -81,9 +79,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       GestureDetector(
                         onTap:
                             () => Navigator.pushNamed(
-                              context,
-                              RoutesNames.forgetPassword,
-                            ),
+                          context,
+                          RoutesNames.forgetPassword,
+                        ),
                         child: Text(
                           'Forget password?',
                           style: getMediumStyle(
@@ -120,7 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: SizeManager.s10.h),
                           CustomElevatedButton(
                             isStadiumBorder: false,
-                            label: StringManager.continueAsGuest,
+
+label: '',
                             backgroundColor: const Color.fromARGB(
                               255,
                               255,
@@ -131,7 +130,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: ColorManager.black,
                               fontSize: SizeManager.s18,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+
+                            },
                           ),
                         ],
                       ),
@@ -151,9 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       GestureDetector(
                         onTap:
                             () => Navigator.pushNamed(
-                              context,
-                              RoutesNames.registerScreen,
-                            ),
+                          context,
+                          RoutesNames.registerScreen,
+                        ),
                         child: Text(
                           'Sign up',
                           style: getSemiBoldStyle(

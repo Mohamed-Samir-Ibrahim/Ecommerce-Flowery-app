@@ -3,170 +3,133 @@ import 'package:flowery/core/utils/resources/font_manager.dart';
 import 'package:flowery/core/utils/resources/styles_manager.dart';
 import 'package:flowery/core/utils/resources/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 
-  class CustomTextFormField extends StatefulWidget {
-    const CustomTextFormField({
-      super.key,
-      this.controller,
-      this.focusNode,
-      this.nextFocus,
-      this.label,
-      this.hint,
-      this.isObscured = false,
-      this.iconData,
-      this.textInputType = TextInputType.text,
-      this.backgroundColor,
-      this.hintTextStyle,
-      this.labelTextStyle,
-      this.cursorColor,
-      this.readOnly = false,
-      this.validation,
-      this.onTap,
-      this.maxLines,
-      this.prefixIcon,
-      this.borderBackgroundColor,
-      this.suffixIcon,
-    });
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField({
+    super.key,
+    this.controller,
+    this.hintText,
+    this.filled ,
+    this.readOnly ,
+    this.validator,
+    this.fillColour,
+    this.suffixIcon,
+    this.keyboardType,
+    this.hintStyle,
+    this.overrideValidator = false,
+    this.prefixIcon,
+    this.onChanged,
+    this.maxLength,
+    this.maxLines ,
+    this.height ,
+    this.width ,
+    this.labelText,
+    this.autofocus=false,
+    this.inputFormatters = const [],
+    this.obscureText,
+    this.fontSize,
+  });
 
-    final TextEditingController? controller;
-    final FocusNode? focusNode;
-    final FocusNode? nextFocus;
-    final bool isObscured;
-    final String? label;
-    final String? hint;
-    final TextInputType textInputType;
-    final IconData? iconData;
-    final Color? backgroundColor;
-    final Color? borderBackgroundColor;
-    final TextStyle? hintTextStyle;
-    final TextStyle? labelTextStyle;
-    final Color? cursorColor;
-    final bool readOnly;
-    final int? maxLines;
-    final Widget? prefixIcon;
-    final Widget? suffixIcon;
-    final String? Function(String?)? validation;
-    final void Function()? onTap;
+  final String? Function(String?)? validator;
+  final Function? onChanged;
+  final TextEditingController? controller;
+  final bool? filled;
+  final Color? fillColour;
+  final bool? obscureText;
+  final bool? readOnly;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final String? hintText;
+  final String? labelText;
+  final TextInputType? keyboardType;
+  final bool overrideValidator;
+  final TextStyle? hintStyle;
+  final int? maxLength;
+  final int? maxLines;
+  final double? height ;
+  final double? width ;
+  final double? fontSize ;
+  final bool autofocus ;
+  final List<TextInputFormatter> inputFormatters ;
 
-    @override
-    State<CustomTextFormField> createState() => _CustomTextFormFieldState();
-  }
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autofocus: autofocus,
+      controller: controller,
+      cursorColor: ColorManager.grey,
+      style:  TextStyle(
+        // height:height,
+        fontSize: fontSize??16.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorManager.grey,
+      ),
+      validator:  validator == null ? null: (value) => validator!(value),
 
-  class _CustomTextFormFieldState extends State<CustomTextFormField> {
-    late bool hidden = widget.isObscured;
-    String? errorText;
 
-    @override
-    Widget build(BuildContext context) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          widget.label != null
-              ? Padding(
-                  padding: const EdgeInsets.only(top: PaddingManager.p2),
-                  child: Text(
-                    widget.label!,
-                    style: widget.labelTextStyle ??
-                        getMediumStyle(color: ColorManager.grey)
-                            .copyWith(fontSize: FontSize.s12.sp),
-                  ),
-                )
-              : const SizedBox(),
-          Container(
-            height: 56.h,
-            margin: const EdgeInsets.only(top: MarginManager.m5),
-            decoration: BoxDecoration(
-              color: widget.backgroundColor ??
-                  ColorManager.darkGrey.withOpacity(.15),
-              borderRadius: BorderRadius.circular(SizeManager.s4),
-              border: Border.all(
-                  color:
-                      widget.borderBackgroundColor ?? ColorManager.primary),
+      onChanged: onChanged == null ? (value) {} : (value) => onChanged!(value),
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
+      obscureText: obscureText?? false,
+      maxLines: maxLines??1,
+      readOnly: readOnly ?? false,
+      maxLength: maxLength,
+
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        isDense: true,
+        counterText: '',
+        alignLabelWithHint: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: ColorManager.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: ColorManager.grey),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: ColorManager.red),
+
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: ColorManager.red),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
+        filled: filled,
+        fillColor: fillColour,
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
+        labelText: labelText,
+
+        labelStyle:
+        TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: ColorManager.grey,
+        ),
+        hintText: hintText,
+        hintStyle: hintStyle ??
+            TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+              color: Color(0xffA6A6A6),
             ),
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: 
-            TextFormField(
-              maxLines: widget.maxLines ?? 1,
-              controller: widget.controller,
-              focusNode: widget.focusNode,
-              readOnly: widget.readOnly,
-              style: getMediumStyle(color: ColorManager.black)
-                  .copyWith(fontSize: FontSize.s18.sp),
-              obscureText: hidden,
-              keyboardType: widget.textInputType,
-              obscuringCharacter: '*',
-              cursorColor: widget.cursorColor ?? ColorManager.black,
-              onTap: widget.onTap,
-              onEditingComplete: () {
-                widget.focusNode?.unfocus();
-                if (widget.nextFocus != null) {
-                  FocusScope.of(context).requestFocus(widget.nextFocus);
-                }
-              },
-              textInputAction: widget.nextFocus == null
-                  ? TextInputAction.done
-                  : TextInputAction.next,
-              validator: (value) {
-                if (widget.validation == null) {
-                  setState(() {
-                    errorText = null;
-                  });
-                } else {
-                  setState(() {
-                    errorText = widget.validation!(value);
-                  });
-                }
-                return errorText;
-              },
-              decoration: InputDecoration(
-    contentPadding: const EdgeInsets.all(PaddingManager.p8),
-    hintText: widget.hint,
-    prefixIcon: widget.prefixIcon,
-    suffixIcon: widget.isObscured
-        ? IconButton(
-            onPressed: () {
-              setState(() {
-                hidden = !hidden;
-              });
-            },
-            iconSize: SizeManager.s24,
-            splashRadius: SizeManager.s1,
-            color: ColorManager.grey,
-            icon: Icon(
-              hidden ? Icons.visibility_off : Icons.visibility, // التبديل بين الأيقونتين
-              color: ColorManager.grey,
-            ),
-          )
-        : widget.suffixIcon,
-        hintStyle: widget.hintTextStyle ??
-        getRegularStyle(color: ColorManager.black).copyWith(fontSize: 18.sp),
-        border: InputBorder.none,
-        enabledBorder: InputBorder.none,
         errorStyle: TextStyle(
-       fontSize: SizeManager.s0,
-       color: ColorManager.black,
-    ),
-  ),
-
-            ),
-          ),
-          errorText == null
-              ? const SizedBox()
-              : Padding(
-                  padding: const EdgeInsets.only(
-                    top: PaddingManager.p8,
-                    left: PaddingManager.p8,
-                  ),
-                  child: Text(
-                    errorText!,
-                    style: getMediumStyle(color: ColorManager.black)
-                        .copyWith(fontSize: 18.sp),
-                  ),
-                ),
-        ],
-      );
-    }
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: Colors.red,
+        ),
+      ),
+    );
   }
+}
