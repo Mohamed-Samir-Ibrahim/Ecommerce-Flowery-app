@@ -50,7 +50,7 @@ class CustomElevatedButton extends StatelessWidget {
             Text(
               label,
               style: textStyle ??
-                  TextStyle(color: ColorManager.white,fontSize: 12.sp,fontWeight: FontWeight.w500)
+                  getMediumStyle(color: ColorManager.white)
                       .copyWith(fontSize: 20.sp),
             ),
             SizedBox(

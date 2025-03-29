@@ -49,8 +49,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                     child: CustomTextFormField(
 
-                                      hintText: 'Enter your frist name',
-                                      labelText: StringManager.firstName,
+                                      hint: 'Enter your frist name',
+                                      backgroundColor: ColorManager.white,
+                                      label: StringManager.firstName,
                                     ),
                                   ),
                                   SizedBox(
@@ -58,8 +59,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   Expanded(
                                     child: CustomTextFormField(
-                                      hintText: 'Enter your last name',
-                                      labelText: StringManager.lastName,
+                                      hint: 'Enter your last name',
+
+                                      backgroundColor: ColorManager.white,
+                                      label: StringManager.lastName,
 
                                     ),
                                   ),
@@ -69,10 +72,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               SizedBox(height: SizeManager.s20.h),
 
                               CustomTextFormField(
-                                hintText: 'Enter your email address',
-                                labelText: StringManager.email,
-                                validator: ValidatorManager.validateEmail,
-                                keyboardType: TextInputType.emailAddress,
+                                hint: 'Enter your email address',
+                                backgroundColor: ColorManager.white,
+                                label: StringManager.email,
+                                validation: ValidatorManager.validateEmail,
+                                textInputType: TextInputType.emailAddress,
                               ),
                               SizedBox(height: SizeManager.s20.h),
 
@@ -80,11 +84,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 children: [
                                   Expanded(
                                     child: CustomTextFormField(
-                                      hintText: 'Enter password',
-                                      labelText: 'Password',
-                                      validator: ValidatorManager.validatePassword,
-                                      obscureText: true,
-                                      keyboardType: TextInputType.visiblePassword,
+                                      hint: 'Enter password',
+                                      backgroundColor: ColorManager.white,
+                                      label: 'Password',
+                                      validation: ValidatorManager.validatePassword,
+                                      isObscured: true,
+                                      textInputType: TextInputType.visiblePassword,
                                     ),
                                   )
                                   ,
@@ -93,11 +98,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   Expanded(
                                     child: CustomTextFormField(
-                                      hintText: 'confirm password',
-                                      labelText: 'Confirm password',
-                                      validator: ValidatorManager.validatePassword,
-                                      obscureText: true,
-                                      keyboardType: TextInputType.visiblePassword,
+                                      hint: 'confirm password',
+                                      backgroundColor: ColorManager.white,
+                                      label: 'Confirm password',
+                                      validation: ValidatorManager.validatePassword,
+                                      isObscured: true,
+                                      textInputType: TextInputType.visiblePassword,
                                     ),
                                   )
                                 ],
@@ -106,9 +112,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               SizedBox(height: SizeManager.s20.h),
 
                               CustomTextFormField(
-                                keyboardType: TextInputType.phone,
-                                hintText: 'Enter phone number',
-                                labelText: 'Phone Number',
+                                textInputType: TextInputType.phone,
+                                hint: 'Enter phone number',
+                                label: 'Phone Number',
+                                backgroundColor: ColorManager.white,
                               ),
 
                               SizedBox(height: SizeManager.s20.h),

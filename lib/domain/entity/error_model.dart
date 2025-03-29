@@ -4,20 +4,20 @@
 class ErrorModel {
   ErrorModel({
     this.message,
-    this.error,});
+    this.errors,});
 
   ErrorModel.fromJson(dynamic json) {
     message = json['message'];
-    error = json['errors'] != null ? ErrorData.fromJson(json['errors']) : null;
+    errors = json['errors'] != null ? ErrorData.fromJson(json['errors']) : null;
   }
   String? message;
-  ErrorData? error;
+  ErrorData? errors;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['message'] = message;
-    if (error != null) {
-      map['errors'] = error?.toJson();
+    if (errors != null) {
+      map['errors'] = errors?.toJson();
     }
     return map;
   }

@@ -16,7 +16,7 @@ class ValidatorManager {
     if (value == null || value.isEmpty) {
       return StringManager.enterYourPassword;
     }
-    if (value.length < 8) {
+    if (value.length < 6) {
       return StringManager.passwordError;
     }
     return null;
