@@ -40,7 +40,7 @@ class OtpScreen extends StatelessWidget {
               );
             } else if (state.status == Status.success &&
                 state.verifyResetResponse != null) {
-
+              Navigator.pushNamed(context, RoutesNames.resetPassWord);
               print("succcccess");
             } else if (state.status == Status.error &&
                 state.exception != null) {

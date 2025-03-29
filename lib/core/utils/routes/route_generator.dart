@@ -8,6 +8,7 @@ import 'package:flowery/presentation/bottom_navigation_bar/bottom_navigation_bar
 import 'package:flutter/material.dart';
 
 import '../../../presentation/auth/screens/login_screen.dart';
+import '../../../presentation/auth/screens/reset_password_screen.dart';
 import '../../../presentation/home/layout_view.dart';
 
 class RouteGenerator {
@@ -43,12 +44,17 @@ class RouteGenerator {
           builder: (context) => BottomNavScreen(),
           settings: settings,
         );
-
+      case RoutesNames.resetPassWord:
+        return MaterialPageRoute(
+          builder: (context) => ResetPasswordScreen(),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const LayoutView(),
           settings: settings,
         );
+
     }
   }
 }

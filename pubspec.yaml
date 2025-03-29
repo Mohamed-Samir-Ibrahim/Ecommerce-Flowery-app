@@ -45,6 +45,7 @@ dependencies:
   equatable: ^2.0.7
   dio:
   logger:
+  json_annotation:
 dev_dependencies:
   flutter_test:
     sdk: flutter

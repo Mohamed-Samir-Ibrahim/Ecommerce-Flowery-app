@@ -8,7 +8,7 @@ class ErrorModel {
 
   ErrorModel.fromJson(dynamic json) {
     message = json['message'];
-    error = json['errors'] != null ? ErrorData.fromJson(json['errors']) : null;
+    error = json['error'] != null ? ErrorData.fromJson(json['error']) : null;
   }
   String? message;
   ErrorData? error;
@@ -17,7 +17,7 @@ class ErrorModel {
     final map = <String, dynamic>{};
     map['message'] = message;
     if (error != null) {
-      map['errors'] = error?.toJson();
+      map['error'] = error?.toJson();
     }
     return map;
   }

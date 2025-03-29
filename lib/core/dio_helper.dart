@@ -19,6 +19,7 @@ abstract class DioModule {
       receiveTimeout: const Duration(seconds: 10),
       headers: {
         "Content-Type": "application/json",
+
       },
     ),);
     dio.interceptors.add(logInterceptor);
