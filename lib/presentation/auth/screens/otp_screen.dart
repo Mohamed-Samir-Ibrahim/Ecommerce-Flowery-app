@@ -25,11 +25,7 @@ class OtpScreen extends StatelessWidget {
         appBar: AppBar(title: Text("Password")),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
-            if (state.status != Status.loading) {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-            }
+
             if (state.status == Status.loading) {
               showDialog(
                 context: context,
@@ -40,10 +36,12 @@ class OtpScreen extends StatelessWidget {
               );
             } else if (state.status == Status.success &&
                 state.verifyResetResponse != null) {
+              Navigator.pop(context);
 
               print("succcccess");
             } else if (state.status == Status.error &&
                 state.exception != null) {
+              Navigator.pop(context);
 
               showDialog(
                 context: context,
