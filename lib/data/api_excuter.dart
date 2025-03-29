@@ -18,26 +18,26 @@ Future<ApiResult<T>> executeApi<T>(ApiCall<T> apiCall) async {
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.connectionTimeout:
         {
-          return Failure(NetworkError());
+          return Error(NetworkError());
         }
       case DioExceptionType.badResponse:
         {
           var responseCode = ex.response?.statusCode ?? 0;
           var errorModel = ErrorModel.fromJson(ex.response?.data);
           if (responseCode >= 400 && responseCode < 500) {
-            return Failure(ClientError(errorModel));
+            return Error(ClientError(errorModel));
           }
           if (responseCode >= 500 && responseCode < 600) {
-            return Failure(ServerError(errorModel));
+            return Error(ServerError(errorModel));
           }
-          return Failure(Exception("Something went wrong!"));
+          return Error(Exception("Something went wrong!"));
         }
       default:
         {
-          return Failure(Exception("Something went wrong!"));
+          return Error(Exception("Something went wrong!"));
         }
     }
   } on  Exception catch(ex){
-    return Failure(ex);
+    return Error(ex);
   }
 }

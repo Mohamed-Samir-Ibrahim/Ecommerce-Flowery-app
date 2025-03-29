@@ -37,7 +37,8 @@ class ForgetPassword extends StatelessWidget {
             } else if (state.status == Status.success &&
                 state.forgetPasswordResponse != null) {
 
-              Navigator.pushNamed(context, RoutesNames.emailVerification);
+              Navigator.pushNamed(context, RoutesNames.emailVerification,
+              );
             } else if (state.status == Status.error &&
                 state.exception != null) {
 

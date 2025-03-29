@@ -97,7 +97,7 @@ class OtpScreen extends StatelessWidget {
                       Text("Didn't receive code?"),
                       TextButton(
                         onPressed: () {
-                          authViewModel.emailController.clear();
+                          // authViewModel.emailController.clear();
                           authViewModel.doIntent(ForgetPasswordIntent());
 
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -5,9 +5,9 @@ class Success<T>extends ApiResult<T>{
   T ?data;
   Success(this.data);
 }
-class Failure<T>extends ApiResult<T>{
+class Error<T>extends ApiResult<T>{
   Exception ?exception;
-  Failure(this.exception);
+  Error(this.exception);
 }
 // class Loading<T>extends Result<T>{
 //

@@ -81,15 +81,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i455.ResetPasswordUseCase>(),
       ),
     );
-    final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final dioModule = _$DioModule();
-    gh.singleton<_i361.LogInterceptor>(() => dioModule.ProvideLogger());
-    gh.singleton<_i361.Dio>(
-      () => dioModule.ProvideDio(gh<_i361.LogInterceptor>()),
-    );
-    gh.singleton<_i995.WebServices>(
-      () => dioModule.ProvideWebServices(gh<_i361.Dio>()),
-    );
+
     gh.factory<_i779.SignupRemoteDataSourceContract>(
       () => _i715.SignUpRemoteDataSourceImpl(
         webServices: gh<_i995.WebServices>(),
@@ -104,13 +96,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i179.SignUpUseCase>(
       () => _i179.SignUpUseCase(signupRepository: gh<_i431.SignupRepository>()),
     );
-    gh.factory<_i851.AuthViewModel>(
-      () => _i851.AuthViewModel(signUpUseCase: gh<_i179.SignUpUseCase>()),
-    );
     return this;
   }
 }
 
 class _$DioModule extends _i219.DioModule {}
 
-class _$DioModule extends _i21.DioModule {}
+
