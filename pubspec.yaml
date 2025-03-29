@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   connectivity_plus: ^6.1.3
+  retrofit_generator: ^9.1.9
   injectable: ^2.5.0
   get_it: ^8.0.3
   retrofit: ^4.4.2
@@ -46,6 +47,9 @@ dependencies:
   dio:
   logger:
   json_annotation:
+  json_serializable: ^6.9.4
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
