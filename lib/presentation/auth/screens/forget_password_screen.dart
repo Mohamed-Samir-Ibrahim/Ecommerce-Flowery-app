@@ -1,5 +1,6 @@
 import 'package:flowery/core/utils/resources/custom_elevated_button.dart';
 import 'package:flowery/core/utils/resources/main_text_field.dart';
+import 'package:flowery/core/utils/resources/validator_manager.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
@@ -21,11 +22,7 @@ class ForgetPassword extends StatelessWidget {
         appBar: AppBar(title: Text("Password")),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
-            if (state.status != Status.loading) {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-            }
+
             if (state.status == Status.loading) {
               showDialog(
                 context: context,
@@ -36,10 +33,12 @@ class ForgetPassword extends StatelessWidget {
               );
             } else if (state.status == Status.success &&
                 state.forgetPasswordResponse != null) {
+              Navigator.pop(context);
 
               Navigator.pushNamed(context, RoutesNames.emailVerification);
             } else if (state.status == Status.error &&
                 state.exception != null) {
+              Navigator.pop(context);
 
               showDialog(
                 context: context,
@@ -67,6 +66,8 @@ class ForgetPassword extends StatelessWidget {
                     controller: authViewModel.emailController,
                     hint: "Enter your email",
                     label: "Email",
+                    validation: ValidatorManager.validateEmail,
+
                   ),
                   SizedBox(height: 48.h),
 

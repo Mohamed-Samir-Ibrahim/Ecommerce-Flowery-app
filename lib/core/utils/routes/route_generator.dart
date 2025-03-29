@@ -32,7 +32,7 @@ class RouteGenerator {
       case RoutesNames.emailVerification:
         return MaterialPageRoute(
           builder:
-              (context) => OtpScreen(),
+              (context) => OtpScreen(),);
       case RoutesNames.registerScreen:
         return MaterialPageRoute(
           builder: (context) => SignUpScreen(),
