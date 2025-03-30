@@ -7,6 +7,9 @@ import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
+import '../model/auth_model/signup/signup_request.dart';
+import '../model/auth_model/signup/signup_response.dart';
+
 part 'WebServices.g.dart';
 
 @RestApi(baseUrl: 'https://flower.elevateegy.com/')
@@ -20,5 +23,9 @@ abstract class WebServices {
   @POST(ApiConstant.verifyResetCodeApi)
   Future<VerifyResetResponse> verifyReset(
       @Body() VerifyResetRequest resetCode,
+      );
+  @POST("api/v1/auth/signup")
+  Future<SignupResponseDto>Signup(
+      @Body() Map<String,dynamic>body,
       );
 }

@@ -64,7 +64,7 @@ class ForgetPassword extends StatelessWidget {
                   SizedBox(height: 20.h),
                   CustomTextFormField(
                     controller: authViewModel.emailController,
-                    validation: ValidatorManager.validateEmail,
+                    validator: ValidatorManager.validateEmail,
 
                     hintText: "Enter your email",
                     labelText: "Email",
