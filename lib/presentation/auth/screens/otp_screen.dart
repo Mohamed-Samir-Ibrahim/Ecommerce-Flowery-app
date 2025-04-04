@@ -1,8 +1,5 @@
 import 'package:flowery/core/utils/resources/color_manager.dart';
-import 'package:flowery/core/utils/resources/custom_elevated_button.dart';
-import 'package:flowery/core/utils/resources/main_text_field.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
-import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
@@ -12,15 +9,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
 
   @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  final viewModel = getIt.get<AuthViewModel>();
+
+  @override
   Widget build(BuildContext context) {
-    final authViewModel = getIt.get<AuthViewModel>();
+
 
     return BlocProvider(
-      create: (context) => authViewModel,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(title: Text("Password")),
         body: BlocConsumer<AuthViewModel, AuthState>(
@@ -38,10 +42,13 @@ class OtpScreen extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 },
               );
+
             } else if (state.status == Status.success &&
                 state.verifyResetResponse != null) {
-              Navigator.pushNamed(context, RoutesNames.resetPassWord);
-              print("succcccess");
+
+              Navigator.pushNamed(context, RoutesNames.resetPassWord,
+                arguments: viewModel.emailController.text,);
+
             } else if (state.status == Status.error &&
                 state.exception != null) {
 
@@ -50,7 +57,7 @@ class OtpScreen extends StatelessWidget {
                 builder: (context) {
                   return AlertDialog(
                     title: const Text("Error"),
-                    content: Text((state.exception.toString())),
+                    content: Text(state.verifyResetResponse?.error ?? "Reset code is invalid or has expired"),
                   );
                 },
               );
@@ -76,10 +83,10 @@ class OtpScreen extends StatelessWidget {
                     showCursor: true,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     autofocus: true,
-                    controller: authViewModel.otpCodeController,
+                    controller: viewModel.otpCodeController,
                     onCompleted: (value) {
-                      authViewModel.otpCodeController.text = value;
-                      authViewModel.doIntent(VerifyResetIntent());
+                      viewModel.otpCodeController.text = value;
+                      viewModel.doIntent(VerifyResetIntent());
                     },
                     defaultPinTheme: PinTheme(
                       width: 48.w,
@@ -98,7 +105,7 @@ class OtpScreen extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           // authViewModel.emailController.clear();
-                          authViewModel.doIntent(ForgetPasswordIntent());
+                          viewModel.doIntent(ForgetPasswordIntent());
 
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("code has be resend")),

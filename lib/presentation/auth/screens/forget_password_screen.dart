@@ -13,10 +13,10 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authViewModel = getIt.get<AuthViewModel>();
+    final AuthViewModel viewModel = getIt<AuthViewModel>();
 
     return BlocProvider(
-      create: (context) => authViewModel,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(title: Text("Password")),
         body: BlocConsumer<AuthViewModel, AuthState>(
@@ -38,6 +38,7 @@ class ForgetPassword extends StatelessWidget {
                 state.forgetPasswordResponse != null) {
 
               Navigator.pushNamed(context, RoutesNames.emailVerification,
+                arguments: viewModel.emailController.text,
               );
             } else if (state.status == Status.error &&
                 state.exception != null) {
@@ -65,7 +66,7 @@ class ForgetPassword extends StatelessWidget {
                   Text("Please enter your email associated to your account"),
                   SizedBox(height: 20.h),
                   CustomTextFormField(
-                    controller: authViewModel.emailController,
+                    controller: viewModel.emailController,
                     hintText: "Enter your email",
                     labelText: "Email",
                   ),
@@ -74,7 +75,7 @@ class ForgetPassword extends StatelessWidget {
                   CustomElevatedButton(
                     label: "Confirm",
                     onPressed: () {
-                      authViewModel.doIntent(ForgetPasswordIntent());
+                      viewModel.doIntent(ForgetPasswordIntent());
 
                     },
                   ),

@@ -3,7 +3,6 @@ import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/utils/dialog_utils.dart';
 import '../../../core/utils/resources/custom_elevated_button.dart';
 import '../../../core/utils/resources/main_text_field.dart';
@@ -21,19 +20,7 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-  final AuthViewModel viewModel = getIt<AuthViewModel>();
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   final email = ModalRoute.of(context)?.settings.arguments as String?;
-  //   if (email != null) {
-  //     viewModel.setEmail(email);
-  //
-  //   } else {
-  //
-  //   }
-  // }
+   final AuthViewModel viewModel = getIt<AuthViewModel>();
 
 
   @override
@@ -52,7 +39,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           if (state.status == Status.success&&state.resetPasswordResponse!=null) {
             DialogUtils.showMessageDialog(
               context,
-              message: 'errorrrrrrr',
+              message: state.resetPasswordResponse?.message?? 'Password reset successfully',
               posTitle: 'OK',
               posAction: () {
                 Navigator.pushNamedAndRemoveUntil(
@@ -65,7 +52,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           } else if (state.status == Status.error&&state.exception  != null) {
             DialogUtils.showMessageDialog(
               context,
-              message: state.resetPasswordResponse?.error??"Operation successful",
+              message: state.resetPasswordResponse?.error??"",
               posTitle: 'Try Again',
             );
           }

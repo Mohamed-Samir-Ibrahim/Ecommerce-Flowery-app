@@ -29,19 +29,6 @@ import '../domain/use_case/auth_use_case/reset_password_use_case.dart' as _i455;
 import '../domain/use_case/auth_use_case/verify_reset_use_case.dart' as _i86;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 
-import '../data/data_source/remote_data_source/auth_remote_data_source/signup/signup_remote_data_source_contract.dart'
-    as _i779;
-import '../data/data_source/remote_data_source/auth_remote_data_source/signup/signup_remote_data_source_impl.dart'
-    as _i715;
-import '../data/di.dart' as _i21;
-import '../data/repository_implementation/auth_repository_implementation/signup_repository_impl.dart'
-    as _i717;
-import '../data/web_services/WebServices.dart' as _i995;
-import '../domain/repository_contract/auth_repository_contract/signup/signup_repository.dart'
-    as _i431;
-import '../domain/use_case/auth_use_case/signup_use_case.dart' as _i179;
-import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
-
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
@@ -74,32 +61,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i86.VerifyResetUseCase>(
       () => _i86.VerifyResetUseCase(gh<_i284.AuthRepositoryContract>()),
     );
-    gh.factory<_i851.AuthViewModel>(
+    gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),
         gh<_i86.VerifyResetUseCase>(),
         gh<_i455.ResetPasswordUseCase>(),
       ),
     );
-
-    gh.factory<_i779.SignupRemoteDataSourceContract>(
-      () => _i715.SignUpRemoteDataSourceImpl(
-        webServices: gh<_i995.WebServices>(),
-      ),
-    );
-    gh.factory<_i431.SignupRepository>(
-      () => _i717.SignUpRepositoryImpl(
-        signupRemoteDataSourceContract:
-            gh<_i779.SignupRemoteDataSourceContract>(),
-      ),
-    );
-    gh.factory<_i179.SignUpUseCase>(
-      () => _i179.SignUpUseCase(signupRepository: gh<_i431.SignupRepository>()),
-    );
     return this;
   }
 }
 
 class _$DioModule extends _i219.DioModule {}
-
-
