@@ -29,11 +29,7 @@ class _OtpScreenState extends State<OtpScreen> {
         appBar: AppBar(title: Text("Password")),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
-            if (state.status != Status.loading) {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-            }
+
             if (state.status == Status.loading) {
               showDialog(
                 context: context,
@@ -46,11 +42,14 @@ class _OtpScreenState extends State<OtpScreen> {
             } else if (state.status == Status.success &&
                 state.verifyResetResponse != null) {
 
+
               Navigator.pushNamed(context, RoutesNames.resetPassWord,
                 arguments: viewModel.emailController.text,);
 
+
             } else if (state.status == Status.error &&
                 state.exception != null) {
+              Navigator.pop(context);
 
               showDialog(
                 context: context,
