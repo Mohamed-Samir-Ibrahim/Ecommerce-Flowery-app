@@ -31,7 +31,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       BlocConsumer<AuthViewModel, AuthState>(
         listener: (context, state) {
           if (state.status == Status.loading) {
-            DialogUtils.showLoadingDialog(context, message: 'Loading...');
+            DialogUtils.showLoadingDialog(context, message: StringManager.loading);
           } else {
             DialogUtils.hideLoadingDialog(context);
           }
@@ -39,8 +39,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           if (state.status == Status.success&&state.resetPasswordResponse!=null) {
             DialogUtils.showMessageDialog(
               context,
-              message: state.resetPasswordResponse?.message?? 'Password reset successfully',
-              posTitle: 'OK',
+              message: state.resetPasswordResponse?.message?? '',
+              posTitle: StringManager.ok,
               posAction: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
@@ -53,7 +53,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             DialogUtils.showMessageDialog(
               context,
               message: state.resetPasswordResponse?.error??"",
-              posTitle: 'Try Again',
+              posTitle: StringManager.pleaseTryAgain,
             );
           }
         },
@@ -61,7 +61,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Password'),
+              title: const Text(StringManager.password),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Navigator.pop(context),
@@ -133,7 +133,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       height: 50,
                       child:
                       CustomElevatedButton(
-                        label: "Continue",
+                        label: StringManager.continueText,
                         onPressed: () {
                           if(viewModel.formKey.currentState!.validate()){
                             viewModel.doIntent(ResetPasswordIntent());
