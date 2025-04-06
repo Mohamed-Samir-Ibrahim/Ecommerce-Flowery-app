@@ -1,6 +1,7 @@
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/presentation/auth/screens/forget_password_screen.dart';
 import 'package:flowery/presentation/auth/screens/otp_screen.dart';
+import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 
 import 'package:flowery/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
 
@@ -34,7 +35,9 @@ class RouteGenerator {
           builder:
               (context) => OtpScreen(),);
       case RoutesNames.registerScreen:
-
+        return MaterialPageRoute(
+          builder:
+              (context) => SignUpScreen(),);
       case RoutesNames.bottomNavScreen:
         return MaterialPageRoute(
           builder: (context) => BottomNavScreen(),
