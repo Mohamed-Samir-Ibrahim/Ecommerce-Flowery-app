@@ -10,6 +10,9 @@ import 'package:retrofit/http.dart';
 import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
+import '../model/auth_model/signup/signup_request.dart';
+import '../model/auth_model/signup/signup_response.dart';
+
 part 'WebServices.g.dart';
 @RestApi(baseUrl: 'https://flower.elevateegy.com/')
 abstract class WebServices {
@@ -29,4 +32,8 @@ abstract class WebServices {
       @Body() ResetPasswordRequest request,
       );
 
+  @POST("api/v1/auth/signup")
+  Future<SignupResponseDto>Signup(
+      @Body() Map<String,dynamic>body,
+      );
 }

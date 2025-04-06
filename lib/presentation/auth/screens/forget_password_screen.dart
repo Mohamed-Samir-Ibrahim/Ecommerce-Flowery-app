@@ -67,6 +67,8 @@ class ForgetPassword extends StatelessWidget {
                   Text(StringManager.hintEnterEmailToResetPassword),
                   SizedBox(height: 20.h),
                   CustomTextFormField(
+                    controller: authViewModel.emailController,
+                    validator: ValidatorManager.validateEmail,
 
                     controller: viewModel.emailController,
                     validator: ValidatorManager.validateEmail,
