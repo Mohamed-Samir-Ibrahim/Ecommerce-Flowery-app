@@ -42,14 +42,12 @@ class AuthRemoteDataSourceImplementation
 
   @override
   Future<ApiResult<login_response_entity>> login({
-    required login_request_entity request})  async{
+    required login_request_entity request})  async{ 
     return executeApi<login_response_entity>(() async {
       var response_login = await client.login(request);
       return  response_login;
     });
   }
- 
-
 
 
 }

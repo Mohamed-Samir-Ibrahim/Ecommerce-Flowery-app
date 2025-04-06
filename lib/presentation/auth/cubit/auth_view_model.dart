@@ -88,12 +88,12 @@ class AuthViewModel extends Cubit<AuthState> {
         var e=result.exception;
         emailController.clear();
         emit(state.copyWith(status: Status.error,exception: e));
-        print("❌ Login Error: ((((((((($e");
+        print(" Login Error: ((((((((($e");
         if (e is DioException) {
            final responseData = e.response?.data;
           final statusCode = e.response?.statusCode;
-          print("🚨 DioException Response: $responseData");
-          print("🔴 Status Code: $statusCode");
+          print(" DioException Response: $responseData");
+          print(" Status Code: $statusCode");
          }
       }
     }
