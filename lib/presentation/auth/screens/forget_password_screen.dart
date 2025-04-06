@@ -9,17 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/utils/resources/string_manager.dart';
+
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authViewModel = getIt.get<AuthViewModel>();
+    final AuthViewModel viewModel = getIt<AuthViewModel>();
 
     return BlocProvider(
-      create: (context) => authViewModel,
+      create: (context) => viewModel,
       child: Scaffold(
-        appBar: AppBar(title: Text("Password")),
+        appBar: AppBar(title: Text(StringManager.password)),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
 
@@ -35,7 +37,9 @@ class ForgetPassword extends StatelessWidget {
                 state.forgetPasswordResponse != null) {
               Navigator.pop(context);
 
-              Navigator.pushNamed(context, RoutesNames.emailVerification);
+              Navigator.pushNamed(context, RoutesNames.emailVerification,
+                arguments: viewModel.emailController.text,
+              );
             } else if (state.status == Status.error &&
                 state.exception != null) {
               Navigator.pop(context);
@@ -44,7 +48,7 @@ class ForgetPassword extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text("Error"),
+                    title: const Text(StringManager.error),
                     content: Text((state.exception.toString())),
                   );
                 },
@@ -57,24 +61,25 @@ class ForgetPassword extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 24.h),
-                  Text("Forget Password"),
+                  Text(StringManager.forgetPassword,),
                   SizedBox(height: 10.h),
 
-                  Text("Please enter your email associated to your account"),
+                  Text(StringManager.hintEnterEmailToResetPassword),
                   SizedBox(height: 20.h),
                   CustomTextFormField(
-                    controller: authViewModel.emailController,
-                    validation: ValidatorManager.validateEmail,
 
-                    hintText: "Enter your email",
-                    labelText: "Email",
+                    controller: viewModel.emailController,
+                    validator: ValidatorManager.validateEmail,
+
+                    hintText: StringManager.enterYourEmail,
+                    labelText: StringManager.email,
                   ),
                   SizedBox(height: 48.h),
 
                   CustomElevatedButton(
-                    label: "Confirm",
+                    label: StringManager.continueText,
                     onPressed: () {
-                      authViewModel.doIntent(ForgetPasswordIntent());
+                      viewModel.doIntent(ForgetPasswordIntent());
 
                     },
                   ),

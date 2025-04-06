@@ -7,20 +7,28 @@ import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
-@injectable
+import '../../../data/model/auth_model/reset_password/reset_password_request.dart';
+import '../../../domain/use_case/auth_use_case/reset_password_use_case.dart';
+@singleton
 class AuthViewModel extends Cubit<AuthState> {
   ForgetPasswordUseCase forgetPasswordUseCase;
   VerifyResetUseCase verifyResetUseCase;
+  ResetPasswordUseCase resetPasswordUseCase ;
 
 
-  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase)
+  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.resetPasswordUseCase)
       : super(AuthState(status: Status.initial));
+
+  final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final otpCodeController = TextEditingController();
 
 
   void _forgetPassword() async {
+
+
 
     emit(state.copyWith(status: Status.loading));
 
@@ -29,6 +37,7 @@ class AuthViewModel extends Cubit<AuthState> {
       case Success():{
 
         emit(state.copyWith(status: Status.success,forgetPassword:result.data));
+
       }
       case Error():{
         var e=result.exception;
@@ -62,6 +71,28 @@ class AuthViewModel extends Cubit<AuthState> {
 
 
   }
+  void _resetPassword() async {
+    if (!formKey.currentState!.validate()) return;
+
+    emit(state.copyWith(status: Status.loading));
+
+    var result = await resetPasswordUseCase.invoke(
+      request: ResetPasswordRequest(email: emailController.text, newPassword: newPasswordController.text),
+    );
+
+    switch (result) {
+      case Success():
+
+        emit(state.copyWith(status: Status.success, resetPassword: result.data));
+        break;
+
+      case Error():
+
+        emit(state.copyWith(status: Status.error, exception: result.exception));
+        break;
+    }
+  }
+
 
 
   void doIntent(AuthIntent authIntent){
@@ -70,6 +101,8 @@ class AuthViewModel extends Cubit<AuthState> {
         _forgetPassword();
       case VerifyResetIntent():
         _verifyReset();
+        case ResetPasswordIntent():
+        _resetPassword();
     }
   }
 
@@ -81,3 +114,7 @@ sealed class AuthIntent{
 
 class ForgetPasswordIntent extends AuthIntent {}
 class VerifyResetIntent extends AuthIntent {}
+class ResetPasswordIntent extends AuthIntent {}
+
+
+
