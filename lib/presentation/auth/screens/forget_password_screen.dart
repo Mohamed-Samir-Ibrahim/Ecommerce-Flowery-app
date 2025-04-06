@@ -5,6 +5,7 @@ import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
+import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,9 +69,7 @@ class ForgetPassword extends StatelessWidget {
                   SizedBox(height: 20.h),
                   CustomTextFormField(
                     controller: authViewModel.emailController,
-                    validator: ValidatorManager.validateEmail,
 
-                    controller: viewModel.emailController,
                     validator: ValidatorManager.validateEmail,
 
                     hintText: StringManager.enterYourEmail,

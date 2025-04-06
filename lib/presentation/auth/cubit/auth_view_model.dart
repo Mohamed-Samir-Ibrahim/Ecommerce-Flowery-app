@@ -18,12 +18,9 @@ class AuthViewModel extends Cubit<AuthState> {
   SignupUseCase signupUseCase;
   ResetPasswordUseCase resetPasswordUseCase ;
 
-  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.signupUseCase)
-
-  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.resetPasswordUseCase)
+  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.resetPasswordUseCase,this.signupUseCase)
       : super(AuthState(status: Status.initial));
 
-  final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -103,7 +100,6 @@ class AuthViewModel extends Cubit<AuthState> {
 
   }
   void _resetPassword() async {
-    if (!formKey.currentState!.validate()) return;
 
     emit(state.copyWith(status: Status.loading));
 

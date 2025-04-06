@@ -13,7 +13,8 @@ import '../cubit/auth_view_model.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
 
-  const ResetPasswordScreen({super.key});
+   ResetPasswordScreen({super.key});
+  final formKey = GlobalKey<FormState>();
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -60,6 +61,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         builder: (context, state) {
 
           return Scaffold(
+
             appBar: AppBar(
               title: const Text(StringManager.password),
               leading: IconButton(
@@ -71,7 +73,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
-                key: viewModel.formKey,
+                key: widget.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -135,7 +137,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       CustomElevatedButton(
                         label: StringManager.continueText,
                         onPressed: () {
-                          if(viewModel.formKey.currentState!.validate()){
+                          if(widget.formKey.currentState!.validate()){
                             viewModel.doIntent(ResetPasswordIntent());
                           }
                         },

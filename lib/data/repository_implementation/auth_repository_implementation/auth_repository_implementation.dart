@@ -29,11 +29,10 @@ class AuthRepositoryImplementation extends AuthRepositoryContract{
   @override
   Future<ApiResult<ResetPasswordResponse>> resetPassword({required ResetPasswordRequest request})async {
     return await _authRemoteDataSourceContract.resetPassword(request: request);
-
+  }
   @override
   Future<ApiResult<SignupEntity>> SignUp({required SignupRequest signup}) async{
    return await _authRemoteDataSourceContract.SignUp(signup: signup);
   }
 
-}
 }
