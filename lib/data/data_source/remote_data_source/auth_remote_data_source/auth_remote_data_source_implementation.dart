@@ -13,6 +13,9 @@ import 'package:flowery/domain/common/api_result.dart';
 import 'package:flowery/domain/entity/auth_entity/signupentity.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../domain/entity/auth_entity/login_entity.dart';
+import '../../../../domain/entity/auth_entity/login_request_entity.dart';
+
 @Injectable(as: AuthRemoteDataSourceContract)
 class AuthRemoteDataSourceImplementation
     implements AuthRemoteDataSourceContract {
@@ -65,5 +68,16 @@ class AuthRemoteDataSourceImplementation
       return response;
     });
   }
+  @override
+  Future<ApiResult<login_response_entity>> login({
+    required login_request_entity request})  async{
+    return executeApi<login_response_entity>(() async {
+      var response_login = await client.login(request);
+      return  response_login;
+    });
+  }
+
 
 }
+
+

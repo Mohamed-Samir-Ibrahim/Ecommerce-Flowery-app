@@ -25,8 +25,9 @@ import '../domain/repository_contract/auth_repository_contract/auth_repository_c
     as _i284;
 import '../domain/use_case/auth_use_case/forget_password_use_case.dart'
     as _i439;
-import '../domain/use_case/auth_use_case/signup_use_case.dart' as _i179;
+import '../domain/use_case/auth_use_case/login_use_case.dart' as _i6;
 import '../domain/use_case/auth_use_case/reset_password_use_case.dart' as _i455;
+import '../domain/use_case/auth_use_case/signup_use_case.dart' as _i179;
 import '../domain/use_case/auth_use_case/verify_reset_use_case.dart' as _i86;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 
@@ -59,16 +60,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i439.ForgetPasswordUseCase>(
       () => _i439.ForgetPasswordUseCase(gh<_i284.AuthRepositoryContract>()),
     );
+    gh.factory<_i86.VerifyResetUseCase>(
+      () => _i86.VerifyResetUseCase(gh<_i284.AuthRepositoryContract>()),
+    );
     gh.factory<_i179.SignupUseCase>(
       () => _i179.SignupUseCase(gh<_i284.AuthRepositoryContract>()),
     );
-    gh.factory<_i86.VerifyResetUseCase>(
-      () => _i86.VerifyResetUseCase(gh<_i284.AuthRepositoryContract>()),
+    gh.factory<_i6.login_use_case>(
+      () => _i6.login_use_case(
+        obj_login_repository_contract: gh<_i284.AuthRepositoryContract>(),
+      ),
     );
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),
         gh<_i86.VerifyResetUseCase>(),
+        gh<_i6.login_use_case>(),
         gh<_i455.ResetPasswordUseCase>(),
         gh<_i179.SignupUseCase>(),
       ),

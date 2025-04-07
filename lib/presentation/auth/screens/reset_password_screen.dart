@@ -50,7 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 );
               },
             );
-          } else if (state.status == Status.error&&state.exception  != null) {
+          } else if (state.status == Status.error&&state.exception!= null) {
             DialogUtils.showMessageDialog(
               context,
               message: state.resetPasswordResponse?.error??"",
