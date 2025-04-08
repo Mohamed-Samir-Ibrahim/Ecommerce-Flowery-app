@@ -7,6 +7,8 @@ import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
+import '../../domain/entity/auth_entity/login_entity.dart';
+import '../../domain/entity/auth_entity/login_request_entity.dart';
 import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
@@ -36,4 +38,8 @@ abstract class WebServices {
   Future<SignupResponseDto>Signup(
       @Body() Map<String,dynamic>body,
       );
+  @POST(ApiConstant.signInApi)
+  Future<login_response_entity> login(@Body() login_request_entity request);
+
+
 }

@@ -1,20 +1,28 @@
 import 'package:json_annotation/json_annotation.dart';
+
+part 'signupentity.g.dart';  // أضف هذا السطر هنا
+
 @JsonSerializable()
 class SignupEntity {
   SignupEntity({
     this.message,
     this.user,
     this.error,
-    this.token,});
-
+    this.token,
+  });
 
   String? message;
   User? user;
   String? token;
-  String? error ;
+  String? error;
 
+  // أضف هنا الـ factory و toJson
+  factory SignupEntity.fromJson(Map<String, dynamic> json) =>
+      _$SignupEntityFromJson(json);
 
+  Map<String, dynamic> toJson() => _$SignupEntityToJson(this);
 }
+
 @JsonSerializable()
 class User {
   User({
@@ -28,8 +36,8 @@ class User {
     this.wishlist,
     this.id,
     this.addresses,
-    this.createdAt,});
-
+    this.createdAt,
+  });
 
   String? firstName;
   String? lastName;
@@ -43,6 +51,8 @@ class User {
   List<dynamic>? addresses;
   String? createdAt;
 
+  // أضف هنا الـ factory و toJson
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

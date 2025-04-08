@@ -1,23 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'signup_response.dart';
+part of 'signupentity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignupResponseDto _$SignupResponseDtoFromJson(Map<String, dynamic> json) =>
-    SignupResponseDto(
-      message: json['message'] as String?,
-      user:
-          json['user'] == null
-              ? null
-              : User.fromJson(json['user'] as Map<String, dynamic>),
-      token: json['token'] as String?,
-      error: json['error'] as String?,
-    );
+SignupEntity _$SignupEntityFromJson(Map<String, dynamic> json) => SignupEntity(
+  message: json['message'] as String?,
+  user:
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+  error: json['error'] as String?,
+  token: json['token'] as String?,
+);
 
-Map<String, dynamic> _$SignupResponseDtoToJson(SignupResponseDto instance) =>
+Map<String, dynamic> _$SignupEntityToJson(SignupEntity instance) =>
     <String, dynamic>{
       'message': instance.message,
       'user': instance.user,
@@ -25,7 +24,7 @@ Map<String, dynamic> _$SignupResponseDtoToJson(SignupResponseDto instance) =>
       'error': instance.error,
     };
 
-UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
+User _$UserFromJson(Map<String, dynamic> json) => User(
   firstName: json['firstName'] as String?,
   lastName: json['lastName'] as String?,
   email: json['email'] as String?,
@@ -39,7 +38,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
   createdAt: json['createdAt'] as String?,
 );
 
-Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'firstName': instance.firstName,
   'lastName': instance.lastName,
   'email': instance.email,

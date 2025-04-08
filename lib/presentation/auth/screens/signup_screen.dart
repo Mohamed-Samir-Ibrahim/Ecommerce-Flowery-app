@@ -91,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       Expanded(
 
                                         child: CustomTextFormField(
-                                          controller: authViewModel.fristName,
+                                          controller: authViewModel.firstName,
                                           hintText: 'Enter your frist name',
                                           fillColour : ColorManager.white,
                                           labelText: StringManager.firstName,
@@ -179,16 +179,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
                                           focusColor: ColorManager.primary,
-                                          value: "male", groupValue: authViewModel.SelectedGender, onChanged: (val){
-                                        authViewModel.SelectedGender=val!;
+                                          value: "male", groupValue: authViewModel.selectedGender, onChanged: (val){
+                                        authViewModel.selectedGender=val!;
                                         setState(() {
 
                                         });
                                       }),
                                       Text('Male',style: TextStyle(
                                           fontSize: SizeManager.s14          ),),
-                                      Radio(value: "female", groupValue:authViewModel.SelectedGender, onChanged: (val){
-                                        authViewModel.SelectedGender=val!;
+                                      Radio(value: "female", groupValue:authViewModel.selectedGender, onChanged: (val){
+                                        authViewModel.selectedGender=val!;
                                         setState(() {
 
                                         });
@@ -201,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                   Row(
                                     children: [
-                                      Text('    Creating an account, you agree to our '),
+                                      Text('Creating an account, you agree to our '),
                                       GestureDetector(
                                           onTap: (){},
                                           child: Text('Terms&Conditions',style: TextStyle(
