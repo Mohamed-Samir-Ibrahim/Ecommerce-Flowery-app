@@ -4,6 +4,7 @@ import 'package:flowery/data/model/auth_model/forget_password/Forget_password_re
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
+import 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -41,5 +42,8 @@ abstract class WebServices {
   @POST(ApiConstant.signInApi)
   Future<login_response_entity> login(@Body() login_request_entity request);
 
+
+  @GET(ApiConstant.getAllCategories)
+  Future<Category_response_entity> getCategories();
 
 }
