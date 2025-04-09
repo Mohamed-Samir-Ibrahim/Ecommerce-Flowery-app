@@ -7,6 +7,8 @@ class StringManager {
   static const String password = 'Password';
   static const String phoneNumber = 'Phone number';
   static const String confirmPassword = 'Confirm password';
+  static const String bestSeller='Best seller';
+  static const String bestSellerDesc='Bloom with our exquisite best sellers';
   static const String alreadyHaveAccount = 'Already have an account?';
   static const String doNotHaveAccount = 'Don`t have an account?';
   static const String enterYourEmail = 'please enter your email';

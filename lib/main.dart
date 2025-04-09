@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
       title: 'Ecommerce Flowery',
       debugShowCheckedModeBanner: false,
       theme:ThemeData.light(),
-      // home: LoginScreen(),
+      // home: BestSellerPage(),
       onGenerateRoute: RouteGenerator.generateRoutes,
       initialRoute: RoutesNames.loginScreen,
-      //ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
+      // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
     ),
   );
   }
