@@ -1,3 +1,4 @@
+import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 @JsonSerializable()
@@ -41,6 +42,7 @@ class BestSellerDto extends BestSeller {
     super.sold,
     super.rateAvg,
       super.rateCount,
+      this.productDto,
       });
 
   BestSellerDto.fromJson(dynamic json) {
@@ -63,6 +65,7 @@ class BestSellerDto extends BestSeller {
     rateAvg = json['rateAvg'];
     rateCount = json['rateCount'];
     id = json['id'];
+    productDto = json['products'] != null ? ProductDto.fromJson(json['products']) : null;
   }
   String? id;
   String? title;
@@ -82,6 +85,7 @@ class BestSellerDto extends BestSeller {
   num? sold;
   num? rateAvg;
   num? rateCount;
+  ProductDto? productDto;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -104,6 +108,7 @@ class BestSellerDto extends BestSeller {
     map['rateAvg'] = rateAvg;
     map['rateCount'] = rateCount;
     map['id'] = id;
+    map['products'] = productDto;
     return map;
   }
 

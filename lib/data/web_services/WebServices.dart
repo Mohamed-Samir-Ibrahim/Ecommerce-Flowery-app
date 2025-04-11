@@ -5,9 +5,11 @@ import 'package:flowery/data/model/auth_model/forget_password/forget_password_re
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
+import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
 import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
+import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -24,7 +26,9 @@ abstract class WebServices {
 
   @GET(ApiConstant.bestSeller)
   Future<BestSellerResponseDto> get();
-  @POST(ApiConstant.forgotPasswordApi)
+  @GET(ApiConstant.bestSeller)
+  Future<ProductResponseDto> getProduct();
+  @POST(ApiConstant.getAllProducts)
   Future<ForgetPasswordResponse> forgetPaswword(
     @Body() ForgetPasswordRequest email,
   );

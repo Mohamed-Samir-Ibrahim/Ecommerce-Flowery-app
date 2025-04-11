@@ -1,8 +1,13 @@
 
 import 'package:flowery/core/utils/resources/string_manager.dart';
+import 'package:flowery/core/utils/routes/routes_names.dart';
+import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
+import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
+import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
 import 'package:flowery/presentation/home/tabs/home/home_states.dart';
 import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
+import 'package:flowery/presentation/home/tabs/home/products/component/product_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,8 +15,8 @@ import '../../../../../core/utils/resources/color_manager.dart';
 import 'custtom_add_to_cart_button.dart';
 
 class BestSellerPage extends StatelessWidget {
-   BestSellerPage({super.key});
-
+   BestSellerPage({super.key,this.productDto});
+List<ProductDto>? productDto;
 HomeViewModel home = getIt<HomeViewModel>();
 
 
@@ -42,7 +47,7 @@ HomeViewModel home = getIt<HomeViewModel>();
               itemCount: data?.length,
               itemBuilder: (context,index){
 
-              return   Container(
+              return   GestureDetector(onTap:() => Navigator.push(context,MaterialPageRoute(builder: (context) => ProductDetailsView(product: data?[index],),)),child: Container(
                   decoration: BoxDecoration(
                       color: ColorManager.white,
                       border: Border.all(color: Colors.black),
@@ -106,7 +111,7 @@ HomeViewModel home = getIt<HomeViewModel>();
                           child: CusttomAddToCartButton(),
                         )
                       ])
-              );
+              ),);
             }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.80,crossAxisSpacing: 8,mainAxisSpacing: 8),),
           );
               }

@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      RoutesNames.bottomNavScreen,
+                                      RoutesNames.mostSellingScreen,
                                     );
                                   },
                                 ),
