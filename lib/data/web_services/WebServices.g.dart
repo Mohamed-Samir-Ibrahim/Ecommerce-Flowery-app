@@ -56,7 +56,7 @@ class _WebServices implements WebServices {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/products',
+            'api/v1/best-seller',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -74,7 +74,6 @@ class _WebServices implements WebServices {
   }
 
   @override
-
   Future<ForgetPasswordResponse> forgetPaswword(
     ForgetPasswordRequest email,
   ) async {
@@ -87,7 +86,7 @@ class _WebServices implements WebServices {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/auth/forgotPassword',
+            'api/v1/products',
             queryParameters: queryParameters,
             data: _data,
           )
