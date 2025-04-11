@@ -21,7 +21,9 @@ class BestSellerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       bestViewModel.dointent(BestSellerScreen());
-    });    return BlocBuilder<BestSellerViewModel,BestSellerState>(
+    });
+
+    return BlocBuilder<BestSellerViewModel,BestSellerState>(
       bloc:bestViewModel ,
       builder: (BuildContext context, state) {
 
@@ -51,12 +53,11 @@ class BestSellerPage extends StatelessWidget {
 
                       borderRadius: BorderRadius.all(Radius.circular(6))
                   ),
-                          margin: EdgeInsets.all(6),
+                          margin: EdgeInsets.all(8),
                   child: Column(
 
                       children: [
                         ClipRRect(
-
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8)
@@ -100,13 +101,13 @@ class BestSellerPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CusttomAddToCartButton(),
-                        )
+                        // SizedBox(
+                        //   height: 3,
+                        // ),
+
+
+                         CusttomAddToCartButton(),
+
                       ])
               );
             }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.80,crossAxisSpacing: 8,mainAxisSpacing: 8),),
