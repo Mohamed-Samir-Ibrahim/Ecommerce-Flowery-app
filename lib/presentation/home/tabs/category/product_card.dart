@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../home/best_seller/custtom_add_to_cart_button.dart';
+
 class ProductCard extends StatelessWidget {
   final Categories_entity category;
 
@@ -45,21 +47,8 @@ class ProductCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
-
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.shopping_cart, size: 16),
-                    label: const Text("Explore"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorManager.primary,
-                      foregroundColor: ColorManager.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                ),
+                const SizedBox(height: 32),
+                CusttomAddToCartButton(),
               ],
             ),
           ),

@@ -32,9 +32,7 @@ class BestSellerViewModel extends Cubit<BestSellerState> {
   dointent(HomeIntent home) {
     switch (home) {
       case BestSellerScreen():{
-
         BestSellerget();
-
       }
     }
   }

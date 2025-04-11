@@ -13,7 +13,6 @@ import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller
 import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
 
 
-oriesimport 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
 
 
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
@@ -25,6 +24,9 @@ import 'package:flowery/data/model/home_model/home_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
+import '../../domain/entity/Categotries_entity/category_model.dart';
+import '../../domain/entity/auth_entity/login_entity.dart';
+import '../../domain/entity/auth_entity/login_request_entity.dart';
 import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
@@ -63,7 +65,7 @@ abstract class WebServices {
 
   @POST(ApiConstant.signInApi)
 
-  Future<login_response_entity> login(@Body() login_request_entity request);    
+  Future<login_response_entity> login(@Body() login_request_entity request);
 
 
   @GET(ApiConstant.getHomeApi)

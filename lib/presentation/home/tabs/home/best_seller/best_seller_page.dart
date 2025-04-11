@@ -1,52 +1,29 @@
 
 import 'package:flowery/core/utils/resources/string_manager.dart';
-
-import 'package:flowery/core/utils/routes/routes_names.dart';
-import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
-import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
-import 'package:flowery/presentation/home/tabs/home/home_states.dart';
-import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
 import 'package:flowery/presentation/home/tabs/home/products/component/product_details_view.dart';
-
-import 'package:flowery/di/injetible_intinalizer.dart';
-import 'package:flowery/presentation/home/tabs/home/home_states.dart';
-import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/resources/color_manager.dart';
-
-import 'custtom_add_to_cart_button.dart';
-
-class BestSellerPage extends StatelessWidget {
-   BestSellerPage({super.key,this.productDto});
-List<ProductDto>? productDto;
-HomeViewModel home = getIt<HomeViewModel>();
 
 import '../best_seller_states.dart';
 import '../best_seller_view_model.dart';
 import 'custtom_add_to_cart_button.dart';
 
 class BestSellerPage extends StatelessWidget {
-   BestSellerPage({super.key});
-
+   BestSellerPage({super.key,this.productDto});
+List<ProductDto>? productDto;
   BestSellerViewModel bestViewModel = getIt<BestSellerViewModel>();
-
-
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
 
-      home.dointent(BestSellerScreen());
-    });    return BlocBuilder<HomeViewModel,HomeStates>(
-      bloc:home ,
-
       bestViewModel.dointent(BestSellerScreen());
-    });    return BlocBuilder<BestSellerViewModel,BestSellerState>(
+    });
+    return BlocBuilder<BestSellerViewModel,BestSellerState>(
       bloc:bestViewModel ,
 
       builder: (BuildContext context, state) {
@@ -79,12 +56,11 @@ class BestSellerPage extends StatelessWidget {
 
                       borderRadius: BorderRadius.all(Radius.circular(6))
                   ),
-                          margin: EdgeInsets.all(6),
+                          margin: EdgeInsets.all(8),
                   child: Column(
 
                       children: [
                         ClipRRect(
-
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8)
@@ -128,13 +104,13 @@ class BestSellerPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CusttomAddToCartButton(),
-                        )
+                        // SizedBox(
+                        //   height: 3,
+                        // ),
+
+
+                         CusttomAddToCartButton(),
+
                       ])
 
               ),);

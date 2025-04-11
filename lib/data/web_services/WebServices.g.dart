@@ -56,7 +56,7 @@ class _WebServices implements WebServices {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/products',
+            'api/v1/best-seller',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -74,7 +74,6 @@ class _WebServices implements WebServices {
   }
 
   @override
-
   Future<ForgetPasswordResponse> forgetPaswword(
     ForgetPasswordRequest email,
   ) async {
@@ -87,7 +86,7 @@ class _WebServices implements WebServices {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/auth/forgotPassword',
+            'api/v1/products',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -219,33 +218,52 @@ class _WebServices implements WebServices {
   }
 
   @override
-
-
   Future<HomeModel> getHomeScreen() async {
-
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-
-
     final _options = _setStreamType<HomeModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             'api/v1/home',
-
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-
     late HomeModel _value;
     try {
       _value = HomeModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
 
+  @override
+  Future<Category_response_entity> getCategories() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<Category_response_entity>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/categories',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late Category_response_entity _value;
+    try {
+      _value = Category_response_entity.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
