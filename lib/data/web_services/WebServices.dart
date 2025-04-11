@@ -5,9 +5,13 @@ import 'package:flowery/data/model/auth_model/forget_password/forget_password_re
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 
+oriesimport 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
+
+
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 
 import 'package:flowery/data/model/home_model/home_model.dart';
+
 
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -50,5 +54,8 @@ abstract class WebServices {
   @GET(ApiConstant.getHomeApi)
   Future<HomeModel> getHomeScreen();
 
+
+  @GET(ApiConstant.getAllCategories)
+  Future<Category_response_entity> getCategories();
 
 }
