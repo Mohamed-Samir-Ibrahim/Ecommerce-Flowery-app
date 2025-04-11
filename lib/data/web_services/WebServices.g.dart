@@ -20,6 +20,33 @@ class _WebServices implements WebServices {
   final ParseErrorLogger? errorLogger;
 
   @override
+  Future<BestSellerResponseDto> get() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<BestSellerResponseDto>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/best-seller',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BestSellerResponseDto _value;
+    try {
+      _value = BestSellerResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ForgetPasswordResponse> forgetPaswword(
     ForgetPasswordRequest email,
   ) async {
@@ -108,26 +135,28 @@ class _WebServices implements WebServices {
   }
 
   @override
-  Future<SignupResponseDto> Signup(Map<String, dynamic> body) async {
+  Future<ResetPasswordResponse> resetPassword(
+    ResetPasswordRequest request,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
-    final _options = _setStreamType<SignupResponseDto>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<ResetPasswordResponse>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/auth/signup',
+            'api/v1/auth/resetPassword',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SignupResponseDto _value;
+    late ResetPasswordResponse _value;
     try {
-      _value = SignupResponseDto.fromJson(_result.data!);
+      _value = ResetPasswordResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -136,16 +165,21 @@ class _WebServices implements WebServices {
   }
 
   @override
+  Future<SignupResponseDto> Signup(Map<String, dynamic> body) async {
   Future<login_response_entity> login(login_request_entity request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options = _setStreamType<SignupResponseDto>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
     _data.addAll(request.toJson());
     final _options = _setStreamType<login_response_entity>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
+            'api/v1/auth/signup',
             'api/v1/auth/signin',
             queryParameters: queryParameters,
             data: _data,
@@ -154,8 +188,10 @@ class _WebServices implements WebServices {
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late login_response_entity _value;
+    late SignupResponseDto _value;
     try {
       _value = login_response_entity.fromJson(_result.data!);
+      _value = SignupResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
