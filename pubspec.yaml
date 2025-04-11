@@ -49,6 +49,8 @@ dependencies:
   logger:
   json_annotation:
   json_serializable: ^6.9.4
+  flutter_image_slideshow: ^0.1.6
+  cached_network_image: ^3.4.1
 
 
 dev_dependencies:
