@@ -4,6 +4,7 @@ import 'package:flowery/presentation/auth/screens/otp_screen.dart';
 import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 
 import 'package:flowery/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:flowery/presentation/home/tabs/home/best_seller/best_seller_page.dart';
 import 'package:flowery/presentation/home/tabs/home/home_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -53,6 +54,11 @@ class RouteGenerator {
         builder: (context) => HomeScreen(),
         settings: settings,
       );
+      case RoutesNames.mostSellingScreen:
+        return MaterialPageRoute(
+          builder: (context) => BestSellerPage(),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const LayoutView(),

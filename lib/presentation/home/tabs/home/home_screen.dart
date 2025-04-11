@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/utils/routes/routes_names.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -124,7 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text("Best seller",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, RoutesNames.mostSellingScreen);
+                                  },
                                   child: Text(
                                     "View All",
                                     style: TextStyle(color: ColorManager.primary,fontSize: 16.sp),

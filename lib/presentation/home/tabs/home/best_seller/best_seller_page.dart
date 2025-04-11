@@ -7,20 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/resources/color_manager.dart';
+import '../best_seller_states.dart';
+import '../best_seller_view_model.dart';
 import 'custtom_add_to_cart_button.dart';
 
 class BestSellerPage extends StatelessWidget {
    BestSellerPage({super.key});
 
-HomeViewModel home = getIt<HomeViewModel>();
+  BestSellerViewModel bestViewModel = getIt<BestSellerViewModel>();
 
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      home.dointent(BestSellerScreen());
-    });    return BlocBuilder<HomeViewModel,HomeStates>(
-      bloc:home ,
+      bestViewModel.dointent(BestSellerScreen());
+    });    return BlocBuilder<BestSellerViewModel,BestSellerState>(
+      bloc:bestViewModel ,
       builder: (BuildContext context, state) {
 
         if(state is IsLoadingBestSeller){
