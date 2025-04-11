@@ -20,6 +20,33 @@ class _WebServices implements WebServices {
   final ParseErrorLogger? errorLogger;
 
   @override
+  Future<BestSellerResponseDto> get() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<BestSellerResponseDto>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/best-seller',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BestSellerResponseDto _value;
+    try {
+      _value = BestSellerResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ForgetPasswordResponse> forgetPaswword(
     ForgetPasswordRequest email,
   ) async {
@@ -164,25 +191,33 @@ class _WebServices implements WebServices {
   }
 
   @override
-  Future<Category_response_entity> getCategories() async {
+
+
+  Future<HomeModel> getHomeScreen() async {
+
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<Category_response_entity>(
+
+
+    final _options = _setStreamType<HomeModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/categories',
+            'api/v1/home',
+
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late Category_response_entity _value;
+
+    late HomeModel _value;
     try {
-      _value = Category_response_entity.fromJson(_result.data!);
+      _value = HomeModel.fromJson(_result.data!);
+
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
