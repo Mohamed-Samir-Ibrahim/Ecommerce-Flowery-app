@@ -31,8 +31,11 @@ class MyApp extends StatelessWidget {
       theme:ThemeData.light(),
       // home: BestSellerPage(),
       onGenerateRoute: RouteGenerator.generateRoutes,
+
       initialRoute: RoutesNames.loginScreen,
       // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
+
+
     ),
   );
   }
