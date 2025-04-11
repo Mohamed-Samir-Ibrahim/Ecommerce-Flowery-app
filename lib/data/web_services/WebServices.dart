@@ -6,9 +6,7 @@ import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
-import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
 
-import 'package:flowery/data/model/home_model/categories/categories_model.dart';
 import 'package:flowery/data/model/home_model/home_model.dart';
 
 import 'package:retrofit/error_logger.dart';
@@ -19,7 +17,6 @@ import '../../domain/entity/auth_entity/login_request_entity.dart';
 import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
-import '../model/auth_model/signup/signup_request.dart';
 import '../model/auth_model/signup/signup_response.dart';
 
 part 'WebServices.g.dart';
@@ -52,4 +49,6 @@ abstract class WebServices {
 
   @GET(ApiConstant.getHomeApi)
   Future<HomeModel> getHomeScreen();
+
+
 }
