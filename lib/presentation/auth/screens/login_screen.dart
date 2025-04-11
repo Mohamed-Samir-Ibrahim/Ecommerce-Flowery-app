@@ -9,6 +9,7 @@ import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
+import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = getIt.get<AuthViewModel>();
+    final home = getIt<HomeViewModel>();
     final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
     return SafeArea(
@@ -166,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: () {
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      RoutesNames.bottomNavScreen,
+                                      RoutesNames.mostSellingScreen,
                                     );
                                   },
                                 ),

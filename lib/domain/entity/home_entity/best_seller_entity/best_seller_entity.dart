@@ -52,4 +52,7 @@ class BestSeller {
   num? sold;
   num? rateAvg;
   num? rateCount;
+
   }
+
+
