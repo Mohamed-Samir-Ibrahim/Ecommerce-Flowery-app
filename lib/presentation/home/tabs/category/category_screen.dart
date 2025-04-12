@@ -1,3 +1,4 @@
+import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
 import 'package:flowery/presentation/home/tabs/category/category_states.dart';
@@ -30,10 +31,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text('', style: TextStyle(color: Colors.black)),
+          title: const Text('Categories', style: TextStyle(color: Colors.black)),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pushNamed(context,RoutesNames.bottomNavScreen),
           ),
         ),
         body: Column(

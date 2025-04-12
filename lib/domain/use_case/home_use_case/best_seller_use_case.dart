@@ -4,9 +4,9 @@ import 'package:flowery/domain/repository_contract/home_repository_contract/best
 import 'package:injectable/injectable.dart';
 
 @injectable
-class bestSellerUseCase{
+class BestSellerUseCase{
   BestSellerRepository bestSellerRepository;
-  bestSellerUseCase({required this.bestSellerRepository});
+  BestSellerUseCase({required this.bestSellerRepository});
   Future<ApiResult<BestSellerEntity>>get(){
    return bestSellerRepository.GetData();
 

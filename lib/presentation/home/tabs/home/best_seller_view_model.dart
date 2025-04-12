@@ -8,31 +8,31 @@ import 'home_states.dart';
 
 @singleton
 class BestSellerViewModel extends Cubit<BestSellerState> {
-  bestSellerUseCase BestSeller;
+  BestSellerUseCase bestSellerUseCase;
 
-    BestSellerViewModel({required this.BestSeller}):super(Initial());
+    BestSellerViewModel({required this.bestSellerUseCase}):super(BestSellerState( status: BestSellerStatus.initial));
 
-  void BestSellerget()async{
-    var response=await  BestSeller.get();
-    emit(IsLoadingBestSeller());
+  void bestSellerGet()async{
+    emit(state.copyWith(status: BestSellerStatus.loading));
+    var response=await  bestSellerUseCase.get();
     switch(response){
       case Success():{
-        var data = await response.data;
-        emit(SuccessBestSeller(bestSellerEntity: data!));
-
+        var res =  response.data;
+        emit(state.copyWith(status: BestSellerStatus.success,bestSellerEntity: res!));
       }
       case Error():{
-        emit(ErrorBestSeller());
+        var e=response.exception;
+          emit(state.copyWith(status: BestSellerStatus.error,exception: e));
 
       }
 
     }
   }
 
-  dointent(HomeIntent home) {
+  doIntent(HomeIntent home) {
     switch (home) {
       case BestSellerScreen():{
-        BestSellerget();
+        bestSellerGet();
       }
     }
   }
