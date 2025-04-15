@@ -4,6 +4,8 @@ import 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
 import 'package:flowery/presentation/home/tabs/category/category_states.dart';
 import 'package:flowery/presentation/home/tabs/category/category_view_model.dart';
 import 'package:flowery/presentation/home/tabs/category/product_card.dart';
+import 'package:flowery/presentation/home/tabs/home/occasion_screen.dart';
+import 'package:flowery/presentation/home/tabs/home/widgets/product_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,6 +24,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
   void initState() {
     super.initState();
     categoryViewModel.getCategories();
+    categoryViewModel.doIntent(
+        getAllProducts());
+    categoryViewModel.doIntent(
+        LoadHomePageIntent());
   }
   @override
   Widget build(BuildContext context) {
@@ -94,6 +100,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         return GestureDetector(
                           onTap: () {
                             setState(() => selectedTabIndex = index);
+
+                            selectedTabIndex==0?categoryViewModel.doIntent(getAllProducts()):
+                            categoryViewModel.doIntent(
+                              LoadCategoriesPageIntent(
+                                categoryId:
+                                state.home?.categories?[selectedTabIndex-1].id ?? "",
+                              ),
+                            );
                           },
                           child: Column(
                             children: [
@@ -124,51 +138,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
             const SizedBox(height: 16),
 
             //  Product Grid
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: BlocBuilder<CategoryViewModel, CategoryStates>(
-                  builder: (context, state) {
-                    if (state.status == CategoryStatus.loading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state.status == CategoryStatus.success) {
-                      List<Categories_entity> categoryList = categoryViewModel.fullList;
+            BlocBuilder<CategoryViewModel, CategoryStates>(
+              builder: (context, state) {
+                if (state.status == CategoryStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state.status == CategoryStatus.success) {
 
-                      if (selectedTabIndex != 0) {
-                        categoryList = categoryList.where((cat) =>
-                        cat.name == categoryViewModel.dynamicTabs[selectedTabIndex]).toList();
-                      }
-
-
-                      if (searchQuery.isNotEmpty) {
-                        categoryList = categoryList.where((cat) =>
-                        cat.name?.toLowerCase().contains(searchQuery.toLowerCase()) ?? false).toList();
-                      }
-
-                      if (categoryList.isEmpty) {
-                        return const Center(child: Text("No categories available."));
-                      }
-
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: categoryList.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: 0.65,
-                        ),
-                        itemBuilder: (context, index) {
-                          return ProductCard(category: categoryList[index]);
-                        },
-                      );
-                    } else {
-                      return const Center(child: Text("❌ Failed to load categories."));
-                    }
-                  },
-                ),
-              ),
+                  return state.products?.products?.length!=0? ProductItems(state: state):Center(child:Text("No Data To Show"),);
+                } else {
+                  return const Center(child: Text("❌ Failed to load categories."));
+                }
+              },
             ),
           ],
         ),

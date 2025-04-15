@@ -41,6 +41,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
             } else if (state.status == Status.success &&
                 state.verifyResetResponse != null) {
+              Navigator.pop(context);
 
 
               Navigator.pushNamed(context, RoutesNames.resetPassWord,

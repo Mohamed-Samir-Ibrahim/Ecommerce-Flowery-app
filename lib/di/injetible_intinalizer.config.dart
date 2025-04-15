@@ -63,7 +63,13 @@ import '../domain/use_case/auth_use_case/signup_use_case.dart' as _i179;
 import '../domain/use_case/auth_use_case/verify_reset_use_case.dart' as _i86;
 import '../domain/use_case/category_use_case/category_use_case.dart' as _i477;
 import '../domain/use_case/home_use_case/best_seller_use_case.dart' as _i554;
+import '../domain/use_case/home_use_case/category_product_use_case.dart'
+    as _i579;
+import '../domain/use_case/home_use_case/get_all_product_use_case.dart'
+    as _i690;
 import '../domain/use_case/home_use_case/home_use_case.dart' as _i817;
+import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
+    as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
@@ -112,11 +118,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i680.HomeRemoteDataSourceContract>(),
       ),
     );
+    gh.factory<_i690.GetAllProductUseCase>(
+      () => _i690.GetAllProductUseCase(gh<_i1053.HomeRepositoryContract>()),
+    );
     gh.factory<_i14.ProductRepo>(
       () => _i1013.ProductRepoImpl(gh<_i713.ProductDataSourceContract>()),
     );
     gh.factory<_i817.HomeUseCase>(
       () => _i817.HomeUseCase(gh<_i1053.HomeRepositoryContract>()),
+    );
+    gh.factory<_i1022.OccasionProductUseCase>(
+      () => _i1022.OccasionProductUseCase(gh<_i1053.HomeRepositoryContract>()),
     );
     gh.factory<_i555.CategoryRepositoryContract>(
       () => _i123.category_repository_implementation(
@@ -135,13 +147,27 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i555.CategoryRepositoryContract>(),
       ),
     );
+
+    gh.singleton<_i540.HomeViewModel>(
+      () => _i540.HomeViewModel(
+        gh<_i817.HomeUseCase>(),
+        gh<_i1022.OccasionProductUseCase>(),
+      ),
+    );
+    gh.factory<_i554.bestSellerUseCase>(
+      () => _i554.bestSellerUseCase(
+
     gh.factory<_i554.BestSellerUseCase>(
       () => _i554.BestSellerUseCase(
+
         bestSellerRepository: gh<_i670.BestSellerRepository>(),
       ),
     );
     gh.factory<_i455.ResetPasswordUseCase>(
       () => _i455.ResetPasswordUseCase(gh<_i284.AuthRepositoryContract>()),
+    );
+    gh.factory<_i579.CategoryProductUseCase>(
+      () => _i579.CategoryProductUseCase(gh<_i1053.HomeRepositoryContract>()),
     );
     gh.factory<_i439.ForgetPasswordUseCase>(
       () => _i439.ForgetPasswordUseCase(gh<_i284.AuthRepositoryContract>()),
@@ -151,9 +177,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i86.VerifyResetUseCase>(
       () => _i86.VerifyResetUseCase(gh<_i284.AuthRepositoryContract>()),
-    );
-    gh.singleton<_i540.HomeViewModel>(
-      () => _i540.HomeViewModel(gh<_i817.HomeUseCase>()),
     );
     gh.factory<_i118.ProductUseCase>(
       () => _i118.ProductUseCase(gh<_i14.ProductRepo>()),
@@ -169,7 +192,20 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i177.CategoryViewModel>(
+
+      () => _i177.CategoryViewModel(
+        gh<_i817.HomeUseCase>(),
+        gh<_i477.CategoryUseCase>(),
+        gh<_i579.CategoryProductUseCase>(),
+        gh<_i690.GetAllProductUseCase>(),
+      ),
+    );
+    gh.singleton<_i891.BestSellerViewModel>(
+      () =>
+          _i891.BestSellerViewModel(BestSeller: gh<_i554.bestSellerUseCase>()),
+
       () => _i177.CategoryViewModel(gh<_i477.CategoryUseCase>()),
+
     );
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
