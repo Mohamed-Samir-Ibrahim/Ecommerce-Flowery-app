@@ -2,6 +2,7 @@ import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/home/home_states.dart';
 import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
+import 'package:flowery/presentation/home/tabs/home/occasion_screen.dart';
 import 'package:flowery/presentation/home/tabs/home/widgets/home_best_seller_widget.dart';
 import 'package:flowery/presentation/home/tabs/home/widgets/home_categories_widget.dart';
 import 'package:flowery/presentation/home/tabs/home/widgets/home_occasion_widget.dart';
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(12.w),
                         child: Column(
-                      
+
                           children: [
                             Row(
                               children: [
@@ -142,7 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text("Occasion",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => OccasionScreen(),));
+                                  },
                                   child: Text(
                                     "View All",
                                     style: TextStyle(color: ColorManager.primary,fontSize: 16.sp),
