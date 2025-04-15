@@ -5,8 +5,8 @@ part 'Verify_reset_response.g.dart';
 @JsonSerializable()
 class VerifyResetResponse {
   String? status;
-  String? error;
-  VerifyResetResponse({this.status, this.error});
+
+  VerifyResetResponse({this.status});
 
   factory VerifyResetResponse.fromJson(Map<String, dynamic> json) => _$VerifyResetResponseFromJson(json);
 

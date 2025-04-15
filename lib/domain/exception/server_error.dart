@@ -17,7 +17,7 @@ class ClientError implements Exception {
 }
 
 class ServerSideError implements Exception {
-  Exception? errorModel;
+  ErrorModel? errorModel;
 
   ServerSideError(this.errorModel);
 }

@@ -2,7 +2,6 @@ import 'package:flowery/core/utils/routes/route_generator.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/screens/login_screen.dart';
-import 'package:flowery/presentation/home/tabs/home/best_seller/best_seller_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -30,13 +29,10 @@ class MyApp extends StatelessWidget {
       title: 'Ecommerce Flowery',
       debugShowCheckedModeBanner: false,
       theme:ThemeData.light(),
-      // home: BestSellerPage(),
+      // home: LoginScreen(),
       onGenerateRoute: RouteGenerator.generateRoutes,
-
       initialRoute: RoutesNames.loginScreen,
-      // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
-
-
+      //ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
     ),
   );
   }

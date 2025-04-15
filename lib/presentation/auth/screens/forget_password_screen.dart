@@ -5,26 +5,21 @@ import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
-import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../core/utils/resources/string_manager.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final AuthViewModel viewModel = getIt<AuthViewModel>();
-
     final authViewModel = getIt.get<AuthViewModel>();
     final _formKey = GlobalKey<FormState>();
     return BlocProvider(
-      create: (context) => viewModel,
+      create: (context) => authViewModel,
       child: Scaffold(
-        appBar: AppBar(title: Text(StringManager.password)),
+        appBar: AppBar(title: Text("Password")),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
 
@@ -40,9 +35,7 @@ class ForgetPassword extends StatelessWidget {
                 state.forgetPasswordResponse != null) {
               Navigator.pop(context);
 
-              Navigator.pushNamed(context, RoutesNames.emailVerification,
-                arguments: viewModel.emailController.text,
-              );
+              Navigator.pushNamed(context, RoutesNames.emailVerification);
             } else if (state.status == Status.error &&
                 state.exception != null) {
               Navigator.pop(context);
@@ -51,7 +44,7 @@ class ForgetPassword extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text(StringManager.error),
+                    title: const Text("Error"),
                     content: Text((state.exception.toString())),
                   );
                 },
@@ -61,28 +54,6 @@ class ForgetPassword extends StatelessWidget {
           builder: (context, state) {
             return Padding(
               padding: EdgeInsets.all(16.r),
-              child: Column(
-                children: [
-                  SizedBox(height: 24.h),
-                  Text(StringManager.forgetPassword,),
-                  SizedBox(height: 10.h),
-
-                  Text(StringManager.hintEnterEmailToResetPassword),
-                  SizedBox(height: 20.h),
-                  CustomTextFormField(
-                    controller: authViewModel.emailController,
-
-                    validator: ValidatorManager.validateEmail,
-
-                    hintText: StringManager.enterYourEmail,
-                    labelText: StringManager.email,
-                  ),
-                  SizedBox(height: 48.h),
-
-                  CustomElevatedButton(
-                    label: StringManager.continueText,
-                    onPressed: () {
-                      viewModel.doIntent(ForgetPasswordIntent());
               child: Form(
                 key: _formKey,
                 child: Column(
