@@ -12,6 +12,7 @@ class ForgetPasswordUseCase {
 
  Future<ApiResult<ForgetPasswordResponse>> invoke(
       {required ForgetPasswordRequest email}) async{
+
     var response = await _authRepo.forgetPassword(email: email);
     return response;
   }
