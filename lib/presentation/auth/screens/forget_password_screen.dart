@@ -19,6 +19,8 @@ class ForgetPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthViewModel viewModel = getIt<AuthViewModel>();
 
+    final authViewModel = getIt.get<AuthViewModel>();
+    final _formKey = GlobalKey<FormState>();
     return BlocProvider(
       create: (context) => viewModel,
       child: Scaffold(
@@ -81,10 +83,34 @@ class ForgetPassword extends StatelessWidget {
                     label: StringManager.continueText,
                     onPressed: () {
                       viewModel.doIntent(ForgetPasswordIntent());
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(height: 24.h),
+                    Text("Forget Password"),
+                    SizedBox(height: 10.h),
 
-                    },
-                  ),
-                ],
+                    Text("Please enter your email associated to your account"),
+                    SizedBox(height: 20.h),
+                    CustomTextFormField(
+                      controller: authViewModel.emailController,
+                      hintText: "Enter your email",
+                      labelText: "Email",
+                      validator: ValidatorManager.validateEmail,
+                    ),
+                    SizedBox(height: 48.h),
+
+                    CustomElevatedButton(
+                      label: "Confirm",
+                      onPressed: () {
+                        if(_formKey.currentState!.validate()) {
+                          authViewModel.doIntent(ForgetPasswordIntent());
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           },
