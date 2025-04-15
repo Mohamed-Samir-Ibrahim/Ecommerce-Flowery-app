@@ -21,17 +21,17 @@ List<ProductDto>? productDto;
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
 
-      bestViewModel.dointent(BestSellerScreen());
+      bestViewModel.doIntent(BestSellerScreen());
     });
     return BlocBuilder<BestSellerViewModel,BestSellerState>(
       bloc:bestViewModel ,
 
       builder: (BuildContext context, state) {
 
-        if(state is IsLoadingBestSeller){
+        if(state.status == BestSellerStatus.loading){
          return Center(child: CircularProgressIndicator());
-        } if (state is SuccessBestSeller){
-          final data = state.bestSellerEntity.besstSeller;
+        } if (state.status == BestSellerStatus.success){
+          final data = state.bestSellerEntity?.besstSeller;
 
           return Scaffold(
             appBar: AppBar(
