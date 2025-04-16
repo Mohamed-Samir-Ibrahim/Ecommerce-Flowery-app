@@ -87,6 +87,7 @@ class ForgetPassword extends StatelessWidget {
                       Form(
                         key: _formKey,
                         child: Column(
+
                           children: [
                             SizedBox(height: 24.h),
                             Text("Forget Password"),
