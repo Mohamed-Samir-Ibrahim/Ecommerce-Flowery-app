@@ -1,8 +1,4 @@
 import 'package:flowery/core/utils/resources/color_manager.dart';
-import 'package:flowery/data/model/home_model/home_model.dart';
-import 'package:flowery/data/model/home_model/occasions/occasions_model.dart';
-import 'package:flowery/data/model/home_model/product/product_model.dart';
-import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/home/home_states.dart';
 import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';

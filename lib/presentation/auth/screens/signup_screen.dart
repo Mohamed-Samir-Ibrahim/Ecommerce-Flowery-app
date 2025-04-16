@@ -1,6 +1,6 @@
-import 'package:flowery/data/model/auth_model/signup/signup_response.dart';
+
 import 'package:flowery/di/injetible_intinalizer.dart';
-import 'package:flowery/domain/entity/error_model.dart';
+
 
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,9 @@ import '../../../../core/utils/resources/string_manager.dart';
 import '../../../../core/utils/resources/styles_manager.dart';
 import '../../../../core/utils/resources/validator_manager.dart';
 import '../../../../core/utils/resources/values_manager.dart';
-import '../../../core/utils/dialog_utils.dart';
+
 import '../../../core/utils/resources/font_manager.dart';
-import '../../../core/utils/routes/routes_names.dart';
+
 import '../cubit/auth_state.dart';
 
 class SignUpScreen extends StatefulWidget {

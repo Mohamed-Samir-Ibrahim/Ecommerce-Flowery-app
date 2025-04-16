@@ -1,7 +1,7 @@
 import 'package:flowery/core/utils/resources/color_manager.dart';
-import 'package:flowery/data/model/home_model/categories/categories_model.dart';
+
 import 'package:flowery/data/model/home_model/home_model.dart';
-import 'package:flowery/domain/entity/home_entity/category.dart';
+
 import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

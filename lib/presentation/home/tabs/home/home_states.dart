@@ -2,12 +2,11 @@
 
 
 import 'package:equatable/equatable.dart';
-import 'package:flowery/data/model/home_model/categories/categories_model.dart';
+
 import 'package:flowery/data/model/home_model/home_model.dart';
-import 'package:flowery/data/model/home_model/occasions/occasions_model.dart';
-import 'package:flowery/data/model/home_model/product/product_model.dart';
+
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
-import 'package:flowery/domain/entity/home_entity/category.dart';
+
 enum Status { loading, success, error ,}
 
 class HomeStates extends Equatable{

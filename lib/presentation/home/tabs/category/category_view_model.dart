@@ -4,7 +4,7 @@ import 'package:flowery/domain/use_case/category_use_case/category_use_case.dart
 import 'package:flowery/domain/use_case/home_use_case/category_product_use_case.dart';
 import 'package:flowery/domain/use_case/home_use_case/get_all_product_use_case.dart';
 import 'package:flowery/domain/use_case/home_use_case/home_use_case.dart';
-import 'package:flowery/domain/use_case/home_use_case/occasion_product_use_case.dart';
+
 import 'package:flowery/presentation/home/tabs/category/category_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

@@ -4,6 +4,7 @@ import 'package:flowery/presentation/auth/screens/otp_screen.dart';
 import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 
 import 'package:flowery/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:flowery/presentation/home/tabs/category/category_screen.dart';
 import 'package:flowery/presentation/home/tabs/home/best_seller/best_seller_page.dart';
 
 import 'package:flowery/presentation/home/tabs/home/products/component/product_details_view.dart';
@@ -63,14 +64,14 @@ class RouteGenerator {
           builder: (context) => BestSellerPage(),
           settings: settings,
         );
-        case RoutesNames.productsDetailsView:
+        // case RoutesNames.productsDetailsView:
+        // return MaterialPageRoute(
+        //   builder: (context) => ProductDetailsView(),
+        //   settings: settings,
+        // );
+        case RoutesNames.categoriesView:
         return MaterialPageRoute(
-          builder: (context) => ProductDetailsView(),
-          settings: settings,
-        );
-        case RoutesNames.mostSellingScreen:
-        return MaterialPageRoute(
-          builder: (context) => BestSellerPage(),
+          builder: (context) => CategoryScreen(),
           settings: settings,
         );
       default:
@@ -78,6 +79,7 @@ class RouteGenerator {
           builder: (context) => const LayoutView(),
           settings: settings,
         );
+
 
     }
   }
