@@ -113,7 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text("Categories",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, RoutesNames.categoriesView);
+                                  },
                                   child: Text(
                                     "View All",
                                     style: TextStyle(color: ColorManager.primary,fontSize: 16.sp),

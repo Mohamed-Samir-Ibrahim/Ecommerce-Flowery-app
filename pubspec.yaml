@@ -51,7 +51,10 @@ dependencies:
   json_serializable: ^6.9.4
   flutter_image_slideshow: ^0.1.6
   cached_network_image: ^3.4.1
-
+  flutter_localizations:
+    sdk: flutter
+  easy_localization:
+  intl:
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +85,7 @@ flutter:
   assets:
     - assets/icon/
     - path/to/
+    - assets/language/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

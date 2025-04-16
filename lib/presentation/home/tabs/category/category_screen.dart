@@ -1,10 +1,9 @@
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
-import 'package:flowery/domain/entity/Categotries_entity/category_model.dart';
+
 import 'package:flowery/presentation/home/tabs/category/category_states.dart';
 import 'package:flowery/presentation/home/tabs/category/category_view_model.dart';
-import 'package:flowery/presentation/home/tabs/category/product_card.dart';
-import 'package:flowery/presentation/home/tabs/home/occasion_screen.dart';
+
 import 'package:flowery/presentation/home/tabs/home/widgets/product_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
