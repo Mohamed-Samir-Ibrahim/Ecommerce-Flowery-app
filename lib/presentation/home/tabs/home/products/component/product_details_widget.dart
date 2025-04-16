@@ -1,10 +1,10 @@
 import 'package:flowery/core/utils/add_cart_button.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
-import 'package:flowery/core/utils/resources/custom_elevated_button.dart';
+
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
-import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
+
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
-import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
+
 import 'package:flowery/presentation/home/tabs/home/products/component/slider_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

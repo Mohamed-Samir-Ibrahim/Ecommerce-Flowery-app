@@ -2,10 +2,10 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
-import 'package:flowery/data/model/auth_model/signup/signup_response.dart';
+
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/domain/entity/auth_entity/signupentity.dart';
-import 'package:flowery/domain/entity/error_model.dart';
+
 
 import '../../../data/model/auth_model/reset_password/reset_password_response.dart';
 import '../../../domain/entity/auth_entity/login_entity.dart';

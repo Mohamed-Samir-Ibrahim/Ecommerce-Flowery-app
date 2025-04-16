@@ -147,19 +147,14 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i555.CategoryRepositoryContract>(),
       ),
     );
-
     gh.singleton<_i540.HomeViewModel>(
       () => _i540.HomeViewModel(
         gh<_i817.HomeUseCase>(),
         gh<_i1022.OccasionProductUseCase>(),
       ),
     );
-    gh.factory<_i554.bestSellerUseCase>(
-      () => _i554.bestSellerUseCase(
-
     gh.factory<_i554.BestSellerUseCase>(
       () => _i554.BestSellerUseCase(
-
         bestSellerRepository: gh<_i670.BestSellerRepository>(),
       ),
     );
@@ -192,20 +187,12 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i177.CategoryViewModel>(
-
       () => _i177.CategoryViewModel(
         gh<_i817.HomeUseCase>(),
         gh<_i477.CategoryUseCase>(),
         gh<_i579.CategoryProductUseCase>(),
         gh<_i690.GetAllProductUseCase>(),
       ),
-    );
-    gh.singleton<_i891.BestSellerViewModel>(
-      () =>
-          _i891.BestSellerViewModel(BestSeller: gh<_i554.bestSellerUseCase>()),
-
-      () => _i177.CategoryViewModel(gh<_i477.CategoryUseCase>()),
-
     );
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
