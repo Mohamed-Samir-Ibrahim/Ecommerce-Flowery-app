@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/string_manager.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
@@ -37,8 +38,8 @@ List<ProductDto>? productDto;
             appBar: AppBar(
               backgroundColor: ColorManager.white,
                 title: ListTile(
-                  title:        Text(StringManager.bestSeller,style: TextStyle(fontSize: 20),),
-                  subtitle:  Text(StringManager.bestSellerDesc),
+                  title:        Text(StringManager.bestSeller.tr(),style: TextStyle(fontSize: 20),),
+                  subtitle:  Text(StringManager.bestSellerDesc.tr()),
                 )
             ),
             body: GridView.builder(

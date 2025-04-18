@@ -14,9 +14,12 @@ void main() async {
   //ApiConstant.token = await secureStorage.read(key: 'token');
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ar')],
+      supportedLocales: [Locale('en'), Locale('ar')
+      ],
+
       path: 'assets/language',
-      fallbackLocale: Locale('en'),
+      fallbackLocale: Locale('ar'),
+      startLocale: Locale('ar'),
       child: MyApp(),
     ),
   );
