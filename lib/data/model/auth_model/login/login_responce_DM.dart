@@ -1,4 +1,4 @@
-import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
+import 'package:flowery/domain/entity/auth_entity/login_response_entity.dart';
 
 
 

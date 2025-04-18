@@ -3,6 +3,8 @@ import 'package:flowery/data/model/auth_model/forget_password/forget_password_re
 import 'package:flowery/data/model/auth_model/signup/signup_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 import 'package:flowery/domain/common/api_result.dart';
+import 'package:flowery/domain/entity/Profile_entity/logout_entity.dart';
+import 'package:flowery/domain/use_case/Profile_use_case/logout_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/forget_password_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/signup_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/verify_reset_use_case.dart';
@@ -22,7 +24,8 @@ class AuthViewModel extends Cubit<AuthState> {
   SignupUseCase signupUseCase;
   ResetPasswordUseCase resetPasswordUseCase ;
   login_use_case objLoginUseCase;
-  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.objLoginUseCase,this.resetPasswordUseCase,this.signupUseCase)
+  logout_use_case objLogoutUseCase;
+  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.objLoginUseCase,this.resetPasswordUseCase,this.signupUseCase,this.objLogoutUseCase)
       : super(AuthState(status: Status.initial));
    bool isChecked = false;
   final emailController = TextEditingController();
@@ -151,8 +154,38 @@ class AuthViewModel extends Cubit<AuthState> {
     }
   }
 
+Future <void> logout() async {
+    emit(state.copyWith(status: Status.loading));
+    var result= await objLogoutUseCase.invoke();
+    switch(result){
+      case Success():{
+        emit(state.copyWith(status: Status.success,logout:result.data));
+        if (result.data?.message == "success") {
+          await SecureStorageService().deleteToken();}
+          print(result.data?.message);
+      }
+      case Error():{
+        var e=result.exception;
+        emailController.clear();
+        emit(state.copyWith(status: Status.error,exception: e));
 
-  void doIntent(AuthIntent authIntent){
+        if (e is DioException) {
+          final responseData = e.response?.data;
+          final statusCode = e.response?.statusCode;
+        }
+      }
+    }
+  }
+
+
+
+
+ 
+
+ 
+  
+
+   doIntent(AuthIntent authIntent){
     switch(authIntent){
       case ForgetPasswordIntent():
         _forgetPassword();
@@ -164,17 +197,18 @@ class AuthViewModel extends Cubit<AuthState> {
         signup();
       case LoginResetIntent():
         login();
+         case LogoutIntent():
+        logout();
     }
   }
 
 
 
 }
-sealed class AuthIntent{
-}
-
+sealed class AuthIntent{}
 class ForgetPasswordIntent extends AuthIntent {}
 class VerifyResetIntent extends AuthIntent {}
 class ResetPasswordIntent extends AuthIntent {}
 class LoginResetIntent extends AuthIntent{}
 class SignupIntent extends AuthIntent{}
+class LogoutIntent extends AuthIntent{}
