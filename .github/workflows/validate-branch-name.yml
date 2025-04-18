@@ -1,0 +1,21 @@
+name: Validate Branch Name
+
+on:
+  pull_request:
+    branches: [development]
+
+jobs:
+  validate-branch-name:
+    name: Check Branch Name Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate branch name
+        run: |
+          echo "Source branch: ${{ github.head_ref }}"
+          if [[ "${{ github.head_ref }}" =~ ^(feature|bugfix|hotfix|release)\/[a-z0-9._-]+$ ]]; then
+            echo "✅ Branch name is valid."
+          else
+            echo "❌ Invalid branch name. Must match: ^(feature|bugfix|hotfix|release)/[a-z0-9._-]+$"
+            exit 1
+          fi

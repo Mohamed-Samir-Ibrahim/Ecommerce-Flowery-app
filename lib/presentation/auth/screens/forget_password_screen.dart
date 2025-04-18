@@ -83,40 +83,41 @@ class ForgetPassword extends StatelessWidget {
                     label: StringManager.continueText,
                     onPressed: () {
                       viewModel.doIntent(ForgetPasswordIntent());
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    SizedBox(height: 24.h),
-                    Text("Forget Password"),
-                    SizedBox(height: 10.h),
+                      child:
+                      Form(
+                        key: _formKey,
+                        child: Column(
 
-                    Text("Please enter your email associated to your account"),
-                    SizedBox(height: 20.h),
-                    CustomTextFormField(
-                      controller: authViewModel.emailController,
-                      hintText: "Enter your email",
-                      labelText: "Email",
-                      validator: ValidatorManager.validateEmail,
-                    ),
-                    SizedBox(height: 48.h),
+                          children: [
+                            SizedBox(height: 24.h),
+                            Text("Forget Password"),
+                            SizedBox(height: 10.h),
 
-                    CustomElevatedButton(
-                      label: "Confirm",
-                      onPressed: () {
-                        if(_formKey.currentState!.validate()) {
-                          authViewModel.doIntent(ForgetPasswordIntent());
-                        }
-                      },
-                    ),
-                  ],
-                ),
-    );
-                  },
-                  ),
-                ],
-              ),
-            );
+                            Text(
+                                "Please enter your email associated to your account"),
+                            SizedBox(height: 20.h),
+                            CustomTextFormField(
+                              controller: authViewModel.emailController,
+                              hintText: "Enter your email",
+                              labelText: "Email",
+                              validator: ValidatorManager.validateEmail,
+                            ),
+                            SizedBox(height: 48.h),
+
+                            CustomElevatedButton(
+                              label: "Confirm",
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  authViewModel.doIntent(
+                                      ForgetPasswordIntent());
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    })])   );
+
           },
         ),
       ),
