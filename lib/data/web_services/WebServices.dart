@@ -4,12 +4,16 @@ import 'package:flowery/data/model/auth_model/forget_password/Forget_password_re
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
+import 'package:flowery/data/model/cart_model/cart_response_dto.dart';
 
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
 import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
+import 'package:flowery/domain/entity/cart_entity/GetCartEntity.dart';
+import 'package:flowery/domain/entity/cart_entity/cart_entity.dart';
+import 'package:flowery/domain/entity/cart_entity/delete_item.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
 import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
 
@@ -32,6 +36,7 @@ import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
 import '../model/auth_model/signup/signup_response.dart';
+import '../model/cart_model/cart_request.dart';
 
 part 'WebServices.g.dart';
 
@@ -67,11 +72,16 @@ abstract class WebServices {
   @POST(ApiConstant.signInApi)
 
   Future<login_response_entity> login(@Body() login_request_entity request);
-
-
+ @POST(ApiConstant.cart)
+ Future<CartEntity> cart(@Body() CartRequest cartreq,@Header("Authorization") String token);
+ @DELETE('${ApiConstant.cart}/{id}')
+ Future deleteCartSP(@Path("id") String id,@Header("Authorization") String token);
   @GET(ApiConstant.getHomeApi)
   Future<HomeModel> getHomeScreen();
-
+  @GET('${ApiConstant.cart}')
+  Future<CartEntity> getCart(@Header("Authorization") String token);
+  @DELETE('${ApiConstant.cart}/{id}')
+  Future<DeleteItem> deleteCartItem(@Path("id") String id,@Header("Authorization") String token);
 
   @GET(ApiConstant.getAllCategories)
   Future<Category_response_entity> getCategories();

@@ -1,86 +1,51 @@
+import 'package:flowery/presentation/home/tabs/cart/cubit/Cart_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/shared_Preferences.dart';
 import '../../../../core/utils/resources/custom_elevated_button.dart';
+import '../../../../di/injetible_intinalizer.dart';
 import 'cart_item.dart';
+import 'cubit/cart_view_model.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+class CartScreen extends StatefulWidget {
+   CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  CartViewModel cartViewModel = getIt<CartViewModel>();
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Cart (3 items)'),
 
-      ),
-      body: Column(
-        children: [
-Row(
-  children: [
-    Image(image: AssetImage('assets/icon/location.png')),
-    Text(' Deliver to ',style: TextStyle(fontSize: 16,
-    ),),
-    Text(' 2XVP+XC - Sheikh Zayed.....',style: TextStyle(
-      fontSize: 16,
-        fontWeight: FontWeight.bold
-    ),),
-    IconButton(onPressed: (){}, icon:Icon(Icons.keyboard_arrow_down_sharp)),
+    return BlocProvider<CartViewModel>.value(
+      value: cartViewModel..dointent(getCartIntent()),
+      child: BlocBuilder<CartViewModel,CartStates>(
 
-  ],
-),
-          SizedBox(height: 5,),
-          cartitem(),
-          SizedBox(height: 5,),
-          cartitem(),
-          SizedBox(height: 5,),
-          cartitem(),
-          SizedBox(height: 5,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              Text('Sub Total'),
-              Text('100\$')
-            ],),
-          ),
-          SizedBox(height: 3,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              Text('Delivery Fee'),
-              Text('10\$')
+        builder: (context,state) {
+      var token = SecureStorageService().getToken();
+      print(token);
 
-            ],),
-          )
-          ,
-          
+          final item = state.cartResponseDto?.cart?.cartItems?? [];
+          return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                    'Cart (${state.cartResponseDto?.numOfCartItems} items)'),
+              ),
+              body: item.isEmpty?Center(child: Text('Your cart is empty')) :ListView.builder(
 
-          Divider(thickness: 2,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Total',style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15
-                ),),
-                Text('110\$',style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15
-                ),)
-
-              ],),
-          ),
-
-SizedBox(height: 18,),
-          CustomElevatedButton(label: 'Checkout', onPressed: () {  },)
-
-        ],
-      ),
+                itemCount: state.cartResponseDto?.cart?.cartItems?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return cartitem(cartI: item[index],);
+                },
+              )
+          );
+        } ),
     );
   }
 }
