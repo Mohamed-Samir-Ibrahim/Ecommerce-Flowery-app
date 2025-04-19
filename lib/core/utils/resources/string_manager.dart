@@ -22,12 +22,18 @@ class StringManager {
   static const String firstNameError = 'Please enter a valid first name';
   static const String lasrNameError = 'Please enter a valid last name';
   static const String emailError = 'Please enter a valid email address';
+  static const String subtotal='Sub Total';
+  static const String total='Total';
+  static  const String DeliveryFee='Delivery Fee';
+  static  const String checkout='Checkout';
+
   static const String passwordError = 'Password must have 8+ chars, uppercase, lowercase, number, and special char.';
 static const String hintEnterEmailToResetPassword = 'please Enter your email associated to your account';
   static const String phoneNumberError = 'Phone number must be 11 digits long and start with 01.';
   static const String rePasswordError = 'Passwords do not match';
   static const String rePasswordNotFound = 'Confirm Passwords not found';
   static const String login = 'Login';
+  static const String logoutApi = "Your cart is empty";
   static const String continueasguest = 'Continue as guest';
   static const String signup = 'Sign up';
   static const String home = 'Home';

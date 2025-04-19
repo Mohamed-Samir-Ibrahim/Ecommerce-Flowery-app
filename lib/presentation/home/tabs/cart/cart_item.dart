@@ -1,3 +1,4 @@
+import 'package:flowery/core/api_constant.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/core/utils/resources/font_manager.dart';
 import 'package:flowery/core/utils/resources/string_manager.dart';
@@ -56,63 +57,73 @@ int btn= 1;
           child: Row(
             children: [
               Image(image: NetworkImage(widget.cartI?.product?.imgCover??""),width: 101,height: 96,),
-              Column(
-                children: [
-                  Row(
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Text('${widget.cartI?.product?.title}',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: FontSize.s18
-                      ),),
-                      SizedBox(width: MediaQuery.of(context).size.width*0.4,),
-
-                      IconButton(onPressed: ()async{
-                        final productId = widget.cartI?.product?.id;
-                          await context.read<CartViewModel>().deletet(productId!);
-
-                      }, icon: Icon(Icons.delete)),
-
-                    ],
-                  ),
-                  Text(widget.cartI?.product?.description??"0",
-                    style: TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        color: ColorManager.grey,
-                        fontSize: FontSize.s14
-                    ),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(widget.cartI?.price.toString()??'0',style: TextStyle(fontWeight: FontWeight.bold),),
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width*0.2,),
-
                       Row(
                         children: [
-                          IconButton(onPressed: (){
-                            if(btn>1){
-                              btn--;
-                            }
-                            setState(() {
-
-                            });
-                          }, icon: Icon(Icons.remove,size: 10,)),
-                          Text('${btn}',style: TextStyle(fontWeight: FontWeight.bold),),
-                          IconButton(onPressed: (){
-                            btn++;
-                  setState(() {
-
-                  });
-                          }, icon: Icon(Icons.add,size: 10,)),
+                          Expanded(
+                            child: Text('${widget.cartI?.product?.title}',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontSize.s18,
+                  
+                            ),
+                              overflow: TextOverflow.ellipsis,
+                  
+                            ),
+                          ),
+                          SizedBox(width: MediaQuery.of(context).size.width*0.4,),
+                  
+                          IconButton(onPressed: ()async{
+                            final productId = widget.cartI?.product?.id;
+                              await context.read<CartViewModel>().deletet(productId!);
+                  await context.read<CartViewModel>().getCart();
+                          }, icon: Icon(Icons.delete)),
+                  
                         ],
                       ),
-
-
+                      Text(widget.cartI?.product?.description??"0",
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: ColorManager.grey,
+                            fontSize: FontSize.s14
+                        ),),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(widget.cartI?.price.toString()??'0',style: TextStyle(fontWeight: FontWeight.bold),),
+                          ),
+                          SizedBox(width: MediaQuery.of(context).size.width*0.2,),
+                  
+                          Row(
+                            children: [
+                              IconButton(onPressed: (){
+                                if(btn>1){
+                                  btn--;
+                                }
+                                setState(() {
+                  
+                                });
+                              }, icon: Icon(Icons.remove,size: 12,)),
+                              Text('${btn}',style: TextStyle(fontWeight: FontWeight.bold),),
+                              IconButton(onPressed: (){
+                                btn++;
+                      setState(() {
+                  
+                      });
+                              }, icon: Icon(Icons.add,size: 12,)),
+                            ],
+                          ),
+                  
+                  
+                        ],
+                      )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
 
 
@@ -127,7 +138,7 @@ int btn= 1;
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Sub Total'),
+            Text('${StringManager.subtotal}'),
             Text('${widget.cartI?.price}\$')
           ],),
       ),
@@ -137,8 +148,8 @@ int btn= 1;
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Delivery Fee'),
-            Text('10\$')
+            Text('${StringManager.DeliveryFee}'),
+            Text('${widget.cartI?.product?.v}')
 
           ],),
       )
@@ -151,11 +162,11 @@ int btn= 1;
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Total',style: TextStyle(
+            Text('${StringManager.total}',style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15
             ),),
-            Text('${widget.cartI?.price}\$',style: TextStyle(
+            Text('${widget.cartI?.product?.price}\$',style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15
             ),)
@@ -164,7 +175,7 @@ int btn= 1;
       ),
 
       SizedBox(height: 18,),
-      CustomElevatedButton(label: 'Checkout', onPressed: () {  },)],
+      CustomElevatedButton(label: '${StringManager.checkout}', onPressed: () {  },)],
 
   );
   }
