@@ -63,5 +63,14 @@
   "search":"البحث",
   "categories":"الفئات",
   "occasion":"الجماليات",
-  "noDataFound":"لا يوجد بيانات لعرضها"
+  "noDataFound":"لا يوجد بيانات لعرضها",
+  "egp":"جنيه",
+  "inStock":"متوفر",
+  "status":"الحالة",
+  "description":"الوصف",
+  "bouquetInclude":"البوقات المشمولة",
+  "whiteWrap":"القلاب البيضاء",
+  "allPricesIncludeTax":"جميع الاسعار شاملة الضريبة",
+  "addToCart":"اضافة الى السلة",
+  "unKnown":"غير معروف"
 }

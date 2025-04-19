@@ -63,5 +63,15 @@
   "search": "Search",
  "categories": "Categories",
   "occasion": "Occasion",
-"noDataFound": "No data to show"
+"noDataFound": "No data to show",
+  "egp": "EGP",
+  "inStock": "In stock",
+  "status": "Status",
+  "description": "Description",
+  "bouquetInclude": "Bouquet include",
+  "whiteWrap": "White wrap",
+  "allPricesIncludeTax": "All prices include tax",
+  "addToCart": "Add to cart",
+  "unKnown": "Unknown"
+
 }

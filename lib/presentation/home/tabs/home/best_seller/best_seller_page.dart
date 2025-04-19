@@ -93,7 +93,7 @@ List<ProductDto>? productDto;
 
                               Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: Text('EGP${data?[index].price} ',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),),
+                                child: Text('${StringManager.egp.tr()} ${data?[index].price} ',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),

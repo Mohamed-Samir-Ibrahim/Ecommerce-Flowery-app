@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 
@@ -7,6 +8,8 @@ import 'package:flowery/presentation/home/tabs/category/category_view_model.dart
 import 'package:flowery/presentation/home/tabs/home/widgets/product_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/utils/resources/string_manager.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -36,7 +39,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text('Categories', style: TextStyle(color: Colors.black)),
+          title:  Text(StringManager.categories.tr(), style: TextStyle(color: Colors.black)),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.pushNamed(context,RoutesNames.bottomNavScreen),
@@ -54,7 +57,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         setState(() => searchQuery = value);
                       },
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: StringManager.search.tr(),
                         prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -143,7 +146,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state.status == CategoryStatus.success) {
 
-                  return state.products?.products?.length!=0? ProductItems(state: state):Center(child:Text("No Data To Show"),);
+                  return state.products?.products?.length!=0? ProductItems(state: state):Center(child:Text(StringManager.noDataFound.tr()),);
                 } else {
                   return const Center(child: Text("❌ Failed to load categories."));
                 }

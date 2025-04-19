@@ -64,5 +64,14 @@ static const String search = 'search';
   static const String categories = 'categories';
   static const String occasion = 'occasion';
   static const String noDataFound = 'noDataFound';
+  static const String egp = 'egp';
+  static const String inStock = 'inStock';
+  static const String status = 'status';
+  static const String description = 'description';
+  static const String bouquetInclude = 'bouquetInclude';
+  static const String whiteWrap = 'whiteWrap';
+  static const String allPricesIncludeTax = 'allPricesIncludeTax';
+  static const String unKnown = 'unKnown';
+  static const String addToCart = 'addToCart';
 
 }
