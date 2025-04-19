@@ -10,6 +10,7 @@ import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
   import 'package:flowery/presentation/auth/screens/login_screen.dart';
 import 'package:flowery/presentation/home/tabs/profile/About_us_screen.dart';
+import 'package:flowery/presentation/home/tabs/profile/terms_and_conditions_screen.dart';
   import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -144,7 +145,20 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
                   );
                 },
               ),
-              buildListTile(Icons.rule_folder_outlined, StringManager.rule_folder_outlined),
+              ListTile(
+                leading: const Icon(Icons.rule_folder_outlined, color: Colors.black),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                title: const Text(StringManager.rule_folder_outlined),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TermsAndConditions(),
+                    ),
+                  );
+                },
+              ),
+              //buildListTile(Icons.rule_folder_outlined, StringManager.rule_folder_outlined),
               const Divider(),
               ListTile(
                 leading: const Icon(Icons.logout, color: Colors.black),

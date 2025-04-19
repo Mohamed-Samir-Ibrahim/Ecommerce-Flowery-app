@@ -1,5 +1,38 @@
 {
   "hello": "Hello",
   "add_to_cart": "Add to Cart",
-  "price": "Price"
+  "price": "Price",
+  "about_title": "About Flowery App",
+  "about_intro": "Flowery is more than just a flower delivery app—it's a celebration of beauty, emotion, and connection. Operated by Flowery Inc., we are dedicated to transforming everyday moments into unforgettable experiences with our exquisite floral arrangements. Whether it's a birthday, wedding, apology, or just because, Flowery makes it easy to send fresh, handcrafted bouquets to loved ones, delivered with care and precision to your doorstep.",
+  "our_story_title": "Our Story",
+  "our_story_paragraphs": [
+    "Founded in 2020 in San Francisco, Flowery began with a simple vision: to make the world a brighter place, one flower at a time. Our founders, passionate about nature and design, saw an opportunity to combine technology with the timeless art of floristry.",
+    "From a small startup, we’ve grown into a trusted name, serving thousands of customers across the United States. Our team of florists, designers, and tech experts work together to ensure every order reflects our commitment to quality and creativity.",
+    "Today, Flowery is proud to partner with local growers and artisans, supporting sustainable practices and bringing the freshest blooms to your door."
+  ],
+  "features_title": "What We Offer",
+  "features_list": [
+    "Explore a diverse catalog of flowers, from classic roses to exotic orchids, curated for every occasion.",
+    "Personalize your bouquets with add-ons like elegant vases, heartfelt greeting cards, or premium chocolates.",
+    "Enjoy flexible delivery options, including same-day delivery in select cities and scheduled deliveries for future dates.",
+    "Track your order in real-time with updates from our florists to your delivery driver.",
+    "Access exclusive seasonal collections and limited-edition arrangements designed by our expert florists.",
+    "Earn rewards with every purchase through our loyalty program, redeemable for discounts on future orders."
+  ],
+  "commitment_title": "Our Commitment to You",
+  "commitment_list": [
+    "We source our flowers from trusted growers who prioritize sustainability and ethical practices, ensuring every bloom is fresh and vibrant.",
+    "Our team is dedicated to crafting arrangements that not only look stunning but also convey the emotions you wish to express.",
+    "Customer satisfaction is at the heart of everything we do. Our support team is available to assist with any questions or concerns.",
+    "We are committed to environmental responsibility, using eco-friendly packaging and supporting initiatives to reduce our carbon footprint."
+  ],
+  "contact_title": "Get in Touch",
+  "contact_list": [
+    "We love hearing from our customers! Whether you have questions, feedback, or need help with an order, our team is here for you.",
+    "Email: support@floweryapp.com",
+    "Phone: (888) 555-1234",
+    "Address: Flowery Inc., 123 Bloom Street, San Francisco, CA 94105",
+    "Follow us on social media for inspiration, promotions, and updates!"
+  ],
+  "closing": "At Flowery, we believe flowers have the power to connect people and create lasting memories. Thank you for choosing us to be part of your special moments!"
 }

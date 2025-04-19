@@ -1,60 +1,124 @@
-import 'package:flowery/core/utils/resources/color_manager.dart';
+import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Aboutus extends StatelessWidget {
+class Aboutus extends StatefulWidget {
   const Aboutus({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            title: Row(children: [Image.asset("assets/icon/flower.png"),
-              SizedBox(width: 4.w),
-              Text("Flowery", style: TextStyle(color: ColorManager.primary)),
-              SizedBox(width: 17.w),],),
-    ),
-    body:SingleChildScrollView(padding: EdgeInsets.all(20.w),
-    child: Card(
-      child: Text('''
+  State<Aboutus> createState() => _AboutusState();
+}
 
-    🌸 About Us – Flowery
-    
-    Welcome to Flowery, your go-to destination for elegant floral arrangements, 
-  thoughtful gifts, and a seamless shopping experience.
-    
-    At Flowery, we believe that every flower tells a story. Whether you're celebrating 
-  love, friendship, gratitude, or simply want to brighten someone’s day, our
-  handpicked blooms are designed to leave a lasting impression.
-    
-    💐 Who We Are:
-    Flowery is a modern e-commerce platform specializing in flowers, gifts, and
-  special  occasion items. We combine creativity, convenience, and care to ensure
-  your orders are  delivered fresh, fast, and flawlessly.
-    
-    🚚 What We Offer:
-    - A wide variety of fresh flowers for every occasion  
-    - Customizable gift packages and greeting options  
-    - Same-day delivery in selected areas  
-    - Easy and secure online ordering  
-    
-    ❤️ Our Mission:
-     To spread joy and beauty, one flower at a time.
-    
-    📍 Why Choose Us?
-    - Premium quality flowers sourced from trusted growers  
-    - Artistic floral designs by passionate florists  
-    - Excellent customer support  
-    - Affordable pricing with seasonal offers  
-    
-    Thank you for choosing Flowery — where every petal speaks from the heart. 🌷
-    ''',
-      style: TextStyle(fontSize: 16, height: 1.5),
-      textAlign: TextAlign.start,
-        ),
-    ),),
-    );
-    
+class _AboutusState extends State<Aboutus> {
+  List<dynamic> sections = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadAboutJson();
   }
+
+  Future<void> loadAboutJson() async {
+    final jsonStr = await rootBundle.loadString('assets/Flowery About Section JSON with Expanded Content.json');
+    final data = json.decode(jsonStr);
+    setState(() {
+      sections = data['about_app'] ?? [];
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final lang = context.locale.languageCode;
+    final bool isArabic = lang == 'ar';
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(context.locale == Locale('ar') ? 'عن التطبيق' : 'About the App'),
+        ),
+        body: sections.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.separated(
+                padding: EdgeInsets.all(16.r),
+                itemCount: sections.length,
+                separatorBuilder: (_, __) => SizedBox(height: 24.h),
+                itemBuilder: (context, index) {
+                  final section = sections[index];
+                  final String? title = section['title']?[lang];
+                  final dynamic content = section['content']?[lang];
+                  final Map<String, dynamic> style = section['style'] ?? {};
+    
+                  final Map<String, dynamic> titleStyle =
+                      style['title'] ?? style;
+                  final Map<String, dynamic> contentStyle =
+                      style['content'] ?? style;
+    
+                  return Column(
+                  crossAxisAlignment: context.locale == Locale('ar') ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                    children: [
+                      if (title != null) ...[
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize:
+                                (titleStyle['fontSize'] ?? 20.sp).toDouble(),
+                            fontWeight: titleStyle['fontWeight'] == 'bold'
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: HexColor(titleStyle['color'] ?? '#000000'),
+                          ),
+                          textAlign: context.locale == Locale('ar') ? TextAlign.right : TextAlign.left,
+                        ),
+                        SizedBox(height: 10.h),
+                      ],
+                      if (content is String)
+                        Text(
+                          content,
+                          style: TextStyle(
+                            fontSize:
+                                (contentStyle['fontSize'] ?? 16.sp).toDouble(),
+                            fontWeight: contentStyle['fontWeight'] == 'bold'
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: HexColor(contentStyle['color'] ?? '#333333'),
+                          ),
+                          textAlign: context.locale == Locale('ar') ? TextAlign.right : TextAlign.left,
+                        ),
+                      if (content is List)
+                        Column(
+                          crossAxisAlignment:
+                          context.locale == Locale('ar') ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          children: content
+                              .map<Widget>(
+                                (item) => Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 6.h),
+                                  child: Text(
+                                    item,
+                                    style: TextStyle(
+                                      fontSize: (contentStyle['fontSize'] ?? 16.sp)
+                                          .toDouble(),
+                                      fontWeight:
+                                          contentStyle['fontWeight'] == 'bold'
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                      color: HexColor(
+                                          contentStyle['color'] ?? '#333333'),
+                                    ),
+                                    textAlign:
+                                    context.locale == Locale('ar') ? TextAlign.right : TextAlign.left,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                    ],
+                  );
+                },
+              ),);
+  }
+}
+
+class HexColor extends Color {
+  HexColor(final String hexColor)
+      : super(int.parse(hexColor.replaceFirst('#', '0xff')));
 }

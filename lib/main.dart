@@ -38,10 +38,13 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
       theme:ThemeData.light(),
-      // home: LoginScreen(),
+      // home: BestSellerPage(),
       onGenerateRoute: RouteGenerator.generateRoutes,
+
       initialRoute: RoutesNames.loginScreen,
-      //ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
+      // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
+
+
     ),
   );
   }

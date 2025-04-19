@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 } else if (state.status == Status.success &&
                     state.obj_login_response != null) {
-                  Navigator.pushNamed(context, RoutesNames.bottomNavScreen);
+                  Navigator.pushNamedAndRemoveUntil(context, RoutesNames.bottomNavScreen,(route) => false,);
 
                 } else if (state.status == Status.error &&
                     state.exception != null) {
@@ -158,9 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontSize: SizeManager.s18,
                                   ),
                                   onPressed: () {
-                                    Navigator.pushReplacementNamed(
+                                    Navigator.pushNamedAndRemoveUntil(
                                       context,
                                       RoutesNames.bottomNavScreen,
+                                      (route) => false,
                                     );
                                   },
                                 ),
