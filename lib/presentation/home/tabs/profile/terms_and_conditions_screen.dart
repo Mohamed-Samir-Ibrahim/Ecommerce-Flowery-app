@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flowery/data/model/Profile/terms_section.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TermsAndConditions extends StatefulWidget {
   const TermsAndConditions({super.key});
@@ -42,7 +43,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
       body: sections.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.r),
               itemCount: sections.length,
               itemBuilder: (context, index) {
                 final section = sections[index];
@@ -67,8 +68,8 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                         : (isArabic ? 'right' : 'left'));
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding: const EdgeInsets.all(10),
+                  margin: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.all(10.r),
                   color: HexColor(
                     (titleStyle['backgroundColor'] ??
                             style['backgroundColor'] ??
@@ -85,7 +86,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                               section.title?[lang] ?? '',
                               style: TextStyle(
                                 fontSize:
-                                    (titleStyle['fontSize'] ?? 18).toDouble(),
+                                    (titleStyle['fontSize'] ?? 18.sp).toDouble(),
                                 fontWeight: titleStyle['fontWeight'] == 'bold'
                                     ? FontWeight.bold
                                     : FontWeight.normal,
@@ -95,15 +96,15 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                             ),
                           ],
                         ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                       if (isList && contentItems != null)
                         ...List.generate(contentItems.length, (i) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            padding: EdgeInsets.symmetric(vertical: 4.h),
                             child: Text(
                               contentItems[i],
                               style: TextStyle(
-                                fontSize: (contentStyle['fontSize'] ?? 16)
+                                fontSize: (contentStyle['fontSize'] ?? 16.sp)
                                     .toDouble(),
                                 fontWeight: contentStyle['fontWeight'] == 'bold'
                                     ? FontWeight.bold
@@ -120,7 +121,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                           contentItems,
                           style: TextStyle(
                             fontSize:
-                                (contentStyle['fontSize'] ?? 16).toDouble(),
+                                (contentStyle['fontSize'] ?? 16.sp).toDouble(),
                             fontWeight: contentStyle['fontWeight'] == 'bold'
                                 ? FontWeight.bold
                                 : FontWeight.normal,

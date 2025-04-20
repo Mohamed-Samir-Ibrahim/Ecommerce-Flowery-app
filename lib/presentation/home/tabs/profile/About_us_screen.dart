@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flowery/data/model/Profile/about_section.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Aboutus extends StatefulWidget {
   const Aboutus({super.key});
@@ -44,7 +45,7 @@ class _AboutusState extends State<Aboutus> {
       body: sections.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.r),
               itemCount: sections.length,
               itemBuilder: (context, index) {
                 final section = sections[index];
@@ -69,8 +70,8 @@ class _AboutusState extends State<Aboutus> {
                         : (isArabic ? 'right' : 'left'));
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding: const EdgeInsets.all(10),
+                  margin: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.all(10.r),
                   color: HexColor(
                     (titleStyle['backgroundColor'] ??
                             style['backgroundColor'] ??
@@ -87,7 +88,7 @@ class _AboutusState extends State<Aboutus> {
                               section.title?[lang] ?? '',
                               style: TextStyle(
                                 fontSize:
-                                    (titleStyle['fontSize'] ?? 18).toDouble(),
+                                    (titleStyle['fontSize'] ?? 18.sp).toDouble(),
                                 fontWeight: titleStyle['fontWeight'] == 'bold'
                                     ? FontWeight.bold
                                     : FontWeight.normal,
@@ -105,7 +106,7 @@ class _AboutusState extends State<Aboutus> {
                             child: Text(
                               contentItems[i],
                               style: TextStyle(
-                                fontSize: (contentStyle['fontSize'] ?? 16)
+                                fontSize: (contentStyle['fontSize'] ?? 16.sp)
                                     .toDouble(),
                                 fontWeight: contentStyle['fontWeight'] == 'bold'
                                     ? FontWeight.bold
@@ -122,7 +123,7 @@ class _AboutusState extends State<Aboutus> {
                           contentItems,
                           style: TextStyle(
                             fontSize:
-                                (contentStyle['fontSize'] ?? 16).toDouble(),
+                                (contentStyle['fontSize'] ?? 16.sp).toDouble(),
                             fontWeight: contentStyle['fontWeight'] == 'bold'
                                 ? FontWeight.bold
                                 : FontWeight.normal,
