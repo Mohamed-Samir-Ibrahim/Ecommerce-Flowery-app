@@ -21,8 +21,8 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
   }
 
   Future<void> loadTermsContent() async {
-    final String jsonString = await rootBundle.loadString(
-        'assets/Flowery Terms and Conditions JSON with Arabic and English.json');
+    final String jsonString = await rootBundle
+        .loadString('assets/Flowery Terms and Conditions JSON with Arabic and English.json');
     final Map<String, dynamic> jsonData = json.decode(jsonString);
     final List<dynamic> items = jsonData['terms_and_conditions'];
 
@@ -37,6 +37,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
     final bool isArabic = lang == 'ar';
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text('terms_and_conditions'.tr())),
       body: sections.isEmpty
           ? const Center(child: CircularProgressIndicator())
@@ -47,12 +48,23 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                 final section = sections[index];
                 final isList = section.content[lang] is List;
                 final contentItems = section.content[lang];
-                final style = section.style;
-                final titleStyle = style['title'] ?? {};
-                final contentStyle = style['content'] ?? {};
 
-                final isFirstSection = index == 0;
-                final isSecondSection = index == 1;
+                final isFirstOrSecond = index == 0 || index == 1;
+
+                final style = section.style;
+                final titleStyle = style['title'] ?? style;
+                final contentStyle = style['content'] ?? style;
+
+                // Fallback alignment from style or language
+                final titleAlign = titleStyle['textAlign']?[lang] ??
+                    (isFirstOrSecond
+                        ? 'center'
+                        : (isArabic ? 'right' : 'left'));
+
+                final contentAlign = contentStyle['textAlign']?[lang] ??
+                    (isFirstOrSecond
+                        ? 'center'
+                        : (isArabic ? 'right' : 'left'));
 
                 return Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
@@ -64,11 +76,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                         .toString(),
                   ),
                   child: Column(
-                    crossAxisAlignment: isFirstSection || isSecondSection
-                        ? CrossAxisAlignment.center
-                        : (isArabic
-                            ? CrossAxisAlignment.end
-                            : CrossAxisAlignment.start),
+                    crossAxisAlignment: _textAlignToCrossAxis(titleAlign),
                     children: [
                       if (section.title != null)
                         Row(
@@ -83,11 +91,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                                     : FontWeight.normal,
                                 color: HexColor(titleStyle['color'] ?? '#000000'),
                               ),
-                              textAlign: isFirstSection || isSecondSection
-                                  ? TextAlign.center
-                                  : (isArabic
-                                      ? TextAlign.right
-                                      : TextAlign.left),
+                              textAlign: _textAlignFromString(titleAlign),
                             ),
                           ],
                         ),
@@ -101,18 +105,13 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                               style: TextStyle(
                                 fontSize: (contentStyle['fontSize'] ?? 16)
                                     .toDouble(),
-                                fontWeight:
-                                    contentStyle['fontWeight'] == 'bold'
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                fontWeight: contentStyle['fontWeight'] == 'bold'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                                 color: HexColor(
                                     contentStyle['color'] ?? '#333333'),
                               ),
-                              textAlign: isFirstSection || isSecondSection
-                                  ? TextAlign.center
-                                  : (isArabic
-                                      ? TextAlign.right
-                                      : TextAlign.left),
+                              textAlign: _textAlignFromString(contentAlign),
                             ),
                           );
                         })
@@ -127,11 +126,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                                 : FontWeight.normal,
                             color: HexColor(contentStyle['color'] ?? '#333333'),
                           ),
-                          textAlign: isFirstSection || isSecondSection
-                              ? TextAlign.center
-                              : (isArabic
-                                  ? TextAlign.right
-                                  : TextAlign.left),
+                          textAlign: _textAlignFromString(contentAlign),
                         ),
                     ],
                   ),
@@ -139,6 +134,30 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               },
             ),
     );
+  }
+
+  TextAlign _textAlignFromString(String align) {
+    switch (align) {
+      case 'right':
+        return TextAlign.right;
+      case 'center':
+        return TextAlign.center;
+      case 'left':
+      default:
+        return TextAlign.left;
+    }
+  }
+
+  CrossAxisAlignment _textAlignToCrossAxis(String align) {
+    switch (align) {
+      case 'right':
+        return CrossAxisAlignment.end;
+      case 'center':
+        return CrossAxisAlignment.center;
+      case 'left':
+      default:
+        return CrossAxisAlignment.start;
+    }
   }
 }
 
