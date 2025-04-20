@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flowery/data/model/Profile/about_section.dart';
 
 class Aboutus extends StatefulWidget {
   const Aboutus({super.key});
@@ -12,19 +12,24 @@ class Aboutus extends StatefulWidget {
 }
 
 class _AboutusState extends State<Aboutus> {
-  List<dynamic> sections = [];
+  List<AboutSection> sections = [];
 
   @override
   void initState() {
     super.initState();
-    loadAboutJson();
+    loadContent();
   }
 
-  Future<void> loadAboutJson() async {
-    final jsonStr = await rootBundle.loadString('assets/Flowery About Section JSON with Expanded Content.json');
-    final data = json.decode(jsonStr);
+  Future<void> loadContent() async {
+    final String jsonString = await rootBundle
+        .loadString('assets/Flowery About Section JSON with Expanded Content.json');
+    final Map<String, dynamic> jsonData = json.decode(jsonString);
+    final List<dynamic> aboutApp = jsonData['about_app'];
+
     setState(() {
-      sections = data['about_app'] ?? [];
+      sections = aboutApp
+          .map((sectionJson) => AboutSection.fromJson(sectionJson))
+          .toList();
     });
   }
 
@@ -32,93 +37,133 @@ class _AboutusState extends State<Aboutus> {
   Widget build(BuildContext context) {
     final lang = context.locale.languageCode;
     final bool isArabic = lang == 'ar';
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(context.locale == Locale('ar') ? 'عن التطبيق' : 'About the App'),
-        ),
-        body: sections.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : ListView.separated(
-                padding: EdgeInsets.all(16.r),
-                itemCount: sections.length,
-                separatorBuilder: (_, __) => SizedBox(height: 24.h),
-                itemBuilder: (context, index) {
-                  final section = sections[index];
-                  final String? title = section['title']?[lang];
-                  final dynamic content = section['content']?[lang];
-                  final Map<String, dynamic> style = section['style'] ?? {};
-    
-                  final Map<String, dynamic> titleStyle =
-                      style['title'] ?? style;
-                  final Map<String, dynamic> contentStyle =
-                      style['content'] ?? style;
-    
-                  return Column(
-                  crossAxisAlignment: context.locale == Locale('ar') ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text('about'.tr())),
+      body: sections.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: sections.length,
+              itemBuilder: (context, index) {
+                final section = sections[index];
+                final isList = section.content[lang] is List;
+                final contentItems = section.content[lang];
+
+                final isFirstOrSecond = index == 0 || index == 1;
+
+                final style = section.style;
+                final titleStyle = style['title'] ?? style;
+                final contentStyle = style['content'] ?? style;
+
+                // Fallback alignment from style or language
+                final titleAlign = titleStyle['textAlign']?[lang] ??
+                    (isFirstOrSecond
+                        ? 'center'
+                        : (isArabic ? 'right' : 'left'));
+
+                final contentAlign = contentStyle['textAlign']?[lang] ??
+                    (isFirstOrSecond
+                        ? 'center'
+                        : (isArabic ? 'right' : 'left'));
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.all(10),
+                  color: HexColor(
+                    (titleStyle['backgroundColor'] ??
+                            style['backgroundColor'] ??
+                            '#FFFFFF')
+                        .toString(),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: _textAlignToCrossAxis(titleAlign),
                     children: [
-                      if (title != null) ...[
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize:
-                                (titleStyle['fontSize'] ?? 20.sp).toDouble(),
-                            fontWeight: titleStyle['fontWeight'] == 'bold'
-                                ? FontWeight.bold
-                                : FontWeight.normal,
-                            color: HexColor(titleStyle['color'] ?? '#000000'),
-                          ),
-                          textAlign: context.locale == Locale('ar') ? TextAlign.right : TextAlign.left,
+                      if (section.title != null)
+                        Row(
+                          children: [
+                            Text(
+                              section.title?[lang] ?? '',
+                              style: TextStyle(
+                                fontSize:
+                                    (titleStyle['fontSize'] ?? 18).toDouble(),
+                                fontWeight: titleStyle['fontWeight'] == 'bold'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                color: HexColor(titleStyle['color'] ?? '#000000'),
+                              ),
+                              textAlign: _textAlignFromString(titleAlign),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 10.h),
-                      ],
-                      if (content is String)
+                      const SizedBox(height: 10),
+                      if (isList && contentItems != null)
+                        ...List.generate(contentItems.length, (i) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              contentItems[i],
+                              style: TextStyle(
+                                fontSize: (contentStyle['fontSize'] ?? 16)
+                                    .toDouble(),
+                                fontWeight: contentStyle['fontWeight'] == 'bold'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                color: HexColor(
+                                    contentStyle['color'] ?? '#333333'),
+                              ),
+                              textAlign: _textAlignFromString(contentAlign),
+                            ),
+                          );
+                        })
+                      else if (contentItems is String)
                         Text(
-                          content,
+                          contentItems,
                           style: TextStyle(
                             fontSize:
-                                (contentStyle['fontSize'] ?? 16.sp).toDouble(),
+                                (contentStyle['fontSize'] ?? 16).toDouble(),
                             fontWeight: contentStyle['fontWeight'] == 'bold'
                                 ? FontWeight.bold
                                 : FontWeight.normal,
                             color: HexColor(contentStyle['color'] ?? '#333333'),
                           ),
-                          textAlign: context.locale == Locale('ar') ? TextAlign.right : TextAlign.left,
-                        ),
-                      if (content is List)
-                        Column(
-                          crossAxisAlignment:
-                          context.locale == Locale('ar') ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                          children: content
-                              .map<Widget>(
-                                (item) => Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 6.h),
-                                  child: Text(
-                                    item,
-                                    style: TextStyle(
-                                      fontSize: (contentStyle['fontSize'] ?? 16.sp)
-                                          .toDouble(),
-                                      fontWeight:
-                                          contentStyle['fontWeight'] == 'bold'
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                      color: HexColor(
-                                          contentStyle['color'] ?? '#333333'),
-                                    ),
-                                    textAlign:
-                                    context.locale == Locale('ar') ? TextAlign.right : TextAlign.left,
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                          textAlign: _textAlignFromString(contentAlign),
                         ),
                     ],
-                  );
-                },
-              ),);
+                  ),
+                );
+              },
+            ),
+    );
+  }
+
+  TextAlign _textAlignFromString(String align) {
+    switch (align) {
+      case 'right':
+        return TextAlign.right;
+      case 'center':
+        return TextAlign.center;
+      case 'left':
+      default:
+        return TextAlign.left;
+    }
+  }
+
+  CrossAxisAlignment _textAlignToCrossAxis(String align) {
+    switch (align) {
+      case 'right':
+        return CrossAxisAlignment.end;
+      case 'center':
+        return CrossAxisAlignment.center;
+      case 'left':
+      default:
+        return CrossAxisAlignment.start;
+    }
   }
 }
 
 class HexColor extends Color {
-  HexColor(final String hexColor)
-      : super(int.parse(hexColor.replaceFirst('#', '0xff')));
+  HexColor(final String hex)
+      : super(int.parse(hex.replaceFirst('#', '0xff')));
 }

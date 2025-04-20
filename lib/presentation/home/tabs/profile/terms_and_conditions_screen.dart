@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flowery/data/model/Profile/terms_section.dart';
 
 class TermsAndConditions extends StatefulWidget {
   const TermsAndConditions({super.key});
@@ -12,19 +12,22 @@ class TermsAndConditions extends StatefulWidget {
 }
 
 class _TermsAndConditionsState extends State<TermsAndConditions> {
-  List<dynamic> sections = [];
+  List<TermsSection> sections = [];
 
   @override
   void initState() {
     super.initState();
-    loadTermsJson();
+    loadTermsContent();
   }
 
-  Future<void> loadTermsJson() async {
-    final jsonStr = await rootBundle.loadString('assets/Flowery Terms and Conditions JSON with Arabic and English.json');
-    final data = json.decode(jsonStr);
+  Future<void> loadTermsContent() async {
+    final String jsonString = await rootBundle.loadString(
+        'assets/Flowery Terms and Conditions JSON with Arabic and English.json');
+    final Map<String, dynamic> jsonData = json.decode(jsonString);
+    final List<dynamic> items = jsonData['terms_and_conditions'];
+
     setState(() {
-      sections = data['terms_and_conditions'] ?? [];
+      sections = items.map((e) => TermsSection.fromJson(e)).toList();
     });
   }
 
@@ -34,76 +37,104 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
     final bool isArabic = lang == 'ar';
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(isArabic ? 'الشروط والأحكام' : 'Terms & Conditions'),
-      ),
+      appBar: AppBar(title: Text('terms_and_conditions'.tr())),
       body: sections.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : ListView.separated(
-              padding: EdgeInsets.all(16.r),
+          : ListView.builder(
+              padding: const EdgeInsets.all(16),
               itemCount: sections.length,
-              separatorBuilder: (_, __) => SizedBox(height: 24.h),
               itemBuilder: (context, index) {
                 final section = sections[index];
-                final String? title = section['title']?[lang];
-                final dynamic content = section['content']?[lang];
-                final Map<String, dynamic> style = section['style'] ?? {};
+                final isList = section.content[lang] is List;
+                final contentItems = section.content[lang];
+                final style = section.style;
+                final titleStyle = style['title'] ?? {};
+                final contentStyle = style['content'] ?? {};
 
-                final Map<String, dynamic> titleStyle = style['title'] ?? style;
-                final Map<String, dynamic> contentStyle = style['content'] ?? style;
+                final isFirstSection = index == 0;
+                final isSecondSection = index == 1;
 
-                return Column(
-                  crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                  children: [
-                    if (title != null) ...[
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: (titleStyle['fontSize'] ?? 20.sp).toDouble(),
-                          fontWeight: titleStyle['fontWeight'] == 'bold'
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: HexColor(titleStyle['color'] ?? '#000000'),
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.all(10),
+                  color: HexColor(
+                    (titleStyle['backgroundColor'] ??
+                            style['backgroundColor'] ??
+                            '#FFFFFF')
+                        .toString(),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: isFirstSection || isSecondSection
+                        ? CrossAxisAlignment.center
+                        : (isArabic
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start),
+                    children: [
+                      if (section.title != null)
+                        Row(
+                          children: [
+                            Text(
+                              section.title?[lang] ?? '',
+                              style: TextStyle(
+                                fontSize:
+                                    (titleStyle['fontSize'] ?? 18).toDouble(),
+                                fontWeight: titleStyle['fontWeight'] == 'bold'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                color: HexColor(titleStyle['color'] ?? '#000000'),
+                              ),
+                              textAlign: isFirstSection || isSecondSection
+                                  ? TextAlign.center
+                                  : (isArabic
+                                      ? TextAlign.right
+                                      : TextAlign.left),
+                            ),
+                          ],
                         ),
-                        textAlign: isArabic ? TextAlign.right : TextAlign.left,
-                      ),
-                      SizedBox(height: 10.h),
-                    ],
-                    if (content is String)
-                      Text(
-                        content,
-                        style: TextStyle(
-                          fontSize: (contentStyle['fontSize'] ?? 16.sp).toDouble(),
-                          fontWeight: contentStyle['fontWeight'] == 'bold'
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: HexColor(contentStyle['color'] ?? '#333333'),
-                        ),
-                        textAlign: isArabic ? TextAlign.right : TextAlign.left,
-                      ),
-                    if (content is List)
-                      Column(
-                        crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                        children: content
-                            .map<Widget>(
-                              (item) => Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6.h),
-                                child: Text(
-                                  item,
-                                  style: TextStyle(
-                                    fontSize: (contentStyle['fontSize'] ?? 16.sp).toDouble(),
-                                    fontWeight: contentStyle['fontWeight'] == 'bold'
+                      const SizedBox(height: 10),
+                      if (isList && contentItems != null)
+                        ...List.generate(contentItems.length, (i) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              contentItems[i],
+                              style: TextStyle(
+                                fontSize: (contentStyle['fontSize'] ?? 16)
+                                    .toDouble(),
+                                fontWeight:
+                                    contentStyle['fontWeight'] == 'bold'
                                         ? FontWeight.bold
                                         : FontWeight.normal,
-                                    color: HexColor(contentStyle['color'] ?? '#333333'),
-                                  ),
-                                  textAlign: isArabic ? TextAlign.right : TextAlign.left,
-                                ),
+                                color: HexColor(
+                                    contentStyle['color'] ?? '#333333'),
                               ),
-                            )
-                            .toList(),
-                      ),
-                  ],
+                              textAlign: isFirstSection || isSecondSection
+                                  ? TextAlign.center
+                                  : (isArabic
+                                      ? TextAlign.right
+                                      : TextAlign.left),
+                            ),
+                          );
+                        })
+                      else if (contentItems is String)
+                        Text(
+                          contentItems,
+                          style: TextStyle(
+                            fontSize:
+                                (contentStyle['fontSize'] ?? 16).toDouble(),
+                            fontWeight: contentStyle['fontWeight'] == 'bold'
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: HexColor(contentStyle['color'] ?? '#333333'),
+                          ),
+                          textAlign: isFirstSection || isSecondSection
+                              ? TextAlign.center
+                              : (isArabic
+                                  ? TextAlign.right
+                                  : TextAlign.left),
+                        ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -112,6 +143,6 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
 }
 
 class HexColor extends Color {
-  HexColor(final String hexColor)
-      : super(int.parse(hexColor.replaceFirst('#', '0xff')));
+  HexColor(final String hex)
+      : super(int.parse(hex.replaceFirst('#', '0xff')));
 }
