@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/home/home_states.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/utils/resources/string_manager.dart';
 import '../../../../core/utils/routes/routes_names.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Image.asset("assets/icon/flower.png"),
                 SizedBox(width: 4.w),
-                Text("Flowery", style: TextStyle(color: ColorManager.primary)),
+                Text(StringManager.appName.tr(), style: TextStyle(color: ColorManager.primary)),
                 SizedBox(width: 17.w),
                 Expanded(
                   child: Container(
@@ -57,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Icon(Icons.search, color: ColorManager.white70),
                           Text(
-                            "Search",
+                            StringManager.search.tr(),
                             style: TextStyle(color: ColorManager.white70),
                           ),
                         ],
@@ -83,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           homeViewModel.doIntent(LoadHomePageIntent());
                         },
-                        child: Text("Error Try Again"),
+                        child: Text(StringManager.error.tr()),
                       ),
                     );
                   }
@@ -111,13 +113,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Categories",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
+                                Text(StringManager.categories.tr(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pushNamed(context, RoutesNames.categoriesView);
                                   },
                                   child: Text(
-                                    "View All",
+                                    StringManager.viewAll.tr(),
                                     style: TextStyle(color: ColorManager.primary,fontSize: 16.sp),
                                   ),
                                 ),
@@ -127,13 +129,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Best seller",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
+                                Text(StringManager.bestSeller.tr(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pushNamed(context, RoutesNames.mostSellingScreen);
                                   },
                                   child: Text(
-                                    "View All",
+                                    StringManager.viewAll.tr(),
                                     style: TextStyle(color: ColorManager.primary,fontSize: 16.sp),
                                   ),
                                 ),
@@ -143,13 +145,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Occasion",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
+                                Text(StringManager.occasion.tr(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp)),
                                 TextButton(
                                   onPressed: () {
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => OccasionScreen(),));
                                   },
                                   child: Text(
-                                    "View All",
+                                   StringManager.viewAll.tr(),
                                     style: TextStyle(color: ColorManager.primary,fontSize: 16.sp),
                                   ),
                                 ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/home/home_states.dart';
@@ -7,6 +8,8 @@ import 'package:flowery/presentation/home/tabs/home/widgets/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/utils/resources/string_manager.dart';
 
 class OccasionScreen extends StatefulWidget {
   OccasionScreen({super.key});
@@ -39,9 +42,9 @@ class _OccasionScreenState extends State<OccasionScreen> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Occasion", style: TextStyle(fontSize: 22.sp)),
+                Text(StringManager.occasion.tr(), style: TextStyle(fontSize: 22.sp)),
                 Text(
-                  "Bloom with our exquisite best sellers",
+                  StringManager.bestSellerDesc.tr(),
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
@@ -66,7 +69,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                         onPressed: () {
                           homeViewModel.doIntent(LoadHomePageIntent());
                         },
-                        child: Text("Error Try Again"),
+                        child: Text(StringManager.error.tr()),
                       ),
                     );
                   }
@@ -113,7 +116,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                         ),
                         state.products?.products?.length != 0
                             ? ProductItems(state: state)
-                            : Center(child: Text("No Data To Show")),
+                            : Center(child: Text(StringManager.noDataFound.tr())),
                       ],
                     );
                   }
