@@ -1,5 +1,7 @@
 {
   "hello": "مرحبا",
   "add_to_cart": "أضف إلى السلة",
-  "price": "السعر"
+  "price": "السعر",
+  "about": "عننا",
+  "terms_and_conditions": "الشروط و الاحكام"
 }

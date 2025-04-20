@@ -49,12 +49,10 @@ dependencies:
   logger:
   json_annotation:
   json_serializable: ^6.9.4
+  easy_localization: ^3.0.7+1
   flutter_image_slideshow: ^0.1.6
   cached_network_image: ^3.4.1
-  flutter_localizations:
-    sdk: flutter
-  easy_localization:
-  intl:
+  
 
 dev_dependencies:
   flutter_test:
@@ -83,10 +81,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/Flowery About Section JSON with Expanded Content.json
+    - assets/Flowery Terms and Conditions JSON with Arabic and English.json
     - assets/icon/
-    - path/to/
     - assets/language/
-  #   - images/a_dot_ham.jpeg
+  # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

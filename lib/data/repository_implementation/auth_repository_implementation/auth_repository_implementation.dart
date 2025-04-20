@@ -5,10 +5,11 @@ import 'package:flowery/data/model/auth_model/signup/signup_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 import 'package:flowery/domain/common/api_result.dart';
+import 'package:flowery/domain/entity/Profile_entity/logout_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/signupentity.dart';
 import 'package:flowery/domain/repository_contract/auth_repository_contract/auth_repository_contract.dart';
 import 'package:injectable/injectable.dart';
-import '../../../domain/entity/auth_entity/login_entity.dart';
+import '../../../domain/entity/auth_entity/login_response_entity.dart';
 import '../../../domain/entity/auth_entity/login_request_entity.dart';
 import '../../model/auth_model/reset_password/reset_password_request.dart';
 import '../../model/auth_model/reset_password/reset_password_response.dart';
@@ -41,4 +42,8 @@ class AuthRepositoryImplementation extends AuthRepositoryContract{
     return await _authRemoteDataSourceContract.login(request: request );
   }
 
+ @override
+  Future<ApiResult<logout_response_entity>>logout()async{
+    return await _authRemoteDataSourceContract.logout();
+  }
 }

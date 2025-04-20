@@ -71,6 +71,7 @@ import '../domain/use_case/home_use_case/home_use_case.dart' as _i817;
 import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
     as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
+import '../domain/use_case/Profile_use_case/logout_use_case.dart' as _i854;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
 import '../presentation/home/tabs/home/best_seller_view_model.dart' as _i891;
@@ -194,6 +195,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
+    gh.factory<_i854.logout_use_case>(
+      () => _i854.logout_use_case(
+        obj_AuthRepositoryContract: gh<_i284.AuthRepositoryContract>(),
+      ),
+    );
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),
@@ -201,6 +207,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i6.login_use_case>(),
         gh<_i455.ResetPasswordUseCase>(),
         gh<_i179.SignupUseCase>(),
+        gh<_i854.logout_use_case>(),
       ),
     );
     return this;

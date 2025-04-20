@@ -1,5 +1,7 @@
 {
   "hello": "Hello",
   "add_to_cart": "Add to Cart",
-  "price": "Price"
+  "price": "Price",
+  "about": "About Us",
+  "terms_and_conditions": "Terms & Conditions"
 }

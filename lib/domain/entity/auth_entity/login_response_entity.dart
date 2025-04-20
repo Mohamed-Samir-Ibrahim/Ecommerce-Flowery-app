@@ -1,7 +1,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'login_entity.g.dart';
+part 'login_response_entity.g.dart';
 
 
 @JsonSerializable(explicitToJson: true) 
@@ -12,6 +12,7 @@ class login_response_entity   {
    String? error;
 
   login_response_entity({ this.message,  this.user,  this.token,this.error});
+  
 factory login_response_entity.fromJson(Map<String, dynamic> json) => _$login_response_entityFromJson(json);
   Map<String, dynamic> toJson() => _$login_response_entityToJson(this);
 }
