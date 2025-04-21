@@ -1,83 +1,50 @@
-import 'dart:convert';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flowery/presentation/home/tabs/profile/about/about_cubit.dart';
+import 'package:flowery/presentation/home/tabs/profile/about/about_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flowery/data/model/Profile/about_section.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Aboutus extends StatefulWidget {
+class Aboutus extends StatelessWidget {
   const Aboutus({super.key});
 
   @override
-  State<Aboutus> createState() => _AboutusState();
-}
-
-class _AboutusState extends State<Aboutus> {
-  List<AboutSection> sections = [];
-
-  @override
-  void initState() {
-    super.initState();
-    loadContent();
-  }
-
-  Future<void> loadContent() async {
-    final String jsonString = await rootBundle
-        .loadString('assets/Flowery About Section JSON with Expanded Content.json');
-    final Map<String, dynamic> jsonData = json.decode(jsonString);
-    final List<dynamic> aboutApp = jsonData['about_app'];
-
-    setState(() {
-      sections = aboutApp
-          .map((sectionJson) => AboutSection.fromJson(sectionJson))
-          .toList();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     final lang = context.locale.languageCode;
     final bool isArabic = lang == 'ar';
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text('about'.tr())),
-      body: sections.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
+      body: BlocBuilder<AboutCubit, AboutState>(
+        builder: (context, state) {
+          if (state is AboutLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is AboutLoaded) {
+            final sections = state.sections;
+
+            return ListView.builder(
               padding: EdgeInsets.all(16.r),
               itemCount: sections.length,
               itemBuilder: (context, index) {
                 final section = sections[index];
                 final isList = section.content[lang] is List;
                 final contentItems = section.content[lang];
-
                 final isFirstOrSecond = index == 0 || index == 1;
 
                 final style = section.style;
                 final titleStyle = style['title'] ?? style;
                 final contentStyle = style['content'] ?? style;
 
-                // Fallback alignment from style or language
                 final titleAlign = titleStyle['textAlign']?[lang] ??
-                    (isFirstOrSecond
-                        ? 'center'
-                        : (isArabic ? 'right' : 'left'));
-
+                    (isFirstOrSecond ? 'center' : (isArabic ? 'right' : 'left'));
                 final contentAlign = contentStyle['textAlign']?[lang] ??
-                    (isFirstOrSecond
-                        ? 'center'
-                        : (isArabic ? 'right' : 'left'));
+                    (isFirstOrSecond ? 'center' : (isArabic ? 'right' : 'left'));
 
                 return Container(
                   margin: EdgeInsets.symmetric(vertical: 10.h),
                   padding: EdgeInsets.all(10.r),
-                  color: HexColor(
-                    (titleStyle['backgroundColor'] ??
-                            style['backgroundColor'] ??
-                            '#FFFFFF')
-                        .toString(),
-                  ),
+                  color: HexColor((titleStyle['backgroundColor'] ?? style['backgroundColor'] ?? '#FFFFFF').toString()),
                   child: Column(
                     crossAxisAlignment: _textAlignToCrossAxis(titleAlign),
                     children: [
@@ -87,8 +54,7 @@ class _AboutusState extends State<Aboutus> {
                             Text(
                               section.title?[lang] ?? '',
                               style: TextStyle(
-                                fontSize:
-                                    (titleStyle['fontSize'] ?? 18.sp).toDouble(),
+                                fontSize: (titleStyle['fontSize'] ?? 18.sp).toDouble(),
                                 fontWeight: titleStyle['fontWeight'] == 'bold'
                                     ? FontWeight.bold
                                     : FontWeight.normal,
@@ -98,21 +64,19 @@ class _AboutusState extends State<Aboutus> {
                             ),
                           ],
                         ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                       if (isList && contentItems != null)
                         ...List.generate(contentItems.length, (i) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            padding: EdgeInsets.symmetric(vertical: 4.h),
                             child: Text(
                               contentItems[i],
                               style: TextStyle(
-                                fontSize: (contentStyle['fontSize'] ?? 16.sp)
-                                    .toDouble(),
+                                fontSize: (contentStyle['fontSize'] ?? 16.sp).toDouble(),
                                 fontWeight: contentStyle['fontWeight'] == 'bold'
                                     ? FontWeight.bold
                                     : FontWeight.normal,
-                                color: HexColor(
-                                    contentStyle['color'] ?? '#333333'),
+                                color: HexColor(contentStyle['color'] ?? '#333333'),
                               ),
                               textAlign: _textAlignFromString(contentAlign),
                             ),
@@ -122,8 +86,7 @@ class _AboutusState extends State<Aboutus> {
                         Text(
                           contentItems,
                           style: TextStyle(
-                            fontSize:
-                                (contentStyle['fontSize'] ?? 16.sp).toDouble(),
+                            fontSize: (contentStyle['fontSize'] ?? 16.sp).toDouble(),
                             fontWeight: contentStyle['fontWeight'] == 'bold'
                                 ? FontWeight.bold
                                 : FontWeight.normal,
@@ -135,7 +98,14 @@ class _AboutusState extends State<Aboutus> {
                   ),
                 );
               },
-            ),
+            );
+          } else if (state is AboutError) {
+            return Center(child: Text(state.message));
+          } else {
+            return const SizedBox();
+          }
+        },
+      ),
     );
   }
 
@@ -165,6 +135,5 @@ class _AboutusState extends State<Aboutus> {
 }
 
 class HexColor extends Color {
-  HexColor(final String hex)
-      : super(int.parse(hex.replaceFirst('#', '0xff')));
+  HexColor(final String hex) : super(int.parse(hex.replaceFirst('#', '0xff')));
 }
