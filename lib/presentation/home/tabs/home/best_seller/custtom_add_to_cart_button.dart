@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/resources/string_manager.dart';
 
 class CusttomAddToCartButton extends StatelessWidget {
   const CusttomAddToCartButton({super.key});
@@ -15,7 +18,7 @@ class CusttomAddToCartButton extends StatelessWidget {
         ), onPressed: () {  }, child: Row(
         children: [
           Image.asset('assets/icon/shoppingcart.png',color: ColorManager.white,),
-          Text('Add to cart',style: TextStyle(fontSize: 13,color: ColorManager.white),)
+          Text(StringManager.addToCart.tr(),style: TextStyle(fontSize: 13,color: ColorManager.white),)
         ],
       ),
         ),
