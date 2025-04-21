@@ -57,6 +57,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: 
+  bloc_test:   
   build_runner:
   injectable_generator:
   retrofit_generator:
