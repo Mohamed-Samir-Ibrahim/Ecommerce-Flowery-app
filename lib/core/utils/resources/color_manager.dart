@@ -9,6 +9,7 @@ abstract class ColorManager {
   static Color white60 = const Color(0xffCFCFCF);
   static Color grey = const Color(0xff737477);
   static Color white70 = const Color(0xffA6A6A6);
+  static Color dividerWhite = const Color(0xffEAEAEA);
   static Color lightGrey = const Color(0xff9E9E9E);
   static Color black = const Color(0xff000000);
   static Color white = const Color.fromARGB(255, 252, 252, 252);
