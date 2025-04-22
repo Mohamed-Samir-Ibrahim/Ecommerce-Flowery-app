@@ -34,6 +34,18 @@ import '../data/data_source/remote_data_source/home_remote_data_source/product_d
     as _i713;
 import '../data/data_source/remote_data_source/home_remote_data_source/product_data_source_impl.dart'
     as _i323;
+import '../data/data_source/remote_data_source/profile_remote_data_source/edit_profile_datasource_imp.dart'
+    as _i1071;
+import '../data/data_source/remote_data_source/profile_remote_data_source/edite_profile_datasource_contract.dart'
+    as _i378;
+import '../data/data_source/remote_data_source/profile_remote_data_source/getloggeduserdata_datasource_contract.dart'
+    as _i219;
+import '../data/data_source/remote_data_source/profile_remote_data_source/getloggeduserdata_datasource_imp.dart'
+    as _i904;
+import '../data/data_source/remote_data_source/profile_remote_data_source/saved_address_data_source_contract.dart'
+    as _i509;
+import '../data/data_source/remote_data_source/profile_remote_data_source/saved_address_data_source_implementation.dart'
+    as _i526;
 import '../data/repository_implementation/auth_repository_implementation/auth_repository_implementation.dart'
     as _i277;
 import '../data/repository_implementation/category_repository_implementation/category_repository_implementation.dart'
@@ -44,6 +56,12 @@ import '../data/repository_implementation/home_repository_implementation/home_re
     as _i645;
 import '../data/repository_implementation/home_repository_implementation/product_repo_impl.dart'
     as _i1013;
+import '../data/repository_implementation/profile_repository_implementation/edite_profile_imp.dart'
+    as _i146;
+import '../data/repository_implementation/profile_repository_implementation/getloggeduserdata_imp.dart'
+    as _i921;
+import '../data/repository_implementation/profile_repository_implementation/saved_address_implementation.dart'
+    as _i736;
 import '../data/web_services/WebServices.dart' as _i995;
 import '../domain/repository_contract/auth_repository_contract/auth_repository_contract.dart'
     as _i284;
@@ -55,6 +73,12 @@ import '../domain/repository_contract/home_repository_contract/home_repository_c
     as _i1053;
 import '../domain/repository_contract/home_repository_contract/product_repository.dart'
     as _i14;
+import '../domain/repository_contract/Profile_repository_contract/edit_profile_contract.dart'
+    as _i720;
+import '../domain/repository_contract/Profile_repository_contract/getloggeduserdata_contract.dart'
+    as _i705;
+import '../domain/repository_contract/Profile_repository_contract/saved_address_contract.dart'
+    as _i356;
 import '../domain/use_case/auth_use_case/forget_password_use_case.dart'
     as _i439;
 import '../domain/use_case/auth_use_case/login_use_case.dart' as _i6;
@@ -71,11 +95,17 @@ import '../domain/use_case/home_use_case/home_use_case.dart' as _i817;
 import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
     as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
+import '../domain/use_case/Profile_use_case/edite_profile_use_case.dart'
+    as _i361;
+import '../domain/use_case/Profile_use_case/getuserdata_usecase.dart' as _i260;
 import '../domain/use_case/Profile_use_case/logout_use_case.dart' as _i854;
+import '../domain/use_case/Profile_use_case/saved_adress_use_case.dart'
+    as _i266;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
 import '../presentation/home/tabs/home/best_seller_view_model.dart' as _i891;
 import '../presentation/home/tabs/home/home_view_model.dart' as _i540;
+import '../presentation/home/tabs/profile/profileviewmodel.dart' as _i537;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -91,6 +121,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i995.WebServices>(
       () => dioModule.provideWebServices(gh<_i361.Dio>()),
+    );
+    gh.factory<_i509.SavedAddressDataSourceContract>(
+      () => _i526.SavedAddressDataSourceImplementation(gh<_i995.WebServices>()),
+    );
+    gh.factory<_i219.GetloggeduserdataDatasourceContract>(
+      () =>
+          _i904.GetloggeduserdataDatasourceImp(client: gh<_i995.WebServices>()),
+    );
+    gh.factory<_i378.EditeProfileDatasourceContract>(
+      () => _i1071.EditProfileDatasourceImp(gh<_i995.WebServices>()),
     );
     gh.factory<_i713.ProductDataSourceContract>(
       () => _i323.ProductDataSourceImpl(client: gh<_i995.WebServices>()),
@@ -109,10 +149,25 @@ extension GetItInjectableX on _i174.GetIt {
         client: gh<_i995.WebServices>(),
       ),
     );
+    gh.factory<_i356.SavedAddressContract>(
+      () => _i736.SavedAddressImplementation(
+        obj_SavedAddressDataSourceContract:
+            gh<_i509.SavedAddressDataSourceContract>(),
+      ),
+    );
     gh.factory<_i670.BestSellerRepository>(
       () => _i384.bestSellerRepositoryImpl(
         bestSellerContractt: gh<_i694.BestSellerContract>(),
       ),
+    );
+    gh.factory<_i705.GetLoggedUserDatacontract>(
+      () => _i921.GetloggeduserdataImpl(
+        getloggeduserdataDatasourceContract:
+            gh<_i219.GetloggeduserdataDatasourceContract>(),
+      ),
+    );
+    gh.factory<_i260.GetLoggedUserUseCase>(
+      () => _i260.GetLoggedUserUseCase(gh<_i705.GetLoggedUserDatacontract>()),
     );
     gh.factory<_i1053.HomeRepositoryContract>(
       () => _i645.HomeRepositoryImplementation(
@@ -140,6 +195,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i284.AuthRepositoryContract>(
       () => _i277.AuthRepositoryImplementation(
         gh<_i658.AuthRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i720.EditProfileContract>(
+      () => _i146.EditprfileRepositoryimplementation(
+        obj_EditeProfileDatasourceContract:
+            gh<_i378.EditeProfileDatasourceContract>(),
       ),
     );
     gh.factory<_i477.CategoryUseCase>(
@@ -174,6 +235,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i86.VerifyResetUseCase>(
       () => _i86.VerifyResetUseCase(gh<_i284.AuthRepositoryContract>()),
     );
+    gh.factory<_i266.saved_adress_use_case>(
+      () => _i266.saved_adress_use_case(
+        obj_SavedAddressContract: gh<_i356.SavedAddressContract>(),
+      ),
+    );
     gh.factory<_i118.ProductUseCase>(
       () => _i118.ProductUseCase(gh<_i14.ProductRepo>()),
     );
@@ -195,9 +261,20 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
+    gh.factory<_i361.edite_profile_use_case>(
+      () => _i361.edite_profile_use_case(
+        obj_EditProfileContract: gh<_i720.EditProfileContract>(),
+      ),
+    );
     gh.factory<_i854.logout_use_case>(
       () => _i854.logout_use_case(
         obj_AuthRepositoryContract: gh<_i284.AuthRepositoryContract>(),
+      ),
+    );
+    gh.factory<_i537.Profileviewmodel>(
+      () => _i537.Profileviewmodel(
+        gh<_i260.GetLoggedUserUseCase>(),
+        gh<_i266.saved_adress_use_case>(),
       ),
     );
     gh.singleton<_i851.AuthViewModel>(

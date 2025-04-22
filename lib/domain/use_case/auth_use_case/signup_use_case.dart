@@ -9,7 +9,6 @@ class SignupUseCase{
   final AuthRepositoryContract _authRepo;
   SignupUseCase( this._authRepo);
   Future<ApiResult<SignupEntity>>SignUp({required SignupRequest signUp})async{
-
    return await  _authRepo.SignUp(signup: signUp);
 
   }

@@ -15,5 +15,3 @@ class SecureStorageService {
     await _storage.delete(key: 'auth_token');
   }
 }
-
-

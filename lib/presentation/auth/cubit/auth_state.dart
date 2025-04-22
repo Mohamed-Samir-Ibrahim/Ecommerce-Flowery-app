@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flowery/data/model/Profile/logout/Logout_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
-import 'package:flowery/domain/entity/Profile_entity/logout_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/signupentity.dart';
 import 'package:flowery/data/model/auth_model/reset_password/reset_password_response.dart';
 import 'package:flowery/domain/entity/auth_entity/login_response_entity.dart';
@@ -15,7 +15,7 @@ class AuthState extends Equatable {
   final SignupEntity? signupResponseDto;
   final ResetPasswordResponse? resetPasswordResponse;
   final login_response_entity? obj_login_response;
-  final logout_response_entity? obj_logout_response;
+  final Logout_response_DM? obj_logout_response;
   final Exception? exception;
   final String? loadingMessage;
 
@@ -37,7 +37,7 @@ class AuthState extends Equatable {
     VerifyResetResponse? verifyReset,
     SignupEntity? signup,
     login_response_entity? login,
-    logout_response_entity? logout,
+    Logout_response_DM? logout,
     ResetPasswordResponse? resetPassword,
     Exception? exception,
     String? loadingMessage,

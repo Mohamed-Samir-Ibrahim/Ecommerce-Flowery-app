@@ -1,38 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api_constant.dart';
-import 'package:flowery/data/model/Profile/Logout.dart';
+import 'package:flowery/data/model/Profile/logout/Logout_response.dart';
+import 'package:flowery/data/model/Profile/get_user_data/logged_User_Data_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
-
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
-import 'package:flowery/domain/entity/Profile_entity/logout_entity.dart';
-import 'package:flowery/domain/entity/auth_entity/login_response_entity.dart';
+import 'package:flowery/domain/entity/Profile_entity/edite_profile/edit_profile_request_entity.dart';
+import 'package:flowery/domain/entity/Profile_entity/edite_profile/edite_profile_response_entity.dart';
+import 'package:flowery/domain/entity/Profile_entity/get_user_data_entity/logged_user_data_entity.dart';
+import 'package:flowery/domain/entity/Profile_entity/address_entity/Saved_Address_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
-import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
-import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
-
-
-
-
-import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
-
+import 'package:flowery/domain/entity/auth_entity/login_response_entity.dart';
 import 'package:flowery/data/model/home_model/home_model.dart';
-
-
-
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-
 import '../../domain/entity/Categotries_entity/category_model.dart';
-import '../../domain/entity/auth_entity/login_response_entity.dart';
-import '../../domain/entity/auth_entity/login_request_entity.dart';
 import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
-
 import '../model/auth_model/signup/signup_response.dart';
 
 part 'WebServices.g.dart';
@@ -59,15 +47,12 @@ abstract class WebServices {
   Future<VerifyResetResponse> verifyReset(@Body() VerifyResetRequest resetCode);
 
   @PUT(ApiConstant.resetPasswordApi)
-  Future<ResetPasswordResponse> resetPassword(
-      @Body() ResetPasswordRequest request,
-      );
+  Future<ResetPasswordResponse> resetPassword(@Body() ResetPasswordRequest request,);
 
-  @POST("api/v1/auth/signup")
+  @POST(ApiConstant.registerApi)
   Future<SignupResponseDto> Signup(@Body() Map<String, dynamic> body);
-
-  @POST(ApiConstant.signInApi)
-
+  
+ @POST(ApiConstant.signInApi)
   Future<login_response_entity> login(@Body() login_request_entity request);
 
 
@@ -90,7 +75,24 @@ abstract class WebServices {
   Future<ProductByOccasion> getAllProducts(
       );
 
+ @GET(ApiConstant.logout)
+  Future<Logout_response_DM> logout(@Header("Authorization") String? token);
 
-  @GET(ApiConstant.logout)
-  Future<logout_response_entity> logout(@Header("Authorization") String? token);
+
+@POST(ApiConstant.editProfile) 
+  Future<EditProfileResponseEntity> editProfile(
+    @Body() Map<String, dynamic> body,
+    @Header('Authorization') String token, 
+  );
+ 
+  @GET(ApiConstant.getLoggedUserData)
+Future<user_LoggedUserDataResponse_entity> loggedUserData(
+  @Header("Authorization") String token , 
+);
+
+  @GET(ApiConstant.addAddress)
+Future<SavedAddress_Response_entity> savedaddress(
+  @Header("Authorization") String token , 
+);
+
 }

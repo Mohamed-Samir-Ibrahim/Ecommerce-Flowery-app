@@ -3,7 +3,6 @@ import 'package:flowery/data/model/auth_model/forget_password/forget_password_re
 import 'package:flowery/data/model/auth_model/signup/signup_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 import 'package:flowery/domain/common/api_result.dart';
-import 'package:flowery/domain/entity/Profile_entity/logout_entity.dart';
 import 'package:flowery/domain/use_case/Profile_use_case/logout_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/forget_password_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/signup_use_case.dart';
@@ -17,6 +16,8 @@ import '../../../data/model/auth_model/reset_password/reset_password_request.dar
 import '../../../domain/entity/auth_entity/login_request_entity.dart';
 import '../../../domain/use_case/auth_use_case/login_use_case.dart';
 import '../../../domain/use_case/auth_use_case/reset_password_use_case.dart';
+
+
 @singleton
 class AuthViewModel extends Cubit<AuthState> {
   ForgetPasswordUseCase forgetPasswordUseCase;
@@ -75,11 +76,6 @@ class AuthViewModel extends Cubit<AuthState> {
 
           emit(state.copyWith(status: Status.success,signup: result.data));
 
-// if(result.data?.message=='success') {
-// }else {
-// emit(SignUpErrorState(exception: result.data!.error??"ErrorMsg"));
-//
-// }
         }
       case Error():
         {
@@ -135,17 +131,17 @@ class AuthViewModel extends Cubit<AuthState> {
     var result= await objLoginUseCase.invoke(request: login_request_entity(
         email: emailloginController.text.trim(),
         password: passwordController.text.trim()));
-    switch(result){
+    switch(result) {
       case Success():{
         emit(state.copyWith(status: Status.success,login:result.data));
-        if (result.data?.token != null) {
+          if (result.data?.token != null) {
           await SecureStorageService().saveToken(result.data!.token!);}
+          print(result.data?.token);
       }
       case Error():{
         var e=result.exception;
         emailController.clear();
         emit(state.copyWith(status: Status.error,exception: e));
-
         if (e is DioException) {
           final responseData = e.response?.data;
           final statusCode = e.response?.statusCode;

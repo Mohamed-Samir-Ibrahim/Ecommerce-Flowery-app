@@ -28,6 +28,7 @@ static const String hintEnterEmailToResetPassword = 'please Enter your email ass
   static const String rePasswordError = 'Passwords do not match';
   static const String rePasswordNotFound = 'Confirm Passwords not found';
   static const String login = 'Login';
+  static const String update = 'Update';
   static const String continueasguest = 'Continue as guest';
   static const String signup = 'Sign up';
   static const String home = 'Home';

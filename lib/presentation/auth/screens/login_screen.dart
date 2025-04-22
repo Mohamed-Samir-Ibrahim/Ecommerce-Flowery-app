@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 } else if (state.status == Status.success &&
                     state.obj_login_response != null) {
+                      
                   Navigator.pushNamed(context, RoutesNames.bottomNavScreen);
 
                 } else if (state.status == Status.error &&
@@ -146,6 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   onPressed: () {
                                       authViewModel.doIntent(LoginResetIntent());
+                                      authViewModel.login();
                                   },
                                 ),
                                 SizedBox(height: SizeManager.s10.h),

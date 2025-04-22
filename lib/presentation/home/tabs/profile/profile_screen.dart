@@ -10,9 +10,10 @@ import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
   import 'package:flowery/presentation/auth/screens/login_screen.dart';
 import 'package:flowery/presentation/home/tabs/profile/About_us_screen.dart';
+import 'package:flowery/presentation/home/tabs/profile/edit_profile_screen.dart';
+import 'package:flowery/presentation/home/tabs/profile/saved_address.dart';
   import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
   class ProfileScreen extends StatefulWidget {
     ProfileScreen({super.key,});
@@ -26,6 +27,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
     String? userName;
     String? email;
     final SecureStorageService Obj_secureStorageService = SecureStorageService(); 
+
 
     @override
     void initState() {
@@ -46,7 +48,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
     }
     @override
     Widget build(BuildContext context) {
-    final authViewModel = getIt.get<AuthViewModel>();
+     final authViewModel = getIt.get<AuthViewModel>();
+    //final getuserdata = getIt.get<Profileviewmodel>();
+
     final SecureStorageService Obj_secureStorageService = SecureStorageService(); 
 
       return Scaffold(
@@ -104,23 +108,44 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(userName?? authViewModel.firstName.toString(),
+                        Text(userName?? "Guest",
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),  
                         const SizedBox(width: 5),
                         if (isLoggedIn)
-                          const Icon(Icons.edit, size: 16),
+                          IconButton(icon: Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditProfileScreen(),
+                              ),
+                            );
+                          },
+                          color: Colors.black, iconSize: 16,),
                       ],
                     ),
                   ),
-                  Text(email?? authViewModel.email.toString(), style: const TextStyle(color: Colors.grey)),
+                  Text(email?? "example@example.com", style: const TextStyle(color: Colors.grey)),
                 ],
               ),
             ),
             const SizedBox(height: 30),
             if (isLoggedIn) ...[
               buildListTile(Icons.shopping_bag_outlined, StringManager.shopping_bag_outlined),
-              buildListTile(Icons.location_on_outlined, StringManager.location_on_outlined),
+                 ListTile(
+                leading: const Icon(Icons.location_on_outlined, color: Colors.black),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                title: const Text(StringManager.location_on_outlined),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  SavedAddressesScreen(),
+                    ),
+                  );
+                },
+              ),
               const Divider(),
               SwitchListTile(
                 value: true,

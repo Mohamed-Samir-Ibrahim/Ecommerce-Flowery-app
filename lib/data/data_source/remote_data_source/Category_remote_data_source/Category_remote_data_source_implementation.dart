@@ -7,13 +7,13 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: Category_Remote_Data_Source_Contract)
 class CategoryRemoteDataSourceImplementation implements Category_Remote_Data_Source_Contract {
   WebServices client;
-
+  
   CategoryRemoteDataSourceImplementation({required this.client});
 
   @override
   Future<ApiResult<List<Categories_entity>>> getCategories() async {
     return executeApi<List<Categories_entity>>(() async {
-      var response = await client.getCategories();
+      var   response = await client.getCategories();
       return response.categories ?? []; 
     });
   }

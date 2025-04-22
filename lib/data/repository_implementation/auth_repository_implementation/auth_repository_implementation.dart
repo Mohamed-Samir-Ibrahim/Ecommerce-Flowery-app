@@ -1,11 +1,11 @@
 import 'package:flowery/data/data_source/remote_data_source/auth_remote_data_source/auth_remote_data_source_contract.dart';
+import 'package:flowery/data/model/Profile/logout/Logout_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/signup/signup_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 import 'package:flowery/domain/common/api_result.dart';
-import 'package:flowery/domain/entity/Profile_entity/logout_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/signupentity.dart';
 import 'package:flowery/domain/repository_contract/auth_repository_contract/auth_repository_contract.dart';
 import 'package:injectable/injectable.dart';
@@ -21,7 +21,6 @@ class AuthRepositoryImplementation extends AuthRepositoryContract{
   @override
   Future<ApiResult<ForgetPasswordResponse>> forgetPassword({required ForgetPasswordRequest email,})async {
     return await _authRemoteDataSourceContract.forgetPassword(email: email);
-
   }
 
   @override
@@ -43,7 +42,7 @@ class AuthRepositoryImplementation extends AuthRepositoryContract{
   }
 
  @override
-  Future<ApiResult<logout_response_entity>>logout()async{
+  Future<ApiResult<Logout_response_DM>>logout()async{
     return await _authRemoteDataSourceContract.logout();
   }
 }
