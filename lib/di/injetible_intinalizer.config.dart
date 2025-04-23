@@ -18,6 +18,10 @@ import '../data/data_source/remote_data_source/auth_remote_data_source/auth_remo
     as _i658;
 import '../data/data_source/remote_data_source/auth_remote_data_source/auth_remote_data_source_implementation.dart'
     as _i793;
+import '../data/data_source/remote_data_source/cart_remote_data_source/cart_remote_data_source_contract.dart'
+    as _i12;
+import '../data/data_source/remote_data_source/cart_remote_data_source/cart_remote_data_source_impl.dart'
+    as _i106;
 import '../data/data_source/remote_data_source/Category_remote_data_source/Category_remote_data_source_contract.dart'
     as _i914;
 import '../data/data_source/remote_data_source/Category_remote_data_source/Category_remote_data_source_implementation.dart'
@@ -36,6 +40,8 @@ import '../data/data_source/remote_data_source/home_remote_data_source/product_d
     as _i323;
 import '../data/repository_implementation/auth_repository_implementation/auth_repository_implementation.dart'
     as _i277;
+import '../data/repository_implementation/cart_repository_impl/cart_repository_impl.dart'
+    as _i18;
 import '../data/repository_implementation/category_repository_implementation/category_repository_implementation.dart'
     as _i123;
 import '../data/repository_implementation/home_repository_implementation/best_seller_rep_impl.dart'
@@ -47,6 +53,8 @@ import '../data/repository_implementation/home_repository_implementation/product
 import '../data/web_services/WebServices.dart' as _i995;
 import '../domain/repository_contract/auth_repository_contract/auth_repository_contract.dart'
     as _i284;
+import '../domain/repository_contract/cart_repository_contract/cart_repository_contract.dart'
+    as _i756;
 import '../domain/repository_contract/category_repository_contract/category_repository_contract.dart'
     as _i555;
 import '../domain/repository_contract/home_repository_contract/best_seller_repository.dart'
@@ -61,6 +69,9 @@ import '../domain/use_case/auth_use_case/login_use_case.dart' as _i6;
 import '../domain/use_case/auth_use_case/reset_password_use_case.dart' as _i455;
 import '../domain/use_case/auth_use_case/signup_use_case.dart' as _i179;
 import '../domain/use_case/auth_use_case/verify_reset_use_case.dart' as _i86;
+import '../domain/use_case/cart_use_case/cart_use_case.dart' as _i368;
+import '../domain/use_case/cart_use_case/delete_item_use_case.dart' as _i1002;
+import '../domain/use_case/cart_use_case/get_cart_use_case.dart' as _i111;
 import '../domain/use_case/category_use_case/category_use_case.dart' as _i477;
 import '../domain/use_case/home_use_case/best_seller_use_case.dart' as _i554;
 import '../domain/use_case/home_use_case/category_product_use_case.dart'
@@ -72,6 +83,7 @@ import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
     as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
+import '../presentation/home/tabs/cart/cubit/cart_view_model.dart' as _i65;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
 import '../presentation/home/tabs/home/best_seller_view_model.dart' as _i891;
 import '../presentation/home/tabs/home/home_view_model.dart' as _i540;
@@ -96,6 +108,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i694.BestSellerContract>(
       () => _i463.bestSellerImpl(client: gh<_i995.WebServices>()),
+    );
+    gh.factory<_i12.cart_remote_data_source_contract>(
+      () => _i106.cart_remote_data_source_impl(gh<_i995.WebServices>()),
     );
     gh.factory<_i658.AuthRemoteDataSourceContract>(
       () => _i793.AuthRemoteDataSourceImplementation(gh<_i995.WebServices>()),
@@ -153,6 +168,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1022.OccasionProductUseCase>(),
       ),
     );
+
+    gh.factory<_i756.cart_repoistory_contract>(
+      () => _i18.cart_repository_impl(
+        cart: gh<_i12.cart_remote_data_source_contract>(),
+      ),
+    );
+
     gh.factory<_i554.BestSellerUseCase>(
       () => _i554.BestSellerUseCase(
         bestSellerRepository: gh<_i670.BestSellerRepository>(),
@@ -194,6 +216,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
+
+    gh.factory<_i368.cart_usecase>(
+      () => _i368.cart_usecase(gh<_i756.cart_repoistory_contract>()),
+    );
+    gh.factory<_i1002.DeleteItemUseCase>(
+      () => _i1002.DeleteItemUseCase(gh<_i756.cart_repoistory_contract>()),
+    );
+    gh.factory<_i111.getCartUseCase>(
+      () => _i111.getCartUseCase(gh<_i756.cart_repoistory_contract>()),
+    );
+
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),
@@ -201,6 +234,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i6.login_use_case>(),
         gh<_i455.ResetPasswordUseCase>(),
         gh<_i179.SignupUseCase>(),
+      ),
+    );
+    gh.singleton<_i65.CartViewModel>(
+      () => _i65.CartViewModel(
+        cart: gh<_i368.cart_usecase>(),
+        getcart: gh<_i111.getCartUseCase>(),
+        delete: gh<_i1002.DeleteItemUseCase>(),
+        webServices: gh<_i995.WebServices>(),
       ),
     );
     return this;
