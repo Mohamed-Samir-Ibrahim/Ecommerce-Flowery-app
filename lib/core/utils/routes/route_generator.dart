@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import '../../../presentation/auth/screens/login_screen.dart';
 import '../../../presentation/auth/screens/reset_password_screen.dart';
 import '../../../presentation/home/layout_view.dart';
+import '../../../presentation/home/tabs/home/search_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -72,6 +73,11 @@ class RouteGenerator {
         case RoutesNames.categoriesView:
         return MaterialPageRoute(
           builder: (context) => CategoryScreen(),
+          settings: settings,
+        );
+      case RoutesNames.searchScreen:
+        return MaterialPageRoute(
+          builder: (context) => SearchScreen(),
           settings: settings,
         );
       default:

@@ -18,7 +18,6 @@ class ProductDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bestSellerDto = ModalRoute.of(context)?.settings.arguments as BestSellerDto?;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

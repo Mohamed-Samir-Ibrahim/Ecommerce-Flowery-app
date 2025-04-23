@@ -72,6 +72,17 @@
   "whiteWrap": "White wrap",
   "allPricesIncludeTax": "All prices include tax",
   "addToCart": "Add to cart",
-  "unKnown": "Unknown"
+  "unKnown": "Unknown",
+  "sortBy": "Sort by",
+  "lowestPrice": "Lowest price",
+  "highestPrice": "Highest price",
+  "newArrival": "New arrival",
+  "oldArrival": "Old arrival",
+  "discount": "Discount",
+  "filter": "Filter",
+  "searchForProduct": "Search for any product you want",
+  "searchHint": "Search for product",
+  "noResultFound": "No result found",
+  "products": "Products"
 
 }

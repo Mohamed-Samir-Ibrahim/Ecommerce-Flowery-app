@@ -28,7 +28,8 @@ class ProductsBean {
   num ?quantity;
   String ?category;
   String ?occasion;
-
+  String ?createdAt;
+  String ?updatedAt;
   num? v;
   num ?discount;
   num ?sold;
@@ -36,7 +37,7 @@ class ProductsBean {
   num ?rateCount;
   String? id2;
 
-  ProductsBean({this.id, this.title, this.slug, this.description, this.imgCover, this.images, this.price, this.priceAfterDiscount, this.quantity, this.category, this.occasion, this.v, this.discount, this.sold, this.rateAvg, this.rateCount, this.id2});
+  ProductsBean({this.id, this.title, this.slug, this.description, this.imgCover, this.images, this.price, this.priceAfterDiscount, this.quantity, this.category, this.occasion, this.v, this.discount, this.sold, this.rateAvg, this.rateCount, this.id2, this.createdAt, this.updatedAt});
 
   factory ProductsBean.fromJson(Map<String, dynamic> json) => _$ProductsBeanFromJson(json);
 
