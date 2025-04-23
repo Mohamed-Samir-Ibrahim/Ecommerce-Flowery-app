@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../../core/utils/resources/string_manager.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -26,7 +29,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return BlocProvider(
       create: (context) => viewModel,
       child: Scaffold(
-        appBar: AppBar(title: Text("Password")),
+        appBar: AppBar(title: Text(StringManager.password.tr())),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
 
@@ -56,8 +59,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text("Error"),
-                    content: Text(state.verifyResetResponse?.error ?? "Reset code is invalid or has expired"),
+                    title:  Text(StringManager.error.tr()),
+                    content: Text(state.verifyResetResponse?.error ?? ""),
                   );
                 },
               );
@@ -71,10 +74,10 @@ class _OtpScreenState extends State<OtpScreen> {
               child: Column(
                 children: [
                   SizedBox(height: 24.h),
-                  Text("Email verification"),
+                  Text(StringManager.emailVerification.tr()),
                   SizedBox(height: 10.h),
                   Text(
-                    "Please enter your code that send to your email address ",
+                    StringManager.enterCodeVerification.tr(),
                   ),
                   SizedBox(height: 20.h),
                   Pinput(
@@ -101,18 +104,18 @@ class _OtpScreenState extends State<OtpScreen> {
 
                   Row(
                     children: [
-                      Text("Didn't receive code?"),
+                      Text(StringManager.didNotReceiveCode.tr()),
                       TextButton(
                         onPressed: () {
                           // authViewModel.emailController.clear();
                           viewModel.doIntent(ForgetPasswordIntent());
 
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("code has be resend")),
+                            SnackBar(content: Text(StringManager.codeHasBeResend.tr())),
                           );
 
                         },
-                        child: Text("Resend",style: TextStyle(color: ColorManager.primary),),
+                        child: Text(StringManager.resend.tr(),style: TextStyle(color: ColorManager.primary),),
                       ),
                     ],
                   ),

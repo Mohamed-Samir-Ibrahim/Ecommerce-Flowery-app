@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/resources/color_manager.dart';
+import '../../../../../core/utils/resources/string_manager.dart';
 
 class ProductItems extends StatelessWidget {
   final state;
@@ -50,7 +52,7 @@ class ProductItems extends StatelessWidget {
                           : Placeholder(), // or SizedBox(), or a default image
                     ),
                     Text(
-                      state.products?.products![index].title ?? "loading",
+                      state.products?.products![index].title ?? StringManager.loading.tr(),
                       style: TextStyle(
                         fontSize: 16.sp,
                         overflow: TextOverflow.ellipsis,
@@ -77,9 +79,7 @@ class ProductItems extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          state.products!.products![index].discount.toString() +
-                              "%" ??
-                              "loading",
+                          "${state.products!.products![index].discount}%",
                           style: TextStyle(
                             color: Colors.green,
                             fontSize: 15.sp,
@@ -90,21 +90,6 @@ class ProductItems extends StatelessWidget {
                     SizedBox(height: 10.h),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.shopping_cart_outlined,
-                            color: ColorManager.white,
-                          ),
-                          Text(
-                            "Add to Cart",
-                            style: TextStyle(
-                              color: ColorManager.white,
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                        ],
-                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primary,
                         padding: EdgeInsets.symmetric(
@@ -114,6 +99,21 @@ class ProductItems extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.r),
                         ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.shopping_cart_outlined,
+                            color: ColorManager.white,
+                          ),
+                          Text(
+                            StringManager.addToCart.tr(),
+                            style: TextStyle(
+                              color: ColorManager.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

@@ -1,12 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
-
 import 'package:flowery/presentation/home/tabs/category/category_states.dart';
 import 'package:flowery/presentation/home/tabs/category/category_view_model.dart';
-
 import 'package:flowery/presentation/home/tabs/home/widgets/product_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/utils/resources/string_manager.dart';
+import 'FilterBottomSheet.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -19,15 +21,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final categoryViewModel = getIt.get<CategoryViewModel>();
   int selectedTabIndex = 0;
   String searchQuery = '';
+
   @override
   void initState() {
     super.initState();
     categoryViewModel.getCategories();
-    categoryViewModel.doIntent(
-        getAllProducts());
-    categoryViewModel.doIntent(
-        LoadHomePageIntent());
+    categoryViewModel.doIntent(getAllProducts());
+    categoryViewModel.doIntent(LoadHomePageIntent());
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,10 +38,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text('Categories', style: TextStyle(color: Colors.black)),
+          title: Text(StringManager.categories.tr(), style: const TextStyle(color: Colors.black)),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.pushNamed(context,RoutesNames.bottomNavScreen),
+            onPressed: () => Navigator.pushNamed(context, RoutesNames.bottomNavScreen),
           ),
         ),
         body: Column(
@@ -50,11 +52,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 children: [
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {
-                        setState(() => searchQuery = value);
+                      onTap: () {
+                        Navigator.pushNamed(context, RoutesNames.searchScreen);
                       },
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: StringManager.search.tr(),
                         prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -72,7 +74,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     child: IconButton(
                       icon: const Icon(Icons.filter_list),
                       onPressed: () {
-                        // Add filter action
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
+                          builder: (context) => FilterBottomSheet(viewModel: categoryViewModel),
+                        );
                       },
                     ),
                   )
@@ -81,12 +90,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             const SizedBox(height: 16),
 
-            //  Dynamic Tabs
+            // Dynamic Tabs
             BlocBuilder<CategoryViewModel, CategoryStates>(
               builder: (context, state) {
                 if (state.status == CategoryStatus.success) {
-                  categoryViewModel.fullList = state.Obj_categories ?? [];
-                  categoryViewModel.generateTabs(categoryViewModel.fullList);
+                  if (state.Obj_categories != null && state.Obj_categories!.isNotEmpty) {
+                    categoryViewModel.fullList = state.Obj_categories!;
+                    categoryViewModel.generateTabs(categoryViewModel.fullList);
+                  } else {
+                    return Center(child: Text(StringManager.noDataFound.tr()));
+                  }
 
                   return SizedBox(
                     height: 40,
@@ -99,12 +112,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         return GestureDetector(
                           onTap: () {
                             setState(() => selectedTabIndex = index);
-
-                            selectedTabIndex==0?categoryViewModel.doIntent(getAllProducts()):
-                            categoryViewModel.doIntent(
+                            selectedTabIndex == 0
+                                ? categoryViewModel.doIntent(getAllProducts())
+                                : categoryViewModel.doIntent(
                               LoadCategoriesPageIntent(
-                                categoryId:
-                                state.home?.categories?[selectedTabIndex-1].id ?? "",
+                                categoryId: state.home?.categories?[selectedTabIndex - 1].id ?? "",
                               ),
                             );
                           },
@@ -136,14 +148,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             const SizedBox(height: 16),
 
-            //  Product Grid
+            // Product Grid
             BlocBuilder<CategoryViewModel, CategoryStates>(
               builder: (context, state) {
                 if (state.status == CategoryStatus.loading) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state.status == CategoryStatus.success) {
-
-                  return state.products?.products?.length!=0? ProductItems(state: state):Center(child:Text("No Data To Show"),);
+                  return (state.products?.products?.isNotEmpty ?? false)
+                      ? ProductItems(state: state)
+                      : Center(child: Text(StringManager.noDataFound.tr()));
                 } else {
                   return const Center(child: Text("❌ Failed to load categories."));
                 }
