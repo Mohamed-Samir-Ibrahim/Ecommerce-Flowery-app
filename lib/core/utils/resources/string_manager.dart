@@ -4,6 +4,16 @@ class StringManager {
   static const String firstName = 'First name';
   static const String lastName = 'Last name';
   static const String email = 'Email';
+  static const String Address = 'Address';
+  static const String city = 'City';
+  static const String Area = 'Area';
+
+  static const String save = 'Save address';
+  static const String EnterYourAddress = 'Enter Your address';
+  static const String Erroroccurred = 'Error occurred';
+  static const String Recipie_ntname= 'Recipient name';
+  static const String Enter_the_recipient_name= 'Enter the recipient name';
+
   static const String password = 'Password';
   static const String phoneNumber = 'Phone number';
   static const String confirmPassword = 'Confirm password';

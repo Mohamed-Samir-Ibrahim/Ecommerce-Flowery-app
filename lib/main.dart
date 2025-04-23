@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/routes/route_generator.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
+import 'package:flowery/presentation/home/tabs/profile/addresses_screen/addresses_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -38,10 +39,10 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
       theme:ThemeData.light(),
-      // home: BestSellerPage(),
-      onGenerateRoute: RouteGenerator.generateRoutes,
-
-      initialRoute: RoutesNames.loginScreen,
+      home: AddressScreen(),
+      // onGenerateRoute: RouteGenerator.generateRoutes,
+      //
+      // initialRoute: RoutesNames.loginScreen,
       // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
 
 

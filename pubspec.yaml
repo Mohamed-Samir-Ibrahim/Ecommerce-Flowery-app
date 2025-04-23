@@ -55,6 +55,10 @@ dependencies:
     sdk: flutter
   easy_localization:
   intl:
+  google_maps_flutter: ^2.12.1
+  geolocator: ^14.0.0
+  geocoding: ^3.0.0
+  mockito: ^5.4.6
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +90,8 @@ flutter:
     - assets/icon/
     - path/to/
     - assets/language/
+    - assets/cities.json
+    - assets/states.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

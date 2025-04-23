@@ -20,6 +20,7 @@ abstract class DioModule {
   @Singleton()
   Dio provideDIO(LogInterceptor logInterceptor) {
     var dio = Dio(  BaseOptions(
+      validateStatus: (_) => true,
       baseUrl: ApiConstant.baseUrl,
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
