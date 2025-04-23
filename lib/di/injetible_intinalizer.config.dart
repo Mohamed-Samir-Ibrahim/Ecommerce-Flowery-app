@@ -38,6 +38,10 @@ import '../data/data_source/remote_data_source/home_remote_data_source/product_d
     as _i713;
 import '../data/data_source/remote_data_source/home_remote_data_source/product_data_source_impl.dart'
     as _i323;
+import '../data/data_source/remote_data_source/profile_remote_data_source/profile_data_source_contract.dart'
+    as _i24;
+import '../data/data_source/remote_data_source/profile_remote_data_source/profile_data_source_impl.dart'
+    as _i37;
 import '../data/repository_implementation/auth_repository_implementation/auth_repository_implementation.dart'
     as _i277;
 import '../data/repository_implementation/cart_repository_impl/cart_repository_impl.dart'
@@ -50,6 +54,8 @@ import '../data/repository_implementation/home_repository_implementation/home_re
     as _i645;
 import '../data/repository_implementation/home_repository_implementation/product_repo_impl.dart'
     as _i1013;
+import '../data/repository_implementation/profile_repository_impl/profile_repository_impl.dart'
+    as _i23;
 import '../data/web_services/WebServices.dart' as _i995;
 import '../domain/repository_contract/auth_repository_contract/auth_repository_contract.dart'
     as _i284;
@@ -63,6 +69,8 @@ import '../domain/repository_contract/home_repository_contract/home_repository_c
     as _i1053;
 import '../domain/repository_contract/home_repository_contract/product_repository.dart'
     as _i14;
+import '../domain/repository_contract/profile_repository_contract/profile_repository_contract.dart'
+    as _i517;
 import '../domain/use_case/auth_use_case/forget_password_use_case.dart'
     as _i439;
 import '../domain/use_case/auth_use_case/login_use_case.dart' as _i6;
@@ -82,11 +90,13 @@ import '../domain/use_case/home_use_case/home_use_case.dart' as _i817;
 import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
     as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
+import '../domain/use_case/profile_use_case/cities_use_case.dart' as _i627;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 import '../presentation/home/tabs/cart/cubit/cart_view_model.dart' as _i65;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
 import '../presentation/home/tabs/home/best_seller_view_model.dart' as _i891;
 import '../presentation/home/tabs/home/home_view_model.dart' as _i540;
+import '../presentation/home/tabs/profile/profile_view_model.dart' as _i35;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -109,8 +119,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i694.BestSellerContract>(
       () => _i463.bestSellerImpl(client: gh<_i995.WebServices>()),
     );
+    gh.factory<_i24.profileDataSourceContract>(
+      () => _i37.ProfileDataSourceImpl(gh<_i995.WebServices>()),
+
     gh.factory<_i12.cart_remote_data_source_contract>(
       () => _i106.cart_remote_data_source_impl(gh<_i995.WebServices>()),
+
     );
     gh.factory<_i658.AuthRemoteDataSourceContract>(
       () => _i793.AuthRemoteDataSourceImplementation(gh<_i995.WebServices>()),
@@ -141,6 +155,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i817.HomeUseCase>(
       () => _i817.HomeUseCase(gh<_i1053.HomeRepositoryContract>()),
+    );
+    gh.factory<_i517.ProfileRepositoryContract>(
+      () => _i23.ProfileRepositoryImpl(gh<_i24.profileDataSourceContract>()),
+    );
+    gh.factory<_i627.cities_use_case>(
+      () => _i627.cities_use_case(gh<_i517.ProfileRepositoryContract>()),
     );
     gh.factory<_i1022.OccasionProductUseCase>(
       () => _i1022.OccasionProductUseCase(gh<_i1053.HomeRepositoryContract>()),
@@ -217,6 +237,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
 
+    gh.singleton<_i35.ProfileViewModel>(
+      () => _i35.ProfileViewModel(gh<_i627.cities_use_case>()),
+    );
+
+
     gh.factory<_i368.cart_usecase>(
       () => _i368.cart_usecase(gh<_i756.cart_repoistory_contract>()),
     );
@@ -226,6 +251,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i111.getCartUseCase>(
       () => _i111.getCartUseCase(gh<_i756.cart_repoistory_contract>()),
     );
+
 
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(

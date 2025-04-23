@@ -1,5 +1,4 @@
 class StringManager {
-
   static const String appName = 'appName';
   static const String userName = 'userName';
   static const String firstName = 'firstName';

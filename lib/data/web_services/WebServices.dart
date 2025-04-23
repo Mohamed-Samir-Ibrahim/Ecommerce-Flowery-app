@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api_constant.dart';
+import 'package:flowery/core/utils/add_cart_button.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
@@ -9,6 +10,9 @@ import 'package:flowery/data/model/cart_model/cart_response_dto.dart';
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
+import 'package:flowery/data/model/profile_model/AddAddressResponseDto.dart';
+import 'package:flowery/data/model/profile_model/CitiesResponseDto.dart';
+import 'package:flowery/data/model/profile_model/addAddressRequest.dart';
 import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
 import 'package:flowery/domain/entity/cart_entity/GetCartEntity.dart';
@@ -93,4 +97,8 @@ abstract class WebServices {
   @GET(ApiConstant.getAllProducts)
   Future<ProductByOccasion> getAllProducts(
       );
+  
+  @PATCH('https://flower.elevateegy.com/api/v1/addresses')
+  Future<AddAddressResponseDto>saveaddress(  @Body() Map<String,dynamic> request
+  ,@Header("Authorization") String token);
 }

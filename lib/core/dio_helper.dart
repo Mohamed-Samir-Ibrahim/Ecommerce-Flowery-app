@@ -17,6 +17,7 @@ abstract class DioModule {
 
     var dio = Dio(  BaseOptions(
 
+
       validateStatus: (_)=>true,
       baseUrl: ApiConstant.baseUrl,
       connectTimeout: const Duration(seconds: 30),
