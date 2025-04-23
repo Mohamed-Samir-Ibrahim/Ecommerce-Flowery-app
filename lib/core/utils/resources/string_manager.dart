@@ -73,5 +73,17 @@ static const String search = 'search';
   static const String allPricesIncludeTax = 'allPricesIncludeTax';
   static const String unKnown = 'unKnown';
   static const String addToCart = 'addToCart';
+  static const String  searchForProduct = 'searchForProduct';
+  static const String  searchHint = 'searchHint';
+  static const String  noResultFound = 'noResultFound';
+  static const String  products = 'products';
+  static const String  sortBy = 'sortBy';
+  static const String  lowestPrice= 'lowestPrice';
+  static const String highestPrice= 'highestPrice';
+  static const String newArrival= 'newArrival';
+  static const String oldArrival= 'oldArrival';
+  static const String discount= 'discount';
+  static const String filter= 'filter';
+
 
 }

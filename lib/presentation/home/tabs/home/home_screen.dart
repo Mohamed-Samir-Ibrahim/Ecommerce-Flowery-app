@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeViewModel homeViewModel = getIt.get<HomeViewModel>();
-
+String searchQuery = '';
   @override
   void initState() {
     super.initState();
@@ -45,25 +45,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(StringManager.appName.tr(), style: TextStyle(color: ColorManager.primary)),
                 SizedBox(width: 17.w),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: ColorManager.white70,
-                        width: 1.w,
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() => searchQuery = value);
+                    },
+                    decoration: InputDecoration(
+                      hintText: StringManager.search.tr(),
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0.w),
-                      child: Row(
-                        children: [
-                          Icon(Icons.search, color: ColorManager.white70),
-                          Text(
-                            StringManager.search.tr(),
-                            style: TextStyle(color: ColorManager.white70),
-                          ),
-                        ],
-                      ),
+                      contentPadding: const EdgeInsets.all(12),
                     ),
                   ),
                 ),
