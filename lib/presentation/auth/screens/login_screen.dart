@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/core/utils/resources/custom_elevated_button.dart';
 import 'package:flowery/core/utils/resources/main_text_field.dart';
@@ -9,14 +10,12 @@ import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
-import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
   static const String routeName = 'Login Screen';
 
   @override
@@ -24,60 +23,49 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // bool isChecked = false;
-  // final TextEditingController emailloginController = TextEditingController();
-  // final TextEditingController passwordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final authViewModel = getIt.get<AuthViewModel>();
-    final home = getIt<HomeViewModel>();
-    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-
     return SafeArea(
       child: BlocProvider(
         create: (context) => authViewModel,
         child: Scaffold(
-          appBar: AppBar(
-
-            title: Text("Login"),
-          ),
+          appBar: AppBar(title: Text(StringManager.login.tr())),
           backgroundColor: ColorManager.white,
           body: BlocConsumer<AuthViewModel, AuthState>(
-              listener: (context, state) {
-                if (state.status != Status.loading) {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
+            listener: (context, state) {
+              if (state.status != Status.loading) {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
                 }
-                if (state.status == Status.loading) {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) {
-                      return const Center(child: CircularProgressIndicator());
-                    },
-                  );
-                } else if (state.status == Status.success &&
-                    state.obj_login_response != null) {
-                  Navigator.pushNamed(context, RoutesNames.bottomNavScreen);
-
-                } else if (state.status == Status.error &&
-                    state.exception != null) {
-                  print("Login Error: ${state.exception}");
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Error"),
-                        content: Text((state.exception.toString())),
-                      );
-                    },
-                  );
-                }
-              },
-              builder: (context, state) {return Padding(
+              }
+              if (state.status == Status.loading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                );
+              } else if (state.status == Status.success &&
+                  state.obj_login_response != null) {
+                Navigator.pushNamed(context, RoutesNames.bottomNavScreen);
+              } else if (state.status == Status.error &&
+                  state.exception != null) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(StringManager.error.tr()),
+                      content: Text((state.exception.toString())),
+                    );
+                  },
+                );
+              }
+            },
+            builder: (context, state) {
+              return Padding(
                 padding: const EdgeInsets.all(PaddingManager.p8),
                 child: SingleChildScrollView(
                   child: Form(
@@ -86,17 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextFormField(
-                          controller:authViewModel.emailloginController,
-                          hintText: 'Enter your email address',
-                          labelText: StringManager.email,
+                          controller: authViewModel.emailloginController,
+                          hintText: StringManager.enterYourEmail.tr(),
+                          labelText: StringManager.email.tr(),
                           validator: ValidatorManager.validateEmail,
                           keyboardType: TextInputType.emailAddress,
                         ),
                         SizedBox(height: SizeManager.s28.h),
                         CustomTextFormField(
                           controller: authViewModel.passwordController,
-                          hintText: 'Enter password',
-                          labelText: 'Password',
+                          hintText: StringManager.enterYourPassword.tr(),
+                          labelText: StringManager.password.tr(),
                           validator: ValidatorManager.validatePassword,
                           obscureText: true,
                           keyboardType: TextInputType.visiblePassword,
@@ -113,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                             Text(
-                              "Remember me",
+                              StringManager.rememberMe.tr(),
                               style: TextStyle(
                                 color: ColorManager.black,
                                 fontSize: SizeManager.s14.sp,
@@ -123,11 +111,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap:
                                   () => Navigator.pushNamed(
-                                context,
-                                RoutesNames.forgetPassword,
-                              ),
+                                    context,
+                                    RoutesNames.forgetPassword,
+                                  ),
                               child: Text(
-                                'Forget password?',
+                                StringManager.forgetPassword.tr(),
                                 style: getMediumStyle(
                                   color: ColorManager.black,
                                 ).copyWith(fontSize: SizeManager.s18.sp),
@@ -143,24 +131,26 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 CustomElevatedButton(
                                   isStadiumBorder: false,
-                                  label: StringManager.login,
+                                  label: StringManager.login.tr(),
                                   backgroundColor: ColorManager.primary,
                                   textStyle: getBoldStyle(
                                     color: ColorManager.white,
                                     fontSize: SizeManager.s18,
                                   ),
                                   onPressed: () {
-
-                                      authViewModel.doIntent(LoginResetIntent());
-
-
+                                    authViewModel.doIntent(LoginResetIntent());
                                   },
                                 ),
                                 SizedBox(height: SizeManager.s10.h),
                                 CustomElevatedButton(
                                   isStadiumBorder: false,
-                                  label: StringManager.continueasguest,
-                                  backgroundColor: const Color.fromARGB(255,255,255, 255,),
+                                  label: StringManager.continueAsGuest.tr(),
+                                  backgroundColor: const Color.fromARGB(
+                                    255,
+                                    255,
+                                    255,
+                                    255,
+                                  ),
                                   textStyle: getBoldStyle(
                                     color: ColorManager.black,
                                     fontSize: SizeManager.s18,
@@ -181,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Don't have an account?",
+                              StringManager.doNotHaveAccount.tr(),
                               style: getSemiBoldStyle(
                                 color: ColorManager.black,
                               ).copyWith(fontSize: SizeManager.s16.sp),
@@ -190,11 +180,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap:
                                   () => Navigator.pushNamed(
-                                context,
-                                RoutesNames.registerScreen,
-                              ),
+                                    context,
+                                    RoutesNames.registerScreen,
+                                  ),
                               child: Text(
-                                'Sign up',
+                                StringManager.signup.tr(),
                                 style: getSemiBoldStyle(
                                   color: ColorManager.primary,
                                 ).copyWith(fontSize: SizeManager.s16.sp),
@@ -206,8 +196,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-              );}
-
+              );
+            },
           ),
         ),
       ),

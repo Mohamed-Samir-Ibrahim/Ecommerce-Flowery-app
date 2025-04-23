@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/presentation/home/tabs/cart/cart_screen.dart';
 import 'package:flowery/presentation/home/tabs/category/category_screen.dart';
 import 'package:flowery/presentation/home/tabs/home/home_screen.dart';
 import 'package:flowery/presentation/home/tabs/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/utils/resources/string_manager.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -37,22 +40,22 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           BottomNavigationBarItem(
             icon: NavBarIcon(name: 'home_icon'),
             activeIcon: NavBarIcon(name: 'home_icon_active'),
-            label: 'Home',
+            label: StringManager.home.tr(),
           ),
           BottomNavigationBarItem(
             icon: NavBarIcon(name: 'category_icon'),
             activeIcon: NavBarIcon(name: 'category_icon_active'),
-            label: 'Categories',
+            label: StringManager.category.tr(),
           ),
           BottomNavigationBarItem(
             icon: NavBarIcon(name: 'cart_icon'),
             activeIcon: NavBarIcon(name: 'cart_icon_active'),
-            label: 'Cart',
+            label: StringManager.cart.tr(),
           ),
           BottomNavigationBarItem(
             icon: NavBarIcon(name: 'profile_icon'),
             activeIcon: NavBarIcon(name: 'profile_icon_active'),
-            label: 'Profile',
+            label: StringManager.profile.tr(),
           ),
         ],
         currentIndex: _selectedIndex,

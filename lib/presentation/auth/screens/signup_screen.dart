@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 
 
@@ -39,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.pop(context);
                 },
               ),
-              title: Text("Sign Up"),
+              title: Text(StringManager.signup.tr()),
             ),
             backgroundColor: ColorManager.white,
             body: BlocConsumer<AuthViewModel,AuthState>(
@@ -57,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     barrierDismissible: false,
     builder: (context) {
     return AlertDialog(
-      title: const Text("Success"),
+      title:  Text(StringManager.success.tr()),
     );
     });}else if (state.status==Status.error){
 
@@ -66,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text("Error"),
+                          title:  Text(StringManager.error.tr()),
                           content: Text(state.exception.toString()),
                         );
                       }
@@ -92,9 +93,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                         child: CustomTextFormField(
                                           controller: authViewModel.firstName,
-                                          hintText: 'Enter your frist name',
+                                          labelText: StringManager.firstName.tr(),
+                                          hintText: StringManager.firstName.tr(),
                                           fillColour : ColorManager.white,
-                                          labelText: StringManager.firstName,
                                         ),
                                       ),
                                       SizedBox(
@@ -103,10 +104,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       Expanded(
                                         child: CustomTextFormField(
                                           controller: authViewModel.lastname,
-                                          hintText: 'Enter your last name',
+                                          hintText: StringManager.enterYourLastName.tr(),
 
                                           fillColour: ColorManager.white,
-                                          labelText: StringManager.lastName,
+                                          labelText: StringManager.lastName.tr(),
 
                                         ),
                                       ),
@@ -117,9 +118,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                   CustomTextFormField(
                                     controller: authViewModel.email,
-                                    hintText: 'Enter your email address',
+                                    hintText: StringManager.enterYourEmail.tr(),
                                     fillColour: ColorManager.white,
-                                    labelText: StringManager.email,
+                                    labelText: StringManager.email.tr(),
                                   ),
                                   SizedBox(height: FontSize.s20.h),
 
@@ -128,9 +129,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       Expanded(
                                         child: CustomTextFormField(
                                           controller: authViewModel.password,
-                                          hintText: 'Enter password',
+                                          hintText: StringManager.enterYourPassword.tr(),
                                           fillColour: ColorManager.white,
-                                          labelText: 'Password',
+                                          labelText: StringManager.password.tr(),
                                           validator: ValidatorManager.validatePassword,
                                           obscureText: true,
                                           keyboardType: TextInputType.visiblePassword,
@@ -143,9 +144,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       Expanded(
                                         child: CustomTextFormField(
                                           controller: authViewModel.rePassword,
-                                          hintText: 'confirm password',
+                                          hintText: StringManager.enterYourConfirmPassword.tr(),
                                           fillColour: ColorManager.white,
-                                          labelText: 'Confirm password',
+                                          labelText: StringManager.confirmPassword.tr(),
                                           validator: ValidatorManager.validatePassword,
                                           obscureText: true,
                                           keyboardType: TextInputType.visiblePassword,
@@ -159,8 +160,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   CustomTextFormField(
                                     controller: authViewModel.phone,
                                     keyboardType: TextInputType.phone,
-                                    hintText: 'Enter phone number',
-                                    labelText: 'Phone Number',
+                                    hintText: StringManager.enterYourPhoneNumber.tr(),
+                                    labelText: StringManager.phoneNumber.tr(),
                                     fillColour: ColorManager.white,
                                   ),
 
@@ -170,30 +171,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                   Row(
                                     children: [
-                                      Text('Gender',
+                                      Text(StringManager.gender.tr(),
                                         style: TextStyle(
                                             fontSize: SizeManager.s20,
                                             fontWeight:FontWeight.bold
                                         ),),
                                       Radio(
-
-
                                           focusColor: ColorManager.primary,
-                                          value: "male", groupValue: authViewModel.selectedGender, onChanged: (val){
+                                          value: StringManager.male.tr(), groupValue: authViewModel.selectedGender, onChanged: (val){
                                         authViewModel.selectedGender=val!;
                                         setState(() {
 
                                         });
                                       }),
-                                      Text('Male',style: TextStyle(
+                                      Text(StringManager.male.tr(),style: TextStyle(
                                           fontSize: SizeManager.s14          ),),
-                                      Radio(value: "female", groupValue:authViewModel.selectedGender, onChanged: (val){
+                                      Radio(value: StringManager.female.tr(), groupValue:authViewModel.selectedGender, onChanged: (val){
                                         authViewModel.selectedGender=val!;
                                         setState(() {
 
                                         });
                                       }),
-                                      Text('Female',style: TextStyle(
+                                      Text(StringManager.female.tr(),style: TextStyle(
                                           fontSize: SizeManager.s14          ),),
                                     ],
                                   ),
@@ -201,10 +200,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                   Row(
                                     children: [
-                                      Text('Creating an account, you agree to our '),
+                                      Text(StringManager.termsAgree.tr()),
                                       GestureDetector(
                                           onTap: (){},
-                                          child: Text('Terms&Conditions',style: TextStyle(
+                                          child: Text(StringManager.termsAndConditions.tr(),style: TextStyle(
                                               fontWeight: FontWeight.bold
                                           ),))
                                     ],

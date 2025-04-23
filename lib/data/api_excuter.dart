@@ -12,6 +12,7 @@ Future<ApiResult<T>> executeApi<T>(ApiCall<T> apiCall) async {
     return Success(result);
   } on DioException catch (ex) {
     switch (ex.type) {
+
       case DioExceptionType.badCertificate:
       case DioExceptionType.connectionError:
       case DioExceptionType.sendTimeout:
