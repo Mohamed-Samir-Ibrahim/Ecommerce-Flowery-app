@@ -168,11 +168,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1022.OccasionProductUseCase>(),
       ),
     );
+
     gh.factory<_i756.cart_repoistory_contract>(
       () => _i18.cart_repository_impl(
         cart: gh<_i12.cart_remote_data_source_contract>(),
       ),
     );
+
     gh.factory<_i554.BestSellerUseCase>(
       () => _i554.BestSellerUseCase(
         bestSellerRepository: gh<_i670.BestSellerRepository>(),
@@ -214,6 +216,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
+
     gh.factory<_i368.cart_usecase>(
       () => _i368.cart_usecase(gh<_i756.cart_repoistory_contract>()),
     );
@@ -223,6 +226,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i111.getCartUseCase>(
       () => _i111.getCartUseCase(gh<_i756.cart_repoistory_contract>()),
     );
+
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),

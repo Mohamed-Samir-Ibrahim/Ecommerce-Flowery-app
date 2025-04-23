@@ -86,7 +86,7 @@ class _WebServices implements WebServices {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/v1/products',
+            'api/v1/auth/forgotPassword',
             queryParameters: queryParameters,
             data: _data,
           )

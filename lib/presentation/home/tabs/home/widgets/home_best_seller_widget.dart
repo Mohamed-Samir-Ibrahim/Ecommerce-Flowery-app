@@ -1,4 +1,4 @@
-import 'package:flowery/core/utils/resources/color_manager.dart';
+
 import 'package:flowery/data/model/home_model/home_model.dart';
 import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
 import 'package:flutter/material.dart';

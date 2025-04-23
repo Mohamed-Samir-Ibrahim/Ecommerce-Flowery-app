@@ -4,11 +4,12 @@ import 'package:flowery/domain/use_case/category_use_case/category_use_case.dart
 import 'package:flowery/domain/use_case/home_use_case/category_product_use_case.dart';
 import 'package:flowery/domain/use_case/home_use_case/get_all_product_use_case.dart';
 import 'package:flowery/domain/use_case/home_use_case/home_use_case.dart';
-import 'package:flowery/domain/use_case/home_use_case/occasion_product_use_case.dart';
+
 import 'package:flowery/presentation/home/tabs/category/category_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../data/model/home_model/product_by_occasion.dart';
 import '../../../../domain/entity/Categotries_entity/category_model.dart';
 
 @injectable
@@ -153,6 +154,62 @@ class CategoryViewModel extends Cubit<CategoryStates> {
         }
     }
   }
+  void _search(String query) async {
+    // If products are not loaded, fetch them
+    if (state.products == null || state.products!.products == null) {
+      _getAllProducts();
+      return;
+    }
+
+    // Filter products
+    final products = state.products?.products ?? [];
+    final filteredProducts = products.where((product) {
+      final name = product.title?.toLowerCase() ?? '';
+      return name.contains(query.toLowerCase());
+    }).toList();
+
+    emit(state.copyWith(
+      searchQuery: query,
+      filteredProducts: filteredProducts,
+      status: CategoryStatus.success,
+    ));
+  }
+void _filterProducts({required double minPrice, required double maxPrice, String? sortBy}) async {
+    emit(state.copyWith(status: CategoryStatus.loading));
+    final products = state.products?.products ?? [];
+
+    // 1. Filter by price
+    List<ProductsBean> filtered = products.where((product) {
+      final price = product.priceAfterDiscount ?? product.price ?? 0;
+      return price >= minPrice && price <= maxPrice;
+    }).toList();
+
+    // 2. Apply sorting
+    switch (sortBy) {
+      case 'highest_price':
+        filtered.sort((a, b) => ((b.priceAfterDiscount ?? b.price ?? 0).compareTo(a.priceAfterDiscount ?? a.price ?? 0)));
+        break;
+      case 'lowest_price':
+        filtered.sort((a, b) => ((a.priceAfterDiscount ?? a.price ?? 0).compareTo(b.priceAfterDiscount ?? b.price ?? 0)));
+        break;
+      case 'new':
+        filtered.sort((a, b) => DateTime.parse(b.createdAt ?? "").compareTo(DateTime.parse(a.createdAt ?? "")));
+        break;
+      case 'old':
+        filtered.sort((a, b) => DateTime.parse(a.createdAt ?? "").compareTo(DateTime.parse(b.createdAt ?? "")));
+        break;
+      case 'discount':
+        filtered.sort((a, b) => ((b.discount ?? 0).compareTo(a.discount ?? 0)));
+        break;
+    }
+    final updatedProductByOccasion = ProductByOccasion(
+      message: state.products?.message,
+      metadata: state.products?.metadata,
+      products: filtered,
+    );
+
+    emit(state.copyWith(status: CategoryStatus.success, products: updatedProductByOccasion, filteredProducts: filtered));
+}
 
   void doIntent(CategoryIntent objCategoryIntent) {
     switch (objCategoryIntent) {
@@ -163,7 +220,7 @@ class CategoryViewModel extends Cubit<CategoryStates> {
         }
       case LoadCategoriesPageIntent():
         {
-          final intent = objCategoryIntent as LoadCategoriesPageIntent;
+          final intent = objCategoryIntent;
 
           _categoryProduc(intent.categoryId);
         }
@@ -175,9 +232,24 @@ class CategoryViewModel extends Cubit<CategoryStates> {
         {
           _getHomeScreen();
         }
+        case FilterProductsIntent():
+        {
+          _filterProducts(
+            minPrice: objCategoryIntent.minPrice,
+            maxPrice: objCategoryIntent.maxPrice,
+            sortBy: objCategoryIntent.sortBy,
+          );
+          break;
+        }
+      case SearchIntent():
+        {
+          _search(objCategoryIntent.query);
+          break;
+        }
     }
   }
 }
+
 
 sealed class CategoryIntent {}
 
@@ -190,3 +262,20 @@ class LoadCategoriesPageIntent extends CategoryIntent {
   LoadCategoriesPageIntent({required this.categoryId});
 }
 class LoadHomePageIntent extends CategoryIntent {}
+class FilterProductsIntent extends CategoryIntent {
+  final double minPrice;
+  final double maxPrice;
+  final String? sortBy; // 'highest_price', 'lowest_price', 'new', 'old', 'discount'
+
+  FilterProductsIntent({
+    required this.minPrice,
+    required this.maxPrice,
+    this.sortBy,
+  });
+}
+
+class SearchIntent extends CategoryIntent {
+  final String query;
+
+  SearchIntent({required this.query});
+}

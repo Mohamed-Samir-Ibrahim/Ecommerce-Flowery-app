@@ -49,11 +49,7 @@ abstract class WebServices {
 
   @GET(ApiConstant.bestSeller)
   Future<ProductResponseDto> getProduct();
-  @POST(ApiConstant.getAllProducts)
-
-
   @POST(ApiConstant.forgotPasswordApi)
-
   Future<ForgetPasswordResponse> forgetPaswword(
       @Body() ForgetPasswordRequest email,
       );

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/custom_elevated_button.dart';
 import 'package:flowery/core/utils/resources/main_text_field.dart';
 import 'package:flowery/core/utils/resources/validator_manager.dart';
@@ -5,7 +6,7 @@ import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_state.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
-import 'package:flowery/presentation/auth/screens/signup_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class ForgetPassword extends StatelessWidget {
     return BlocProvider(
       create: (context) => viewModel,
       child: Scaffold(
-        appBar: AppBar(title: Text(StringManager.password)),
+        appBar: AppBar(title: Text(StringManager.password.tr())),
         body: BlocConsumer<AuthViewModel, AuthState>(
           listener: (context, state) {
 
@@ -51,7 +52,7 @@ class ForgetPassword extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text(StringManager.error),
+                    title:  Text(StringManager.error.tr()),
                     content: Text((state.exception.toString())),
                   );
                 },
@@ -61,58 +62,36 @@ class ForgetPassword extends StatelessWidget {
           builder: (context, state) {
             return Padding(
               padding: EdgeInsets.all(16.r),
+                child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   SizedBox(height: 24.h),
-                  Text(StringManager.forgetPassword,),
+                  Text(StringManager.forgetPassword.tr()),
                   SizedBox(height: 10.h),
 
-                  Text(StringManager.hintEnterEmailToResetPassword),
+                  Text(StringManager.hintEnterEmailToResetPassword.tr()),
                   SizedBox(height: 20.h),
                   CustomTextFormField(
                     controller: authViewModel.emailController,
-
+                    hintText: StringManager.enterYourEmail.tr(),
+                    labelText: StringManager.email.tr(),
                     validator: ValidatorManager.validateEmail,
-
-                    hintText: StringManager.enterYourEmail,
-                    labelText: StringManager.email,
                   ),
                   SizedBox(height: 48.h),
 
                   CustomElevatedButton(
-                    label: StringManager.continueText,
+                    label:StringManager.confirm.tr(),
                     onPressed: () {
-            viewModel.doIntent(ForgetPasswordIntent());
-            child: Form(
-            key: _formKey,
-            child: Column(
-            children: [
-            SizedBox(height: 24.h),
-            Text("Forget Password"),
-            SizedBox(height: 10.h),
+                      if(_formKey.currentState!.validate()) {
+                        authViewModel.doIntent(ForgetPasswordIntent());
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
 
-            Text("Please enter your email associated to your account"),
-            SizedBox(height: 20.h),
-            CustomTextFormField(
-            controller: authViewModel.emailController,
-            hintText: "Enter your email",
-            labelText: "Email",
-            validator: ValidatorManager.validateEmail,
-            ),
-            SizedBox(height: 48.h),
-
-            CustomElevatedButton(
-            label: "Confirm",
-            onPressed: () {
-            if(_formKey.currentState!.validate()) {
-            authViewModel.doIntent(ForgetPasswordIntent());
-            }
-            },
-            ),
-            ],
-            ),
-            );
-            })])
             );
           },
         ),

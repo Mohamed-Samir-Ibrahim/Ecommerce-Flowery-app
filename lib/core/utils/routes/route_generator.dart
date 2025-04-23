@@ -4,6 +4,7 @@ import 'package:flowery/presentation/auth/screens/otp_screen.dart';
 import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 
 import 'package:flowery/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:flowery/presentation/home/tabs/category/category_screen.dart';
 import 'package:flowery/presentation/home/tabs/home/best_seller/best_seller_page.dart';
 
 import 'package:flowery/presentation/home/tabs/home/products/component/product_details_view.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import '../../../presentation/auth/screens/login_screen.dart';
 import '../../../presentation/auth/screens/reset_password_screen.dart';
 import '../../../presentation/home/layout_view.dart';
+import '../../../presentation/home/tabs/home/search_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -63,14 +65,19 @@ class RouteGenerator {
           builder: (context) => BestSellerPage(),
           settings: settings,
         );
-        case RoutesNames.productsDetailsView:
+        // case RoutesNames.productsDetailsView:
+        // return MaterialPageRoute(
+        //   builder: (context) => ProductDetailsView(),
+        //   settings: settings,
+        // );
+        case RoutesNames.categoriesView:
         return MaterialPageRoute(
-          builder: (context) => ProductDetailsView(),
+          builder: (context) => CategoryScreen(),
           settings: settings,
         );
-        case RoutesNames.mostSellingScreen:
+      case RoutesNames.searchScreen:
         return MaterialPageRoute(
-          builder: (context) => BestSellerPage(),
+          builder: (context) => SearchScreen(),
           settings: settings,
         );
       default:
@@ -78,6 +85,7 @@ class RouteGenerator {
           builder: (context) => const LayoutView(),
           settings: settings,
         );
+
 
     }
   }

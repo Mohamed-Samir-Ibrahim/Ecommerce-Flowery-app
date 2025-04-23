@@ -1,10 +1,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
-import 'package:flowery/domain/use_case/home_use_case/best_seller_use_case.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../../../auth/cubit/auth_state.dart';
 enum BestSellerStatus{initial,loading,success,error}
 
 class BestSellerState extends Equatable{

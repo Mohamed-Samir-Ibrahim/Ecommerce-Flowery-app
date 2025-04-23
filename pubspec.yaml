@@ -51,7 +51,11 @@ dependencies:
   json_serializable: ^6.9.4
   flutter_image_slideshow: ^0.1.6
   cached_network_image: ^3.4.1
-
+  flutter_localizations:
+    sdk: flutter
+  easy_localization:
+  intl:
+  lingo_hunter: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +64,7 @@ dev_dependencies:
   injectable_generator:
   retrofit_generator:
   json_serializable: ^6.8.0
+  mocktail: ^1.0.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -82,6 +87,7 @@ flutter:
   assets:
     - assets/icon/
     - path/to/
+    - assets/language/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
