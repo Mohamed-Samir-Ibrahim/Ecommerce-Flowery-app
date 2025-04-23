@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/routes/route_generator.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
+import 'package:flowery/presentation/home/tabs/profile/profileviewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 void main() async {
@@ -16,10 +18,16 @@ void main() async {
       path: 'assets/language',
       fallbackLocale: Locale('en'),
       startLocale: Locale('en'),
-      child: MyApp(),
+      child: MultiBlocProvider(providers: [
+        BlocProvider(
+          create: (context) => getIt.get<Profileviewmodel>(),
+        ),
+      ],
+      
+      child: MyApp()),
     ),
   );
-}
+} 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
