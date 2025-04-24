@@ -1,3 +1,4 @@
+import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/resources/custom_elevated_button.dart';
@@ -77,7 +78,9 @@ Row(
           ),
 
 SizedBox(height: 18,),
-          CustomElevatedButton(label: 'Checkout', onPressed: () {  },)
+          CustomElevatedButton(label: 'Checkout', onPressed: () {
+            Navigator.pushNamed(context, RoutesNames.checkoutPage);
+          },)
 
         ],
       ),

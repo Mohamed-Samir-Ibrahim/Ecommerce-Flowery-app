@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       // home: BestSellerPage(),
       onGenerateRoute: RouteGenerator.generateRoutes,
 
-      initialRoute: RoutesNames.loginScreen,
+      initialRoute: RoutesNames.checkoutPage,
       // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
 
 

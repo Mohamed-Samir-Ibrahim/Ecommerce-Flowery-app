@@ -11,6 +11,7 @@ import 'package:flowery/data/model/home_model/product_model/product_response_dto
 import 'package:flowery/data/model/payment_model/checkout_session_model/checkout_session_response.dart';
 import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_response.dart';
 import 'package:flowery/data/model/payment_model/payment_request/payment_request.dart';
+import 'package:flowery/data/model/user_address_model/get_logged_user_address.dart';
 import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
@@ -92,5 +93,9 @@ abstract class WebServices {
       @Body() PaymentRequest request,
       @Header('Authorization') String token,
 
+      );
+  @GET(ApiConstant.getLoggedUserAddresses)
+  Future<GetLoggedUserAddressResponse> loggedUserAddresses(
+      @Header('Authorization') String token,
       );
 }

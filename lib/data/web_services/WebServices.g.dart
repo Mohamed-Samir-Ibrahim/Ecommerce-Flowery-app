@@ -354,7 +354,7 @@ class _WebServices implements WebServices {
 
   @override
   Future<CreatCashOrderResponse> createCashOrder(
-    CreatCashOrderRequest request,
+    PaymentRequest request,
     String token,
   ) async {
     final _extra = <String, dynamic>{};
@@ -386,7 +386,7 @@ class _WebServices implements WebServices {
 
   @override
   Future<CheckoutSessionResponse> checkoutSession(
-    CheckoutSessionRequest request,
+    PaymentRequest request,
     String token,
   ) async {
     final _extra = <String, dynamic>{};
@@ -409,6 +409,34 @@ class _WebServices implements WebServices {
     late CheckoutSessionResponse _value;
     try {
       _value = CheckoutSessionResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetLoggedUserAddressResponse> loggedUserAddresses(String token) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GetLoggedUserAddressResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/addresses',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetLoggedUserAddressResponse _value;
+    try {
+      _value = GetLoggedUserAddressResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
