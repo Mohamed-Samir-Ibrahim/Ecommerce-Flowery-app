@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/api_constant.dart';
 import 'package:flowery/core/utils/resources/color_manager.dart';
 import 'package:flowery/core/utils/resources/font_manager.dart';
@@ -39,7 +40,7 @@ int btn= 1;
       Row(
         children: [
           Image(image: AssetImage('assets/icon/location.png')),
-          Text(' Deliver to ',style: TextStyle(fontSize: 16,
+          Text(StringManager.deliverTo.tr(),style: TextStyle(fontSize: 16,
           ),),
           Text(' 2XVP+XC - Sheikh Zayed.....',style: TextStyle(
               fontSize: 16,
@@ -108,7 +109,7 @@ int btn= 1;
                   
                                 });
                               }, icon: Icon(Icons.remove,size: 12,)),
-                              Text('${btn}',style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text('$btn',style: TextStyle(fontWeight: FontWeight.bold),),
                               IconButton(onPressed: (){
                                 btn++;
                       setState(() {
@@ -138,7 +139,7 @@ int btn= 1;
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${StringManager.subtotal}'),
+            Text(StringManager.subtotal.tr()),
             Text('${widget.cartI?.price}\$')
           ],),
       ),
@@ -148,7 +149,7 @@ int btn= 1;
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${StringManager.DeliveryFee}'),
+            Text(StringManager.deliveryFee.tr()),
             Text('${widget.cartI?.product?.v}')
 
           ],),
@@ -162,7 +163,7 @@ int btn= 1;
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${StringManager.total}',style: TextStyle(
+            Text(StringManager.total.tr(),style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15
             ),),
@@ -175,7 +176,7 @@ int btn= 1;
       ),
 
       SizedBox(height: 18,),
-      CustomElevatedButton(label: '${StringManager.checkout}', onPressed: () {  },)],
+      CustomElevatedButton(label: StringManager.checkout.tr(), onPressed: () {  },)],
 
   );
   }

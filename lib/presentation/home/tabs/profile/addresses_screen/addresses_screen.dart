@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/resources/string_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _AddressScreenState extends State<AddressScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Colors.black),
-        title: Text(StringManager.Address, style: TextStyle(color: Colors.black)),
+        title: Text(StringManager.address.tr(), style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -46,7 +47,7 @@ class _AddressScreenState extends State<AddressScreen> {
             if (state.status == ProfileStates.loading) {
               return Center(child: CircularProgressIndicator());
             } else if (state.status == ProfileStates.error) {
-              return Center(child: Text(state.message ?? StringManager.Erroroccurred));
+              return Center(child: Text(state.message ?? StringManager.errorOccurred.tr()));
             } else if (state.status == ProfileStates.success) {
               final cities = state.citiesentity ?? [];
               final states = state.stateentity ?? [];
@@ -56,7 +57,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 200,
                         child: map(
                           onAddressPicked: (String address) {
@@ -68,21 +69,21 @@ class _AddressScreenState extends State<AddressScreen> {
                       SizedBox(height: 12.h),
                       CustomTextFormField(
                         controller: profileViewModel.street,
-                        labelText: StringManager.Address,
-                        hintText: StringManager.EnterYourAddress,
+                        labelText: StringManager.address.tr(),
+                        hintText: StringManager.enterYourAddress.tr(),
                       ),
                       SizedBox(height: 12.h),
                       CustomTextFormField(
                         controller: profileViewModel.phone,
-                        labelText: StringManager.phoneNumber,
-                        hintText: StringManager.enterYourPhoneNumber,
+                        labelText: StringManager.phoneNumber.tr(),
+                        hintText: StringManager.enterYourPhoneNumber.tr(),
                         keyboardType: TextInputType.phone,
                       ),
                       SizedBox(height: 12.h),
                       CustomTextFormField(
                         controller: profileViewModel.username,
-                        labelText: StringManager.Recipie_ntname,
-                        hintText: StringManager.Enter_the_recipient_name,
+                        labelText: StringManager.recipientName.tr(),
+                        hintText: StringManager.enterTheRecipientName.tr(),
                       ),
                       SizedBox(height: 10.h),
                       Row(
@@ -91,7 +92,7 @@ class _AddressScreenState extends State<AddressScreen> {
                             child: DropdownButtonFormField<String>(
                               value: profileViewModel.selectedCity,
                               decoration: InputDecoration(
-                                labelText: StringManager.city,
+                                labelText: StringManager.city.tr(),
                                 border: OutlineInputBorder(),
                               ),
                               items: cities.map((city) {
@@ -114,7 +115,7 @@ class _AddressScreenState extends State<AddressScreen> {
                               child: DropdownButtonFormField<String>(
                                 value: selectedArea,
                                 decoration: InputDecoration(
-                                  labelText:StringManager.Area,
+                                  labelText:StringManager.area.tr(),
                                   border: OutlineInputBorder(),
                                 ),
                                 items: areas.map((area) {
@@ -135,7 +136,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       ),
                       SizedBox(height: 24.h),
                       CustomElevatedButton(
-                        label: StringManager.save,
+                        label: StringManager.save.tr(),
                         onPressed: () async {
                           await profileViewModel..dointent(SaveAddressIntent());
                           print("Address: ${profileViewModel.street.text}");
@@ -146,7 +147,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
               );
             } else {
-              return Center(child: Text(StringManager.Erroroccurred));
+              return Center(child: Text(StringManager.errorOccurred.tr()));
             }
           },
         ),

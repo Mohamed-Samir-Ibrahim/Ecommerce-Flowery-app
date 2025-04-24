@@ -63,7 +63,7 @@ void main() {
     viewModel.doIntent(FilterProductsIntent(minPrice: 100, maxPrice: 200));
 
     final result = viewModel.state.filteredProducts ?? [];
-    print(result);
+
     expect(result.length, 1); // Only Lily (150) is in range
     expect(result.any((p) => p.title == 'Rose'), false);
     expect(result.any((p) => p.title == 'Lily'), true);

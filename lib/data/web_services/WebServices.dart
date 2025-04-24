@@ -88,7 +88,7 @@ abstract class WebServices {
 
   @GET(ApiConstant.getAllProducts)
   Future<ProductByOccasion> getOcassionProducts(
-      @Query("occasion") String occasion,
+      @Query("occasion")  String occasionId,
       );
   @GET(ApiConstant.getAllProducts)
   Future<ProductByOccasion> getCategoryProducts(

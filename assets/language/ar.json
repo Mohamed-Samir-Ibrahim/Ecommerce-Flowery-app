@@ -83,5 +83,19 @@
   "searchForProduct": "ابحث عن اي منتج تريده",
   "searchHint": "ابحث عن منتج",
   "noResultFound": "لم يتم العثور على نتايج",
-  "products": "المنتجات"
+  "products": "المنتجات",
+  "checkout": "الدفع",
+  "subtotal": "المجموع الفرعي",
+  "deliveryFee": "رسوم التوصيل",
+  "total": "المجموع",
+  "address": "العنوان",
+  "enterYourAddress": "ادخل عنوانك",
+  "errorOccurred": "حدث خطاء",
+  "recipientName": "اسم المستلم",
+  "enterTheRecipientName": "ادخل اسم المستلم",
+  "city": "المدينة",
+  "area": "المنطقة",
+  "save": "حفظ",
+  "deliverTo": "توصيل الى"
+
 }

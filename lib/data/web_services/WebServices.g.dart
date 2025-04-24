@@ -257,7 +257,7 @@ class _WebServices implements WebServices {
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'https://flower.elevateegy.com/api/v1/cart/${id}',
+            'api/v1/cart/${id}',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -306,7 +306,7 @@ class _WebServices implements WebServices {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'https://flower.elevateegy.com/api/v1/cart',
+            'api/v1/cart',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -334,7 +334,7 @@ class _WebServices implements WebServices {
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'https://flower.elevateegy.com/api/v1/cart/${id}',
+            'api/v1/cart/${id}',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -379,9 +379,9 @@ class _WebServices implements WebServices {
   }
 
   @override
-  Future<ProductByOccasion> getOcassionProducts(String occasion) async {
+  Future<ProductByOccasion> getOcassionProducts(String occasionId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'occasion': occasion};
+    final queryParameters = <String, dynamic>{r'occasion': occasionId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ProductByOccasion>(

@@ -119,12 +119,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i694.BestSellerContract>(
       () => _i463.bestSellerImpl(client: gh<_i995.WebServices>()),
     );
-    gh.factory<_i24.profileDataSourceContract>(
-      () => _i37.ProfileDataSourceImpl(gh<_i995.WebServices>()),
-
     gh.factory<_i12.cart_remote_data_source_contract>(
       () => _i106.cart_remote_data_source_impl(gh<_i995.WebServices>()),
-
+    );
+    gh.factory<_i24.profileDataSourceContract>(
+      () => _i37.ProfileDataSourceImpl(gh<_i995.WebServices>()),
     );
     gh.factory<_i658.AuthRemoteDataSourceContract>(
       () => _i793.AuthRemoteDataSourceImplementation(gh<_i995.WebServices>()),
@@ -188,13 +187,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1022.OccasionProductUseCase>(),
       ),
     );
-
     gh.factory<_i756.cart_repoistory_contract>(
       () => _i18.cart_repository_impl(
         cart: gh<_i12.cart_remote_data_source_contract>(),
       ),
     );
-
     gh.factory<_i554.BestSellerUseCase>(
       () => _i554.BestSellerUseCase(
         bestSellerRepository: gh<_i670.BestSellerRepository>(),
@@ -236,12 +233,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
-
     gh.singleton<_i35.ProfileViewModel>(
       () => _i35.ProfileViewModel(gh<_i627.cities_use_case>()),
     );
-
-
     gh.factory<_i368.cart_usecase>(
       () => _i368.cart_usecase(gh<_i756.cart_repoistory_contract>()),
     );
@@ -251,8 +245,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i111.getCartUseCase>(
       () => _i111.getCartUseCase(gh<_i756.cart_repoistory_contract>()),
     );
-
-
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),
