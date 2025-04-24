@@ -18,7 +18,6 @@ class SignupResponseDto extends SignupEntity {
 @JsonSerializable()
 class UserDto extends User{
 
-
   UserDto({super.firstName, super.lastName, super.email, super.gender, super.phone, super.photo, super.role, super.wishlist, super.id, super.addresses, super.createdAt});
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);

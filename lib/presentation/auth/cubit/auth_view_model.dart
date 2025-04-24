@@ -3,6 +3,7 @@ import 'package:flowery/data/model/auth_model/forget_password/forget_password_re
 import 'package:flowery/data/model/auth_model/signup/signup_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
 import 'package:flowery/domain/common/api_result.dart';
+import 'package:flowery/domain/use_case/Profile_use_case/logout_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/forget_password_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/signup_use_case.dart';
 import 'package:flowery/domain/use_case/auth_use_case/verify_reset_use_case.dart';
@@ -15,6 +16,8 @@ import '../../../data/model/auth_model/reset_password/reset_password_request.dar
 import '../../../domain/entity/auth_entity/login_request_entity.dart';
 import '../../../domain/use_case/auth_use_case/login_use_case.dart';
 import '../../../domain/use_case/auth_use_case/reset_password_use_case.dart';
+
+
 @singleton
 class AuthViewModel extends Cubit<AuthState> {
   ForgetPasswordUseCase forgetPasswordUseCase;
@@ -22,7 +25,8 @@ class AuthViewModel extends Cubit<AuthState> {
   SignupUseCase signupUseCase;
   ResetPasswordUseCase resetPasswordUseCase ;
   login_use_case objLoginUseCase;
-  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.objLoginUseCase,this.resetPasswordUseCase,this.signupUseCase)
+  logout_use_case objLogoutUseCase;
+  AuthViewModel(this.forgetPasswordUseCase,this.verifyResetUseCase,this.objLoginUseCase,this.resetPasswordUseCase,this.signupUseCase,this.objLogoutUseCase)
       : super(AuthState(status: Status.initial));
    bool isChecked = false;
   final emailController = TextEditingController();
@@ -132,12 +136,34 @@ class AuthViewModel extends Cubit<AuthState> {
     var result= await objLoginUseCase.invoke(request: login_request_entity(
         email: emailloginController.text.trim(),
         password: passwordController.text.trim()));
-    switch(result){
+    switch(result) {
       case Success():{
         emit(state.copyWith(status: Status.success,login:result.data));
-        if (result.data?.token != null) {
+          if (result.data?.token != null) {
           await SecureStorageService().saveToken(result.data!.token!);}
+          print(result.data?.token);
+      }
+      case Error():{
+        var e=result.exception;
+        emailController.clear();
+        emit(state.copyWith(status: Status.error,exception: e));
+        if (e is DioException) {
+          final responseData = e.response?.data;
+          final statusCode = e.response?.statusCode;
+        }
+      }
+    }
+  }
 
+Future <void> logout() async {
+    emit(state.copyWith(status: Status.loading));
+    var result= await objLogoutUseCase.invoke();
+    switch(result){
+      case Success():{
+        emit(state.copyWith(status: Status.success,logout:result.data));
+        if (result.data?.message == "success") {
+          await SecureStorageService().deleteToken();}
+          print(result.data?.message);
       }
       case Error():{
         var e=result.exception;
@@ -165,17 +191,18 @@ class AuthViewModel extends Cubit<AuthState> {
         signup();
       case LoginResetIntent():
         login();
+         case LogoutIntent():
+        logout();
     }
   }
 
 
 
 }
-sealed class AuthIntent{
-}
-
+sealed class AuthIntent{}
 class ForgetPasswordIntent extends AuthIntent {}
 class VerifyResetIntent extends AuthIntent {}
 class ResetPasswordIntent extends AuthIntent {}
 class LoginResetIntent extends AuthIntent{}
 class SignupIntent extends AuthIntent{}
+class LogoutIntent extends AuthIntent{}

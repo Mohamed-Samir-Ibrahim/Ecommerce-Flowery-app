@@ -10,7 +10,6 @@ class SignupEntity {
     this.error,
     this.token,
   });
-
   String? message;
   User? user;
   String? token;
@@ -51,8 +50,6 @@ class User {
   List<dynamic>? addresses;
   String? createdAt;
 
-  // أضف هنا الـ factory و toJson
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }

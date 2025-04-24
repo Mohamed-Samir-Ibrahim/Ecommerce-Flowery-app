@@ -2,29 +2,34 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flowery/core/utils/routes/route_generator.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
-
+import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
+import 'package:flowery/presentation/home/tabs/profile/profileviewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 void main() async {
- // configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   configureDependencies();
-  //ApiConstant.token = await secureStorage.read(key: 'token');
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')
       ],
       path: 'assets/language',
-      fallbackLocale: Locale('ar'),
-      startLocale: Locale('ar'),
-      child: MyApp(),
+      fallbackLocale: Locale('en'),
+      startLocale: Locale('en'),
+      child: MultiBlocProvider(providers: [
+        BlocProvider(
+          create: (context) => getIt.get<Profileviewmodel>(),
+        ),
+      ],
+
+      child: MyApp()),
     ),
   );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -41,16 +46,8 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
       theme:ThemeData.light(),
-
-
-      // home: CartScreen(),
       onGenerateRoute: RouteGenerator.generateRoutes,
-
       initialRoute: RoutesNames.loginScreen,
-
-      // ApiConstant.token != null ? RoutesNames.layout : RoutesNames.loginScreen,
-
-
     ),
   );
   }

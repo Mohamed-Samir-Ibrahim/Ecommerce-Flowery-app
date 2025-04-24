@@ -98,6 +98,19 @@ static const  String area = 'area';
   static const  String save = 'save';
   static const String deliverTo= 'deliverTo';
 
+  static const String forgotPasswordSuccess = 'OTP sent to your email';
+  static const String forgotPasswordError = 'There is no account with this email address  admin1@1eleate.com';
+  static const String shopping_bag_outlined = 'My orders';
+  static const String location_on_outlined = 'Saved address';
+  static const String notification = 'Notification';
+  static const String language = 'Language';
+  static const String english = 'English';
+  static const String info_outline = 'About us';
+  static const String rule_folder_outlined = 'Terms & conditions';
+  static const String logout = 'Logout';
+  static const String versionApp = 'v 6.3.0 - (446)';
+
+
 
 
 }

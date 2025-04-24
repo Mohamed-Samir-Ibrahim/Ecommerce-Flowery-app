@@ -13,17 +13,15 @@ import '../../../../core/utils/resources/string_manager.dart';
 
 class OccasionScreen extends StatefulWidget {
   OccasionScreen({super.key});
-
   @override
   State<OccasionScreen> createState() => _OccasionScreenState();
 }
-
 class _OccasionScreenState extends State<OccasionScreen> {
   HomeViewModel homeViewModel = getIt.get<HomeViewModel>();
   int selectedIndex = 0;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     homeViewModel.doIntent(LoadHomePageIntent());
     homeViewModel.doIntent(

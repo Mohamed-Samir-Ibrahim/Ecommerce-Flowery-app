@@ -1,23 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api_constant.dart';
-import 'package:flowery/core/utils/add_cart_button.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
-import 'package:flowery/data/model/cart_model/cart_response_dto.dart';
 
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
-import 'package:flowery/data/model/profile_model/AddAddressResponseDto.dart';
-import 'package:flowery/data/model/profile_model/CitiesResponseDto.dart';
-import 'package:flowery/data/model/profile_model/addAddressRequest.dart';
 import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
-import 'package:flowery/domain/entity/cart_entity/GetCartEntity.dart';
-import 'package:flowery/domain/entity/cart_entity/cart_entity.dart';
-import 'package:flowery/domain/entity/cart_entity/delete_item.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
 import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
 
@@ -40,7 +32,6 @@ import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
 import '../model/auth_model/signup/signup_response.dart';
-import '../model/cart_model/cart_request.dart';
 
 part 'WebServices.g.dart';
 
@@ -66,11 +57,10 @@ abstract class WebServices {
       @Body() ResetPasswordRequest request,
       );
 
-  @POST("api/v1/auth/signup")
+  @POST(ApiConstant.registerApi)
   Future<SignupResponseDto> Signup(@Body() Map<String, dynamic> body);
 
-  @POST(ApiConstant.signInApi)
-
+ @POST(ApiConstant.signInApi)
   Future<login_response_entity> login(@Body() login_request_entity request);
  @POST(ApiConstant.cart)
  Future<CartEntity> cart(@Body() CartRequest cartreq,@Header("Authorization") String token);
@@ -97,8 +87,31 @@ abstract class WebServices {
   @GET(ApiConstant.getAllProducts)
   Future<ProductByOccasion> getAllProducts(
       );
-  
+
   @PATCH('https://flower.elevateegy.com/api/v1/addresses')
   Future<AddAddressResponseDto>saveaddress(  @Body() Map<String,dynamic> request
   ,@Header("Authorization") String token);
+}
+
+ @GET(ApiConstant.logout)
+  Future<Logout_response_DM> logout(@Header("Authorization") String? token);
+
+
+@POST(ApiConstant.editProfile)
+  Future<EditProfileResponseEntity> editProfile(
+    @Body() Map<String, dynamic> body,
+    @Header('Authorization') String token,
+  );
+
+  @GET(ApiConstant.getLoggedUserData)
+Future<GetLoggedUserDataResponseDm> loggedUserData(
+  @Header("Authorization") String token ,
+);
+
+  @GET(ApiConstant.addAddress)
+Future<SavedAddress_Response_entity> savedaddress(
+  @Header("Authorization") String token ,
+);
+@PATCH(ApiConstant.changePassword)
+Future<ChangePasswordDto> changePassword(@Body() Map<String, dynamic> body, @Header("Authorization") String token);
 }

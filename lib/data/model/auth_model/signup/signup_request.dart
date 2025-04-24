@@ -8,6 +8,7 @@ class SignupRequest {
   final String gender;
 
   SignupRequest({required this.fristName ,required this.LastName,required this.Phone,required this.email,required this.Password,required this.RePassword,required this.gender});
+  
   Map<String,dynamic> tojson()=>
       {
         "firstName": fristName,
@@ -16,4 +17,5 @@ class SignupRequest {
         "password": Password,
         "rePassword": RePassword,
         "phone": Phone,
-        "gender": gender};}
+        "gender": gender};
+      }
