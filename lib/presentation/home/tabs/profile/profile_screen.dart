@@ -10,10 +10,11 @@ import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/auth/cubit/auth_view_model.dart';
   import 'package:flowery/presentation/auth/screens/login_screen.dart';
 import 'package:flowery/presentation/home/tabs/profile/About_us_screen.dart';
-import 'package:flowery/presentation/home/tabs/profile/edit_profile_screen.dart';
 import 'package:flowery/presentation/home/tabs/profile/saved_address.dart';
   import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'edit_profile_screen.dart';
 
   class ProfileScreen extends StatefulWidget {
     ProfileScreen({super.key,});

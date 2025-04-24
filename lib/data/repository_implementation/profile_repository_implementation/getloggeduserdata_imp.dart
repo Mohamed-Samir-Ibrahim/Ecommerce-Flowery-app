@@ -1,10 +1,10 @@
 
 import 'package:flowery/data/data_source/remote_data_source/profile_remote_data_source/getloggeduserdata_datasource_contract.dart';
-import 'package:flowery/data/model/Profile/get_user_data/logged_User_Data_response.dart';
 import 'package:flowery/domain/common/api_result.dart';
-import 'package:flowery/domain/entity/Profile_entity/get_user_data_entity/logged_user_data_entity.dart';
 import 'package:flowery/domain/repository_contract/Profile_repository_contract/getloggeduserdata_contract.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../domain/entity/Profile_entity/get_user_data_entity/LoggedUserDataResponse_entity.dart';
 
 @Injectable(as: GetLoggedUserDatacontract)
 class GetloggeduserdataImpl extends GetLoggedUserDatacontract{
@@ -12,8 +12,8 @@ class GetloggeduserdataImpl extends GetLoggedUserDatacontract{
   GetloggeduserdataImpl({ required this.getloggeduserdataDatasourceContract});
   
   @override
-  Future<ApiResult<List<user_LoggedUserDataResponse_entity>>> GetloggeduserData({ required String token}) async {
-    return await getloggeduserdataDatasourceContract.getloggeduserdata( token: 'Bearer $token');
+  Future<ApiResult<LoggedUserDataResponseEntity>> GetloggeduserData({ required String token}) async {
+    return await getloggeduserdataDatasourceContract.getloggeduserdata( token: token);
 
   }
 }
