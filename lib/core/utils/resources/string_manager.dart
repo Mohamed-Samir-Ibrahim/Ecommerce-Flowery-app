@@ -71,7 +71,27 @@ static const String search = 'search';
   static const String bouquetInclude = 'bouquetInclude';
   static const String whiteWrap = 'whiteWrap';
   static const String allPricesIncludeTax = 'allPricesIncludeTax';
-  static const String unKnown = 'unKnown';
   static const String addToCart = 'addToCart';
+  static const String unKnown = 'unKnown';
+  static const String checkout = 'Checkout';
+  static const String deliveryTime = 'Delivery time';
+  static const String schedule = 'Schedule';
+  static const String instant = 'Instant,';
+  static const String arriveBy = 'Arrive by';
+  static const String deliveryAddress = 'Delivery address';
+  static const String office= 'Office';
+  static const String addNew = 'add New';
+  static const String paymentMethod = 'Payment method';
+  static const String cashOnDelivery = 'Cash on delivery ';
+  static const String creditCard = 'Credit card';
+  static const String itIsAGift = 'It is a gift';
+  static const String enterYourName = 'Enter your name';
+  static const String name = 'Name';
+  static const String subTotal = 'Sub Total';
+  static const String deliveryFee = 'Delivery Fee';
+  static const String total = 'Total';
+  static const String placeOrder = 'Place Order';
+  static const String completePayment = 'Complete Payment';
+
 
 }

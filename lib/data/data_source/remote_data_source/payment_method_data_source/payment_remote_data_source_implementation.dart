@@ -9,10 +9,9 @@ import 'package:flowery/data/model/auth_model/reset_password/reset_password_requ
 import 'package:flowery/data/model/auth_model/reset_password/reset_password_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
-import 'package:flowery/data/model/payment_model/checkout_session_model/checkout_session_request.dart';
 import 'package:flowery/data/model/payment_model/checkout_session_model/checkout_session_response.dart';
-import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_request.dart';
 import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_response.dart';
+import 'package:flowery/data/model/payment_model/payment_request/payment_request.dart';
 import 'package:flowery/data/web_services/WebServices.dart';
 import 'package:flowery/domain/common/api_result.dart';
 import 'package:flowery/domain/entity/auth_entity/signupentity.dart';
@@ -30,7 +29,7 @@ class PaymentRemoteDataSourceImplementation
 
 
   @override
-  Future<ApiResult<CheckoutSessionResponse>> checkoutSession({required CheckoutSessionRequest request,required String token})async {
+  Future<ApiResult<CheckoutSessionResponse>> checkoutSession({required PaymentRequest request,required String token})async {
     return executeApi<CheckoutSessionResponse>(() async {
       var response = await client.checkoutSession(request,token);
 
@@ -40,7 +39,7 @@ class PaymentRemoteDataSourceImplementation
   }
 
   @override
-  Future<ApiResult<CreatCashOrderResponse>> createCashOrder({required CreatCashOrderRequest request,required String token}) async {
+  Future<ApiResult<CreatCashOrderResponse>> createCashOrder({required PaymentRequest request,required String token}) async {
     return executeApi<CreatCashOrderResponse>(() async {
       var response = await client.createCashOrder(request,token);
 

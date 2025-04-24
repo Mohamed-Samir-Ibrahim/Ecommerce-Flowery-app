@@ -1,16 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'checkout_session_request.g.dart';
 
+part 'payment_request.g.dart';
 
 @JsonSerializable()
-class CheckoutSessionRequest {
+class PaymentRequest {
   ShippingAddressBean ?shippingAddress;
 
-  CheckoutSessionRequest({this.shippingAddress});
+  PaymentRequest({this.shippingAddress});
 
-  factory CheckoutSessionRequest.fromJson(Map<String, dynamic> json) => _$CheckoutSessionRequestFromJson(json);
+  factory PaymentRequest.fromJson(Map<String, dynamic> json) => _$PaymentRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CheckoutSessionRequestToJson(this);
+  Map<String, dynamic> toJson() => _$PaymentRequestToJson(this);
 }
 
 @JsonSerializable()

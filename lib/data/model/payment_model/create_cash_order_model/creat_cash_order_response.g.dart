@@ -31,9 +31,9 @@ OrderBean _$OrderBeanFromJson(Map<String, dynamic> json) => OrderBean(
   isPaid: json['isPaid'] as bool?,
   isDelivered: json['isDelivered'] as bool?,
   state: json['state'] as String?,
-  id: json['_id'] as String?,
+  id: json['id'] as String?,
   orderNumber: json['orderNumber'] as String?,
-  v: json['__v'] as num?,
+  v: json['v'] as num?,
 );
 
 Map<String, dynamic> _$OrderBeanToJson(OrderBean instance) => <String, dynamic>{
@@ -44,9 +44,9 @@ Map<String, dynamic> _$OrderBeanToJson(OrderBean instance) => <String, dynamic>{
   'isPaid': instance.isPaid,
   'isDelivered': instance.isDelivered,
   'state': instance.state,
-  '_id': instance.id,
+  'id': instance.id,
   'orderNumber': instance.orderNumber,
-  '__v': instance.v,
+  'v': instance.v,
 };
 
 OrderItemsBean _$OrderItemsBeanFromJson(Map<String, dynamic> json) =>
@@ -57,7 +57,7 @@ OrderItemsBean _$OrderItemsBeanFromJson(Map<String, dynamic> json) =>
               : ProductBean.fromJson(json['product'] as Map<String, dynamic>),
       price: json['price'] as num?,
       quantity: json['quantity'] as num?,
-      id: json['_id'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$OrderItemsBeanToJson(OrderItemsBean instance) =>
@@ -65,11 +65,11 @@ Map<String, dynamic> _$OrderItemsBeanToJson(OrderItemsBean instance) =>
       'product': instance.product,
       'price': instance.price,
       'quantity': instance.quantity,
-      '_id': instance.id,
+      'id': instance.id,
     };
 
 ProductBean _$ProductBeanFromJson(Map<String, dynamic> json) => ProductBean(
-  id2: json['_id'] as String?,
+  id2: json['id2'] as String?,
   title: json['title'] as String?,
   slug: json['slug'] as String?,
   description: json['description'] as String?,
@@ -80,7 +80,7 @@ ProductBean _$ProductBeanFromJson(Map<String, dynamic> json) => ProductBean(
   quantity: json['quantity'] as num?,
   category: json['category'] as String?,
   occasion: json['occasion'] as String?,
-  v: json['__v'] as num?,
+  v: json['v'] as num?,
   discount: json['discount'] as num?,
   sold: json['sold'] as num?,
   rateAvg: json['rateAvg'] as num?,
@@ -90,7 +90,7 @@ ProductBean _$ProductBeanFromJson(Map<String, dynamic> json) => ProductBean(
 
 Map<String, dynamic> _$ProductBeanToJson(ProductBean instance) =>
     <String, dynamic>{
-      '_id': instance.id2,
+      'id2': instance.id2,
       'title': instance.title,
       'slug': instance.slug,
       'description': instance.description,
@@ -101,7 +101,7 @@ Map<String, dynamic> _$ProductBeanToJson(ProductBean instance) =>
       'quantity': instance.quantity,
       'category': instance.category,
       'occasion': instance.occasion,
-      '__v': instance.v,
+      'v': instance.v,
       'discount': instance.discount,
       'sold': instance.sold,
       'rateAvg': instance.rateAvg,

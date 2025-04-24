@@ -8,10 +8,9 @@ import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
-import 'package:flowery/data/model/payment_model/checkout_session_model/checkout_session_request.dart';
 import 'package:flowery/data/model/payment_model/checkout_session_model/checkout_session_response.dart';
-import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_request.dart';
 import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_response.dart';
+import 'package:flowery/data/model/payment_model/payment_request/payment_request.dart';
 import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
@@ -84,13 +83,13 @@ abstract class WebServices {
 
   @POST(ApiConstant.cashOrders)
   Future<CreatCashOrderResponse> createCashOrder(
-    @Body() CreatCashOrderRequest request,
+    @Body() PaymentRequest request,
       @Header('Authorization') String token,
 
       );
   @POST(ApiConstant.checkoutSession)
   Future<CheckoutSessionResponse> checkoutSession(
-      @Body() CheckoutSessionRequest request,
+      @Body() PaymentRequest request,
       @Header('Authorization') String token,
 
       );

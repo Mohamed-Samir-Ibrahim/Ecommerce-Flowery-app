@@ -11,10 +11,11 @@ class CartStates extends Equatable {
   CheckoutSessionResponse? checkoutSessionResponse;
   Exception? exception;
   String? loadingMessage;
-
+bool ?paymentMethod;
   CartStates({required this.status,
     this.exception,
     this.loadingMessage,
+    this.paymentMethod,
     this.cashOrderResponse, this.checkoutSessionResponse
   });
 
@@ -23,6 +24,7 @@ class CartStates extends Equatable {
     Exception? exception,
     CheckoutSessionResponse? checkoutSessionResponse,
     CreatCashOrderResponse ?cashOrderResponse,
+    bool ?paymentMethod,
 
     String? loadingMessage,
   }) {
@@ -30,6 +32,7 @@ class CartStates extends Equatable {
         status: status ?? this.status,
         loadingMessage: loadingMessage ?? this.loadingMessage,
         exception: exception ?? this.exception,
+        paymentMethod: paymentMethod??this.paymentMethod,
         cashOrderResponse: cashOrderResponse ?? this.cashOrderResponse,
         checkoutSessionResponse: checkoutSessionResponse ??
             this.checkoutSessionResponse
@@ -40,6 +43,7 @@ class CartStates extends Equatable {
   // TODO: implement props
   List<Object?> get props =>
       [
+        paymentMethod,
         status,
         exception,
         loadingMessage,

@@ -1,7 +1,7 @@
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
-import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_request.dart';
 import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_response.dart';
+import 'package:flowery/data/model/payment_model/payment_request/payment_request.dart';
 import 'package:flowery/domain/common/api_result.dart';
 import 'package:flowery/domain/repository_contract/auth_repository_contract/auth_repository_contract.dart';
 import 'package:flowery/domain/repository_contract/payment_repository_contract/payment_repository_contract.dart';
@@ -14,7 +14,7 @@ class CreateCashOrderUseCase {
  CreateCashOrderUseCase(this._paymentRepo);
 
  Future<ApiResult<CreatCashOrderResponse>> invoke(
-      {required CreatCashOrderRequest request,required String token}) async{
+      {required PaymentRequest request,required String token}) async{
 
     var response = await _paymentRepo.createCashOrder(request: request,token: token);
     return response;

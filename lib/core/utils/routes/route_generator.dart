@@ -4,6 +4,9 @@ import 'package:flowery/presentation/auth/screens/otp_screen.dart';
 import 'package:flowery/presentation/auth/screens/signup_screen.dart';
 
 import 'package:flowery/presentation/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:flowery/presentation/home/tabs/cart/checkout_page.dart';
+import 'package:flowery/presentation/home/tabs/cart/order_page.dart';
+import 'package:flowery/presentation/home/tabs/cart/web_view_page.dart';
 import 'package:flowery/presentation/home/tabs/category/category_screen.dart';
 import 'package:flowery/presentation/home/tabs/home/best_seller/best_seller_page.dart';
 
@@ -69,11 +72,25 @@ class RouteGenerator {
         //   builder: (context) => ProductDetailsView(),
         //   settings: settings,
         // );
-        case RoutesNames.categoriesView:
+      case RoutesNames.categoriesView:
         return MaterialPageRoute(
           builder: (context) => CategoryScreen(),
           settings: settings,
         );
+      case RoutesNames.orderPage:
+        return MaterialPageRoute(
+          builder: (context) => OrderPage(),
+          settings: settings,
+        );
+      case RoutesNames.checkoutPage:
+        return MaterialPageRoute(
+          builder: (context) => CheckoutPage(),
+          settings: settings,
+        );   case RoutesNames.webViewPage:
+      return MaterialPageRoute(
+        builder: (context) => PaymentWebViewPage(),
+        settings: settings,
+      );
       default:
         return MaterialPageRoute(
           builder: (context) => const LayoutView(),

@@ -1,25 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'creat_cash_order_request.dart';
+part of 'payment_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreatCashOrderRequest _$CreatCashOrderRequestFromJson(
-  Map<String, dynamic> json,
-) => CreatCashOrderRequest(
-  shippingAddress:
-      json['shippingAddress'] == null
-          ? null
-          : ShippingAddressBean.fromJson(
-            json['shippingAddress'] as Map<String, dynamic>,
-          ),
-);
+PaymentRequest _$PaymentRequestFromJson(Map<String, dynamic> json) =>
+    PaymentRequest(
+      shippingAddress:
+          json['shippingAddress'] == null
+              ? null
+              : ShippingAddressBean.fromJson(
+                json['shippingAddress'] as Map<String, dynamic>,
+              ),
+    );
 
-Map<String, dynamic> _$CreatCashOrderRequestToJson(
-  CreatCashOrderRequest instance,
-) => <String, dynamic>{'shippingAddress': instance.shippingAddress};
+Map<String, dynamic> _$PaymentRequestToJson(PaymentRequest instance) =>
+    <String, dynamic>{'shippingAddress': instance.shippingAddress};
 
 ShippingAddressBean _$ShippingAddressBeanFromJson(Map<String, dynamic> json) =>
     ShippingAddressBean(
