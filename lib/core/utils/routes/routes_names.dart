@@ -30,4 +30,5 @@ class RoutesNames {
   static const String orderPage = 'orderPage';
   static const String checkoutPage = 'checkoutPage';
   static const String webViewPage = 'webViewPage';
+  static const String searchScreen = '/searchScreen'; // New route
 }

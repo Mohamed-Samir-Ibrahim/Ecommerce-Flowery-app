@@ -57,6 +57,14 @@ dependencies:
   intl:
   webview_flutter: ^4.11.0
 
+  google_maps_flutter: ^2.12.1
+  geolocator: ^14.0.0
+  geocoding: ^3.0.0
+  mockito: ^5.4.6
+
+  lingo_hunter: ^1.0.3
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +72,7 @@ dev_dependencies:
   injectable_generator:
   retrofit_generator:
   json_serializable: ^6.8.0
+  mocktail: ^1.0.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -87,6 +96,8 @@ flutter:
     - assets/icon/
     - path/to/
     - assets/language/
+    - assets/cities.json
+    - assets/states.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

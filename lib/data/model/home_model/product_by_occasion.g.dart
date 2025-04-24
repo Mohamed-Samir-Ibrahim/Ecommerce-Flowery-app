@@ -44,6 +44,8 @@ ProductsBean _$ProductsBeanFromJson(Map<String, dynamic> json) => ProductsBean(
   rateAvg: json['rateAvg'] as num?,
   rateCount: json['rateCount'] as num?,
   id2: json['id2'] as String?,
+  createdAt: json['createdAt'] as String?,
+  updatedAt: json['updatedAt'] as String?,
 );
 
 Map<String, dynamic> _$ProductsBeanToJson(ProductsBean instance) =>
@@ -59,6 +61,8 @@ Map<String, dynamic> _$ProductsBeanToJson(ProductsBean instance) =>
       'quantity': instance.quantity,
       'category': instance.category,
       'occasion': instance.occasion,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
       'v': instance.v,
       'discount': instance.discount,
       'sold': instance.sold,

@@ -62,7 +62,7 @@ class HomeViewModel extends Cubit<HomeStates> {
         }
       case LoadOccasionPageIntent():
         {
-          final intent = homeIntent as LoadOccasionPageIntent;
+          final intent = homeIntent;
 
           _occasionProduc(intent.occasionId);
         }

@@ -23,8 +23,7 @@ class StringManager {
   static const String lastNameError = 'lastNameError';
   static const String emailError = 'emailError';
   static const String passwordError = 'passwordError';
-  static const String hintEnterEmailToResetPassword =
-      'hintEnterEmailToResetPassword';
+  static const String hintEnterEmailToResetPassword = 'hintEnterEmailToResetPassword';
   static const String phoneNumberError = 'phoneNumberError';
   static const String rePasswordError = 'rePasswordError';
   static const String rePasswordNotFound = 'rePasswordNotFound';
@@ -58,10 +57,10 @@ class StringManager {
   static const String codeHasBeResend = 'codeHasBeResend?';
   static const String resend = 'resend';
   static const String confirm = 'confirm';
-  static const String cart = 'cart';
-  static const String category = 'category';
-  static const String viewAll = 'viewAll';
-  static const String search = 'search';
+static const String cart = 'cart';
+static const String category = 'category';
+static const String viewAll = 'viewAll';
+static const String search = 'search';
   static const String categories = 'categories';
   static const String occasion = 'occasion';
   static const String noDataFound = 'noDataFound';
@@ -93,4 +92,31 @@ class StringManager {
   static const String total = 'total';
   static const String placeOrder = 'placeOrder';
   static const String completePayment = 'completePayment';
+  static const String  searchForProduct = 'searchForProduct';
+  static const String  searchHint = 'searchHint';
+  static const String  noResultFound = 'noResultFound';
+  static const String  products = 'products';
+  static const String  sortBy = 'sortBy';
+  static const String  lowestPrice= 'lowestPrice';
+  static const String highestPrice= 'highestPrice';
+  static const String newArrival= 'newArrival';
+  static const String oldArrival= 'oldArrival';
+  static const String discount= 'discount';
+  static const String filter= 'filter';
+  static const String checkout = 'checkout';
+  static const String subtotal= 'subtotal';
+  static const String deliveryFee= 'deliveryFee';
+  static const String total= 'total';
+  static const String address= 'Address';
+  static const String enterYourAddress= 'enterYourAddress';
+  static const String errorOccurred= 'errorOccurred';
+  static const String recipientName= 'recipientName';
+  static const String enterTheRecipientName= 'enterTheRecipientName';
+  static const  String city = 'city';
+static const  String area = 'area';
+  static const  String save = 'save';
+  static const String deliverTo= 'deliverTo';
+
+
+
 }
