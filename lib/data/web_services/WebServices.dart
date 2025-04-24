@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api_constant.dart';
+import 'package:flowery/data/model/Profile/change_password/change_password_dto.dart';
 import 'package:flowery/data/model/Profile/logout/Logout_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
@@ -8,6 +9,8 @@ import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
+import 'package:flowery/domain/common/api_result.dart';
+import 'package:flowery/domain/entity/Profile_entity/change_password_entity.dart';
 import 'package:flowery/domain/entity/Profile_entity/edite_profile/edit_profile_request_entity.dart';
 import 'package:flowery/domain/entity/Profile_entity/edite_profile/edite_profile_response_entity.dart';
 import 'package:flowery/domain/entity/Profile_entity/address_entity/Saved_Address_entity.dart';
@@ -93,5 +96,6 @@ Future<GetLoggedUserDataResponseDm> loggedUserData(
 Future<SavedAddress_Response_entity> savedaddress(
   @Header("Authorization") String token , 
 );
-
+@PATCH(ApiConstant.changePassword)
+Future<ChangePasswordDto> changePassword(@Body() Map<String, dynamic> body, @Header("Authorization") String token);
 }

@@ -34,6 +34,10 @@ import '../data/data_source/remote_data_source/home_remote_data_source/product_d
     as _i713;
 import '../data/data_source/remote_data_source/home_remote_data_source/product_data_source_impl.dart'
     as _i323;
+import '../data/data_source/remote_data_source/profile_remote_data_source/change_password_contract.dart'
+    as _i518;
+import '../data/data_source/remote_data_source/profile_remote_data_source/change_password_impl.dart'
+    as _i7;
 import '../data/data_source/remote_data_source/profile_remote_data_source/edit_profile_datasource_imp.dart'
     as _i1071;
 import '../data/data_source/remote_data_source/profile_remote_data_source/edite_profile_datasource_contract.dart'
@@ -56,6 +60,8 @@ import '../data/repository_implementation/home_repository_implementation/home_re
     as _i645;
 import '../data/repository_implementation/home_repository_implementation/product_repo_impl.dart'
     as _i1013;
+import '../data/repository_implementation/profile_repository_implementation/change_password_repository_impl.dart'
+    as _i859;
 import '../data/repository_implementation/profile_repository_implementation/edite_profile_imp.dart'
     as _i146;
 import '../data/repository_implementation/profile_repository_implementation/getloggeduserdata_imp.dart'
@@ -73,6 +79,8 @@ import '../domain/repository_contract/home_repository_contract/home_repository_c
     as _i1053;
 import '../domain/repository_contract/home_repository_contract/product_repository.dart'
     as _i14;
+import '../domain/repository_contract/Profile_repository_contract/chanange_password_repository.dart'
+    as _i745;
 import '../domain/repository_contract/Profile_repository_contract/edit_profile_contract.dart'
     as _i720;
 import '../domain/repository_contract/Profile_repository_contract/getloggeduserdata_contract.dart'
@@ -95,6 +103,8 @@ import '../domain/use_case/home_use_case/home_use_case.dart' as _i817;
 import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
     as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
+import '../domain/use_case/Profile_use_case/change_password_use_case.dart'
+    as _i178;
 import '../domain/use_case/Profile_use_case/edite_profile_use_case.dart'
     as _i361;
 import '../domain/use_case/Profile_use_case/getuserdata_usecase.dart' as _i260;
@@ -105,6 +115,8 @@ import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
 import '../presentation/home/tabs/home/best_seller_view_model.dart' as _i891;
 import '../presentation/home/tabs/home/home_view_model.dart' as _i540;
+import '../presentation/home/tabs/profile/change_password/change_password_cubit.dart'
+    as _i123;
 import '../presentation/home/tabs/profile/profileviewmodel.dart' as _i537;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -122,8 +134,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i995.WebServices>(
       () => dioModule.provideWebServices(gh<_i361.Dio>()),
     );
+    gh.factory<_i518.ChangePasswordContract>(
+      () => _i7.ChangePasswordImpl(client: gh<_i995.WebServices>()),
+    );
     gh.factory<_i509.SavedAddressDataSourceContract>(
       () => _i526.SavedAddressDataSourceImplementation(gh<_i995.WebServices>()),
+    );
+    gh.factory<_i745.ChangePasswordRepository>(
+      () => _i859.ChangePasswordRepositoryImpl(
+        contract: gh<_i518.ChangePasswordContract>(),
+      ),
     );
     gh.factory<_i219.GetloggeduserdataDatasourceContract>(
       () =>
@@ -143,6 +163,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i680.HomeRemoteDataSourceContract>(
       () => _i782.HomeRemoteDataSourceImplementation(gh<_i995.WebServices>()),
+    );
+    gh.factory<_i178.ChangePasswordUseCase>(
+      () => _i178.ChangePasswordUseCase(
+        repository: gh<_i745.ChangePasswordRepository>(),
+      ),
     );
     gh.factory<_i914.Category_Remote_Data_Source_Contract>(
       () => _i672.CategoryRemoteDataSourceImplementation(
@@ -173,6 +198,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i645.HomeRepositoryImplementation(
         gh<_i680.HomeRemoteDataSourceContract>(),
       ),
+    );
+    gh.singleton<_i123.ChangePasswordCubit>(
+      () => _i123.ChangePasswordCubit(gh<_i178.ChangePasswordUseCase>()),
     );
     gh.factory<_i690.GetAllProductUseCase>(
       () => _i690.GetAllProductUseCase(gh<_i1053.HomeRepositoryContract>()),
