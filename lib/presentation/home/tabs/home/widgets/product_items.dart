@@ -1,14 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/resources/color_manager.dart';
 import '../../../../../core/utils/resources/string_manager.dart';
+import '../../cart/cubit/cart_view_model.dart';
 
 class ProductItems extends StatelessWidget {
   final state;
-
-  const ProductItems({super.key, this.state});
+  CartViewModel cartViewModel = getIt<CartViewModel>();
+   ProductItems({super.key, this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +91,14 @@ class ProductItems extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartViewModel.dointent(
+                          AddCartIntent(
+                            productid: state.products?.products![index].id ?? "",
+                            quantity: 1,
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primary,
                         padding: EdgeInsets.symmetric(

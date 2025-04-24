@@ -137,6 +137,7 @@ class AuthViewModel extends Cubit<AuthState> {
         emit(state.copyWith(status: Status.success,login:result.data));
         if (result.data?.token != null) {
           await SecureStorageService().saveToken(result.data!.token!);}
+
       }
       case Error():{
         var e=result.exception;
