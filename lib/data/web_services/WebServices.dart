@@ -1,36 +1,33 @@
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api_constant.dart';
+import 'package:flowery/data/model/Profile/change_password/change_password_dto.dart';
+import 'package:flowery/data/model/Profile/get_user_data/GetLoggedUserDataResponseDm.dart';
+import 'package:flowery/data/model/Profile/logout/Logout_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/Forget_password_response.dart';
 import 'package:flowery/data/model/auth_model/forget_password/forget_password_request.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/Verify_reset_response.dart';
 import 'package:flowery/data/model/auth_model/verify_reset/verify_reset_request.dart';
-
+import 'package:flowery/data/model/cart_model/cart_request.dart';
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
 import 'package:flowery/data/model/home_model/product_by_occasion.dart';
 import 'package:flowery/data/model/home_model/product_model/product_response_dto.dart';
-import 'package:flowery/domain/entity/auth_entity/login_entity.dart';
+import 'package:flowery/data/model/profile_model/AddAddressResponseDto.dart';
+import 'package:flowery/domain/entity/Profile_entity/address_entity/Saved_Address_entity.dart';
+import 'package:flowery/domain/entity/Profile_entity/edite_profile/edite_profile_response_entity.dart';
 import 'package:flowery/domain/entity/auth_entity/login_request_entity.dart';
+import 'package:flowery/domain/entity/auth_entity/login_response_entity.dart';
+import 'package:flowery/domain/entity/cart_entity/cart_entity.dart';
+import 'package:flowery/domain/entity/cart_entity/delete_item.dart';
 import 'package:flowery/domain/entity/home_entity/best_seller_entity/best_seller_entity.dart';
 import 'package:flowery/domain/entity/home_entity/product_response_entity/product_response_entity.dart';
-
-
-
-
 import 'package:flowery/data/model/home_model/best_seller_response_dto.dart';
-
 import 'package:flowery/data/model/home_model/home_model.dart';
-
-
-
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-
 import '../../domain/entity/Categotries_entity/category_model.dart';
-import '../../domain/entity/auth_entity/login_entity.dart';
 import '../../domain/entity/auth_entity/login_request_entity.dart';
 import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
-
 import '../model/auth_model/signup/signup_response.dart';
 
 part 'WebServices.g.dart';
@@ -91,7 +88,7 @@ abstract class WebServices {
   @PATCH('https://flower.elevateegy.com/api/v1/addresses')
   Future<AddAddressResponseDto>saveaddress(  @Body() Map<String,dynamic> request
   ,@Header("Authorization") String token);
-}
+
 
  @GET(ApiConstant.logout)
   Future<Logout_response_DM> logout(@Header("Authorization") String? token);
