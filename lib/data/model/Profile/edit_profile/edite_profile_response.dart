@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 @JsonSerializable(explicitToJson: true)
 class EditProfileResponseDM extends EditProfileResponseEntity {
   EditProfileResponseDM({
-    required super.message,
+     super.message,
     super.user,
     super.error,
   });

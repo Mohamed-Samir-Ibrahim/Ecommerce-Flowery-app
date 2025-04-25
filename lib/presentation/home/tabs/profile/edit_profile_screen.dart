@@ -7,6 +7,7 @@ import 'package:flowery/core/utils/resources/validator_manager.dart';
 import 'package:flowery/core/utils/resources/values_manager.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/profile/chang_password.dart';
+import 'package:flowery/presentation/home/tabs/profile/profile_view_model.dart';
 import 'package:flowery/presentation/home/tabs/profile/profileviewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,18 +24,18 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   String selectedGender = 'female';
-  Profileviewmodel profileviewmodel = getIt<Profileviewmodel>();
+  ProfileViewModel profileviewmodel = getIt<ProfileViewModel>();
 
   @override
   void initState() {
     super.initState();
     // Fetch user data on init
-profileviewmodel..doIntent(loggeduserdata());
+profileviewmodel..dointent(loggeduserdata());
   }
 
   @override
   Widget build(BuildContext context) {
-    var ger = context.read<Profileviewmodel>();
+    var ger = context.read<ProfileViewModel>();
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorManager.white,
@@ -48,27 +49,27 @@ profileviewmodel..doIntent(loggeduserdata());
           backgroundColor: ColorManager.white,
           elevation: 0,
         ),
-        body: BlocConsumer<Profileviewmodel, ProfileStates>(
+        body: BlocConsumer<ProfileViewModel, ProfileState>(
           bloc: profileviewmodel,
           listener: (context, state) {
-            if (state.status == ProfileStatus.error) {
+            if (state.status == ProfileStates.error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Something went wrong")),
               );
-            } else if (state.status == ProfileStatus.success) {
+            } else if (state.status == ProfileStates.success) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Profile updated successfully")),
               );
             }
           },
           builder: (context, state) {
-            if (state.status == ProfileStatus.loading) {
+            if (state.status == ProfileStates.loading) {
               return Center(child: CircularProgressIndicator());
             }
-else if (state.status == ProfileStatus.error) {
+else if (state.status == ProfileStates.error) {
               return Center(child: Text("Something went wrong"));
 }
-else if (state.status == ProfileStatus.success) {
+else if (state.status == ProfileStates.success) {
   final user = state.obj_user_LoggedUserDataResponse_entity?.user;
     return Form(
       key: _formKey,

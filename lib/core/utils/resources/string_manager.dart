@@ -97,9 +97,6 @@ static const String search = 'search';
 static const  String area = 'area';
   static const  String save = 'save';
   static const String deliverTo= 'deliverTo';
-
-  static const String forgotPasswordSuccess = 'OTP sent to your email';
-  static const String forgotPasswordError = 'There is no account with this email address  admin1@1eleate.com';
   static const String shopping_bag_outlined = 'My orders';
   static const String location_on_outlined = 'Saved address';
   static const String notification = 'Notification';

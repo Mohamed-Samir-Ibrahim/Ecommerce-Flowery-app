@@ -3,6 +3,9 @@ import 'package:flowery/data/model/profile_model/CitiesResponseDto.dart';
 import 'package:flowery/domain/entity/profile_entity/addaddress.dart';
 import 'package:flowery/domain/entity/profile_entity/statesentity.dart';
 
+import '../../../../domain/entity/Profile_entity/address_entity/Saved_Address_entity.dart';
+import '../../../../domain/entity/Profile_entity/edite_profile/edite_profile_response_entity.dart';
+import '../../../../domain/entity/Profile_entity/get_user_data_entity/LoggedUserDataResponse_entity.dart';
 import '../../../../domain/entity/profile_entity/citiesentity.dart';
 
 enum ProfileStates { initial, loading, success, error }
@@ -16,7 +19,7 @@ class ProfileState extends Equatable {
   LoggedUserDataResponseEntity? obj_user_LoggedUserDataResponse_entity;
   List<SavedAddress_Response_entity>? obj_SavedAddress_Response_entity;
   final EditProfileResponseEntity? obj_EditeProfileResponse_entity;
-  const ProfileState( {required this.status, this.message, this.citiesentity,this.stateentity,this.saveAddress
+   ProfileState( {required this.status, this.message, this.citiesentity,this.stateentity,this.saveAddress,
   this.obj_user_LoggedUserDataResponse_entity,
     this.obj_SavedAddress_Response_entity,
     this.obj_EditeProfileResponse_entity,

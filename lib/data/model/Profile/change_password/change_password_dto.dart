@@ -6,8 +6,8 @@ part 'change_password_dto.g.dart';
 @JsonSerializable()
 class ChangePasswordDto extends ChangePasswordEntity {
   ChangePasswordDto({
-    required super.message,
-    required super.token,
+     super.message,
+     super.token,
   });
 
   factory ChangePasswordDto.fromJson(Map<String, dynamic> json) => _$ChangePasswordDtoFromJson(json);

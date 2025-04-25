@@ -14,11 +14,11 @@ import 'Cart_states.dart';
 @singleton
 class CartViewModel extends Cubit<CartStates> {
   cart_usecase cart;
-  WebServices? webServices;
+  // WebServices? webServices;
   DeleteItemUseCase delete;
   getCartUseCase getcart;
 
-  CartViewModel({required this.cart,required this.getcart,required this.delete,this.webServices})
+  CartViewModel({required this.cart,required this.getcart,required this.delete,})
       : super(CartStates(state: states.initial));
 
   void AddCart(String product, int quantity ) async {
@@ -57,24 +57,24 @@ class CartViewModel extends Cubit<CartStates> {
     }
   }
 
-  Future<void> deletet(String productid)async{
-    var token = await SecureStorageService().getToken();
-   var res= await webServices?.deleteCartSP(productid, 'Bearer $token');
-   switch(res){
-     case Success():{
-
-
-       await getCart();
-
-       print(res.data?.cart?.cartItems?.toString());
-
-     }
-     case Error():{
-       emit(state.copyWith(state: states.error,exception: res.exception));
-     }
-   }
-
-  }
+  // Future<void> deletet(String productid)async{
+  //   var token = await SecureStorageService().getToken();
+  //  var res= await webServices?.deleteCartSP(productid, 'Bearer $token');
+  //  switch(res){
+  //    case Success():{
+  //
+  //
+  //      await getCart();
+  //
+  //      print(res.data?.cart?.cartItems?.toString());
+  //
+  //    }
+  //    case Error():{
+  //      emit(state.copyWith(state: states.error,exception: res.exception));
+  //    }
+  //  }
+  //
+  // }
 
   dointent(CartIntent cartIntent) {
     switch (cartIntent) {

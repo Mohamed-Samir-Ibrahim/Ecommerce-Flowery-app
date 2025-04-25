@@ -38,10 +38,26 @@ import '../data/data_source/remote_data_source/home_remote_data_source/product_d
     as _i713;
 import '../data/data_source/remote_data_source/home_remote_data_source/product_data_source_impl.dart'
     as _i323;
+import '../data/data_source/remote_data_source/profile_remote_data_source/change_password_contract.dart'
+    as _i518;
+import '../data/data_source/remote_data_source/profile_remote_data_source/change_password_impl.dart'
+    as _i7;
+import '../data/data_source/remote_data_source/profile_remote_data_source/edit_profile_datasource_imp.dart'
+    as _i1071;
+import '../data/data_source/remote_data_source/profile_remote_data_source/edite_profile_datasource_contract.dart'
+    as _i378;
+import '../data/data_source/remote_data_source/profile_remote_data_source/getloggeduserdata_datasource_contract.dart'
+    as _i219;
+import '../data/data_source/remote_data_source/profile_remote_data_source/getloggeduserdata_datasource_imp.dart'
+    as _i904;
 import '../data/data_source/remote_data_source/profile_remote_data_source/profile_data_source_contract.dart'
     as _i24;
 import '../data/data_source/remote_data_source/profile_remote_data_source/profile_data_source_impl.dart'
     as _i37;
+import '../data/data_source/remote_data_source/profile_remote_data_source/saved_address_data_source_contract.dart'
+    as _i509;
+import '../data/data_source/remote_data_source/profile_remote_data_source/saved_address_data_source_implementation.dart'
+    as _i526;
 import '../data/repository_implementation/auth_repository_implementation/auth_repository_implementation.dart'
     as _i277;
 import '../data/repository_implementation/cart_repository_impl/cart_repository_impl.dart'
@@ -56,6 +72,14 @@ import '../data/repository_implementation/home_repository_implementation/product
     as _i1013;
 import '../data/repository_implementation/profile_repository_impl/profile_repository_impl.dart'
     as _i23;
+import '../data/repository_implementation/profile_repository_implementation/change_password_repository_impl.dart'
+    as _i859;
+import '../data/repository_implementation/profile_repository_implementation/edite_profile_imp.dart'
+    as _i146;
+import '../data/repository_implementation/profile_repository_implementation/getloggeduserdata_imp.dart'
+    as _i921;
+import '../data/repository_implementation/profile_repository_implementation/saved_address_implementation.dart'
+    as _i736;
 import '../data/web_services/WebServices.dart' as _i995;
 import '../domain/repository_contract/auth_repository_contract/auth_repository_contract.dart'
     as _i284;
@@ -90,12 +114,22 @@ import '../domain/use_case/home_use_case/home_use_case.dart' as _i817;
 import '../domain/use_case/home_use_case/occasion_product_use_case.dart'
     as _i1022;
 import '../domain/use_case/home_use_case/product_use_case.dart' as _i118;
+import '../domain/use_case/profile_use_case/change_password_use_case.dart'
+    as _i887;
 import '../domain/use_case/profile_use_case/cities_use_case.dart' as _i627;
+import '../domain/use_case/profile_use_case/edite_profile_use_case.dart'
+    as _i253;
+import '../domain/use_case/profile_use_case/getuserdata_usecase.dart' as _i1025;
+import '../domain/use_case/profile_use_case/logout_use_case.dart' as _i162;
+import '../domain/use_case/profile_use_case/saved_adress_use_case.dart'
+    as _i940;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
 import '../presentation/home/tabs/cart/cubit/cart_view_model.dart' as _i65;
 import '../presentation/home/tabs/category/category_view_model.dart' as _i177;
 import '../presentation/home/tabs/home/best_seller_view_model.dart' as _i891;
 import '../presentation/home/tabs/home/home_view_model.dart' as _i540;
+import '../presentation/home/tabs/profile/change_password/change_password_cubit.dart'
+    as _i123;
 import '../presentation/home/tabs/profile/profile_view_model.dart' as _i35;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -107,11 +141,48 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.singleton<_i361.LogInterceptor>(() => dioModule.provideLogger());
+    gh.factory<_i940.saved_adress_use_case>(
+      () => _i940.saved_adress_use_case(
+        obj_SavedAddressContract: gh<InvalidType>(),
+      ),
+    );
+    gh.singleton<_i123.ChangePasswordCubit>(
+      () => _i123.ChangePasswordCubit(gh<InvalidType>()),
+    );
+    gh.factory<_i1025.GetLoggedUserUseCase>(
+      () => _i1025.GetLoggedUserUseCase(gh<InvalidType>()),
+    );
+    gh.factory<_i253.edite_profile_use_case>(
+      () => _i253.edite_profile_use_case(
+        obj_EditProfileContract: gh<InvalidType>(),
+      ),
+    );
     gh.singleton<_i361.Dio>(
       () => dioModule.provideDIO(gh<_i361.LogInterceptor>()),
     );
+    gh.factory<_i887.ChangePasswordUseCase>(
+      () => _i887.ChangePasswordUseCase(repository: gh<InvalidType>()),
+    );
     gh.singleton<_i995.WebServices>(
       () => dioModule.provideWebServices(gh<_i361.Dio>()),
+    );
+    gh.factory<_i518.ChangePasswordContract>(
+      () => _i7.ChangePasswordImpl(client: gh<_i995.WebServices>()),
+    );
+    gh.factory<_i509.SavedAddressDataSourceContract>(
+      () => _i526.SavedAddressDataSourceImplementation(gh<_i995.WebServices>()),
+    );
+    gh.factory<_i859.ChangePasswordRepositoryImpl>(
+      () => _i859.ChangePasswordRepositoryImpl(
+        contract: gh<_i518.ChangePasswordContract>(),
+      ),
+    );
+    gh.factory<_i219.GetloggeduserdataDatasourceContract>(
+      () =>
+          _i904.GetloggeduserdataDatasourceImp(client: gh<_i995.WebServices>()),
+    );
+    gh.factory<_i378.EditeProfileDatasourceContract>(
+      () => _i1071.EditProfileDatasourceImp(gh<_i995.WebServices>()),
     );
     gh.factory<_i713.ProductDataSourceContract>(
       () => _i323.ProductDataSourceImpl(client: gh<_i995.WebServices>()),
@@ -122,6 +193,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i12.cart_remote_data_source_contract>(
       () => _i106.cart_remote_data_source_impl(gh<_i995.WebServices>()),
     );
+    gh.factory<_i736.SavedAddressImplementation>(
+      () => _i736.SavedAddressImplementation(
+        obj_SavedAddressDataSourceContract:
+            gh<_i509.SavedAddressDataSourceContract>(),
+      ),
+    );
     gh.factory<_i24.profileDataSourceContract>(
       () => _i37.ProfileDataSourceImpl(gh<_i995.WebServices>()),
     );
@@ -130,6 +207,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i680.HomeRemoteDataSourceContract>(
       () => _i782.HomeRemoteDataSourceImplementation(gh<_i995.WebServices>()),
+    );
+    gh.factory<_i921.GetloggeduserdataImpl>(
+      () => _i921.GetloggeduserdataImpl(
+        getloggeduserdataDatasourceContract:
+            gh<_i219.GetloggeduserdataDatasourceContract>(),
+      ),
     );
     gh.factory<_i914.Category_Remote_Data_Source_Contract>(
       () => _i672.CategoryRemoteDataSourceImplementation(
@@ -144,6 +227,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1053.HomeRepositoryContract>(
       () => _i645.HomeRepositoryImplementation(
         gh<_i680.HomeRemoteDataSourceContract>(),
+      ),
+    );
+    gh.factory<_i146.EditprfileRepositoryimplementation>(
+      () => _i146.EditprfileRepositoryimplementation(
+        obj_EditeProfileDatasourceContract:
+            gh<_i378.EditeProfileDatasourceContract>(),
       ),
     );
     gh.factory<_i690.GetAllProductUseCase>(
@@ -220,6 +309,13 @@ extension GetItInjectableX on _i174.GetIt {
         bestSellerUseCase: gh<_i554.BestSellerUseCase>(),
       ),
     );
+    gh.singleton<_i35.ProfileViewModel>(
+      () => _i35.ProfileViewModel(
+        gh<_i627.cities_use_case>(),
+        gh<InvalidType>(),
+        gh<InvalidType>(),
+      ),
+    );
     gh.factory<_i6.login_use_case>(
       () => _i6.login_use_case(
         obj_login_repository_contract: gh<_i284.AuthRepositoryContract>(),
@@ -233,9 +329,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
-    gh.singleton<_i35.ProfileViewModel>(
-      () => _i35.ProfileViewModel(gh<_i627.cities_use_case>()),
-    );
     gh.factory<_i368.cart_usecase>(
       () => _i368.cart_usecase(gh<_i756.cart_repoistory_contract>()),
     );
@@ -245,6 +338,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i111.getCartUseCase>(
       () => _i111.getCartUseCase(gh<_i756.cart_repoistory_contract>()),
     );
+    gh.factory<_i162.logout_use_case>(
+      () => _i162.logout_use_case(
+        obj_AuthRepositoryContract: gh<_i284.AuthRepositoryContract>(),
+      ),
+    );
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
         gh<_i439.ForgetPasswordUseCase>(),
@@ -252,6 +350,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i6.login_use_case>(),
         gh<_i455.ResetPasswordUseCase>(),
         gh<_i179.SignupUseCase>(),
+        gh<InvalidType>(),
       ),
     );
     gh.singleton<_i65.CartViewModel>(
@@ -259,7 +358,6 @@ extension GetItInjectableX on _i174.GetIt {
         cart: gh<_i368.cart_usecase>(),
         getcart: gh<_i111.getCartUseCase>(),
         delete: gh<_i1002.DeleteItemUseCase>(),
-        webServices: gh<_i995.WebServices>(),
       ),
     );
     return this;

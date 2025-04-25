@@ -1,5 +1,6 @@
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/profile/profile_states.dart';
+import 'package:flowery/presentation/home/tabs/profile/profile_view_model.dart';
 import 'package:flowery/presentation/home/tabs/profile/profileviewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,12 +16,12 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<Profileviewmodel>().getsavedaddress(); // Add your BLoC method for fetching addresses
+    context.read<ProfileViewModel>().getsavedaddress(); // Add your BLoC method for fetching addresses
   }
 
   @override
   Widget build(BuildContext context) {
-      final profile = getIt.get<Profileviewmodel>();
+      final profile = getIt.get<ProfileViewModel>();
       
     return BlocProvider.value(
       // create: (BuildContext context) 
@@ -36,16 +37,16 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
           elevation: 0,
         ),
       
-        body: BlocConsumer<Profileviewmodel, ProfileStates>(
+        body: BlocConsumer<ProfileViewModel, ProfileState>(
           listener: (context, state) {
-            if (state.status == ProfileStatus.error) {
+            if (state.status == ProfileStates.error) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Failed to load addresses")),
               );
             }
           },
           builder: (context, state) {
-            if (state.status == ProfileStatus.loading) {
+            if (state.status == ProfileStates.loading) {
               return Center(child: CircularProgressIndicator());
             }
       
