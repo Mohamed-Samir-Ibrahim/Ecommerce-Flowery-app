@@ -55,6 +55,7 @@ dependencies:
     sdk: flutter
   easy_localization:
   intl:
+  webview_flutter: ^4.11.0
 
   google_maps_flutter: ^2.12.1
   geolocator: ^14.0.0

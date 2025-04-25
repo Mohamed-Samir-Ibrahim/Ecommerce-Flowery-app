@@ -27,5 +27,8 @@ class RoutesNames {
   static const String placeOrderSuccess = 'placeOrderSuccess';
   static const String trackOrder = 'trackOrder';
   static const String bottomNavScreen = 'bottomNavScreen';
+  static const String orderPage = 'orderPage';
+  static const String checkoutPage = 'checkoutPage';
+  static const String webViewPage = 'webViewPage';
   static const String searchScreen = '/searchScreen'; // New route
 }
