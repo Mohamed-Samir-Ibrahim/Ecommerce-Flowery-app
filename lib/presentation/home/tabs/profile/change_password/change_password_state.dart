@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flowery/domain/entity/profile_entity/change_password_entity.dart';
+import 'package:flowery/domain/entity/Profile_entity/change_password_entity.dart';
 
 enum ChangePasswordStatus { initial, loading, success, error }
 

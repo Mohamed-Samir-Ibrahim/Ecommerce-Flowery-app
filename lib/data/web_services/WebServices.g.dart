@@ -476,7 +476,8 @@ class _WebServices implements WebServices {
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{'Authorization': token,'Content-Type': 'application/json',
+    'Accept': 'application/json',};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);

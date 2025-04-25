@@ -11,10 +11,17 @@ class ChangePasswordUseCase {
   ChangePasswordUseCase({required this.repository});
 
   Future<ApiResult<ChangePasswordEntity>> call({
-    ChangePasswordRequest? changePasswordRequest
+    ChangePasswordRequest? changePasswordRequest,
+    String? oldPassword,
+    String? newPassword
   }) {
+    final request = changePasswordRequest ??
+        ChangePasswordRequest(
+          password: oldPassword,
+          newPassword: newPassword,
+        );
     return repository.changePassword(
-      changePasswordRequest: changePasswordRequest??ChangePasswordRequest()
+      changePasswordRequest: request
     );
   }
 }

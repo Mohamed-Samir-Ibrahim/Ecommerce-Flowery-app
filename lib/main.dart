@@ -3,6 +3,7 @@ import 'package:flowery/core/utils/routes/route_generator.dart';
 import 'package:flowery/core/utils/routes/routes_names.dart';
 import 'package:flowery/di/injetible_intinalizer.dart';
 import 'package:flowery/presentation/home/tabs/home/home_view_model.dart';
+import 'package:flowery/presentation/home/tabs/profile/change_password/change_password_cubit.dart';
 import 'package:flowery/presentation/home/tabs/profile/profileviewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,9 @@ void main() async {
       child: MultiBlocProvider(providers: [
         BlocProvider(
           create: (context) => getIt.get<Profileviewmodel>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt.get<ChangePasswordCubit>()
         ),
       ],
       

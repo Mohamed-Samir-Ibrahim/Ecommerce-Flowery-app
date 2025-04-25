@@ -17,7 +17,11 @@ class ChangePasswordImpl implements ChangePasswordContract {
   @override
   Future<ApiResult<ChangePasswordDto>> changePassword(ChangePasswordRequest changePasswordRequest) async{
     var token = await SecureStorageService().getToken();
+    print('token: $token');
     return executeApi(() async {
+      print("Sending request with token: Bearer $token");
+      print("Body: ${changePasswordRequest.toJson()}");
+      print("Final body to send: ${changePasswordRequest.toJson()}");
       return await client.changePassword(changePasswordRequest.toJson(), 'Bearer $token');
     });
   }
