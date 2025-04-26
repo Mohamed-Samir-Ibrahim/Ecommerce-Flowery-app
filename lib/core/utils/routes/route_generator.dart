@@ -13,7 +13,8 @@ import 'package:flowery/presentation/home/tabs/home/best_seller/best_seller_page
 import 'package:flowery/presentation/home/tabs/home/products/component/product_details_view.dart';
 
 import 'package:flowery/presentation/home/tabs/home/home_screen.dart';
-
+import 'package:flowery/presentation/home/tabs/profile/About_us_screen.dart';
+import 'package:flowery/presentation/home/tabs/profile/terms_and_conditions_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -42,13 +43,9 @@ class RouteGenerator {
           settings: settings,
         );
       case RoutesNames.emailVerification:
-        return MaterialPageRoute(
-          builder:
-              (context) => OtpScreen(),);
+        return MaterialPageRoute(builder: (context) => OtpScreen());
       case RoutesNames.registerScreen:
-        return MaterialPageRoute(
-          builder:
-              (context) => SignUpScreen(),);
+        return MaterialPageRoute(builder: (context) => SignUpScreen());
       case RoutesNames.bottomNavScreen:
         return MaterialPageRoute(
           builder: (context) => BottomNavScreen(),
@@ -58,22 +55,23 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => ResetPasswordScreen(),
           settings: settings,
-        );  case RoutesNames.homeScreen:
-      return MaterialPageRoute(
-        builder: (context) => HomeScreen(),
-        settings: settings,
-      );
+        );
+      case RoutesNames.homeScreen:
+        return MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+          settings: settings,
+        );
       case RoutesNames.mostSellingScreen:
         return MaterialPageRoute(
           builder: (context) => BestSellerPage(),
           settings: settings,
         );
-        // case RoutesNames.productsDetailsView:
-        // return MaterialPageRoute(
-        //   builder: (context) => ProductDetailsView(),
-        //   settings: settings,
-        // );
-        case RoutesNames.categoriesView:
+      // case RoutesNames.productsDetailsView:
+      // return MaterialPageRoute(
+      //   builder: (context) => ProductDetailsView(),
+      //   settings: settings,
+      // );
+      case RoutesNames.categoriesView:
         return MaterialPageRoute(
           builder: (context) => CategoryScreen(),
           settings: settings,
@@ -88,22 +86,31 @@ class RouteGenerator {
           builder: (context) => OrderPage(),
           settings: settings,
         );
+      case RoutesNames.aboutAppView:
+        return MaterialPageRoute(
+          builder: (context) => Aboutus(),
+          settings: settings,
+        );
+      case RoutesNames.termsAndConditionsPage:
+        return MaterialPageRoute(
+          builder: (context) => TermsAndConditions(),
+          settings: settings,
+        );  
       case RoutesNames.checkoutPage:
         return MaterialPageRoute(
           builder: (context) => CheckoutPage(),
           settings: settings,
-        );   case RoutesNames.webViewPage:
-      return MaterialPageRoute(
-        builder: (context) => PaymentWebViewPage(),
-        settings: settings,
-      );
+        );
+      case RoutesNames.webViewPage:
+        return MaterialPageRoute(
+          builder: (context) => PaymentWebViewPage(),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const LayoutView(),
           settings: settings,
         );
-
-
     }
   }
 }

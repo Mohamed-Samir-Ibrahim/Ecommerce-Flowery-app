@@ -69,6 +69,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner:
+  bloc_test:
   injectable_generator:
   retrofit_generator:
   json_serializable: ^6.8.0
@@ -93,6 +94,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/Flowery About Section JSON with Expanded Content.json
+    - assets/Flowery Terms and Conditions JSON with Arabic and English.json
     - assets/icon/
     - path/to/
     - assets/language/
