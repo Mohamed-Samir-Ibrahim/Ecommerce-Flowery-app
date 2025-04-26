@@ -39,6 +39,7 @@ import '../model/auth_model/reset_password/reset_password_request.dart';
 import '../model/auth_model/reset_password/reset_password_response.dart';
 
 import '../model/auth_model/signup/signup_response.dart';
+import '../model/cart_model/cart_request.dart';
 
 part 'WebServices.g.dart';
 
@@ -110,4 +111,11 @@ abstract class WebServices {
   @PATCH('https://flower.elevateegy.com/api/v1/addresses')
   Future<AddAddressResponseDto>saveaddress(  @Body() Map<String,dynamic> request
   ,@Header("Authorization") String token);
+  @GET('${ApiConstant.cart}')
+  Future<CartEntity> getCart(@Header("Authorization") String token);
+  @DELETE('${ApiConstant.cart}/{id}')
+  Future<DeleteItem> deleteCartItem(@Path("id") String id,@Header("Authorization") String token);
+  @POST(ApiConstant.cart)
+  Future<CartEntity> cart(@Body() CartRequest cartreq,@Header("Authorization") String token);
+
 }

@@ -72,8 +72,7 @@
   "whiteWrap": "White wrap",
   "allPricesIncludeTax": "All prices include tax",
   "addToCart": "Add to cart",
-  "unKnown": "Unknown",
-  "checkout": "Checkout",
+
   "deliveryTime": "Delivery time",
   "schedule": "Schedule",
   "instant": "Instant,",
@@ -91,7 +90,7 @@
   " placeOrder": "Place Order",
   "enterYourName": "Enter your name",
   "name": "Name",
-  " completePayment": "Complete Payment"
+  "completePayment": "Complete Payment",
   "unKnown": "Unknown",
   "sortBy": "Sort by",
   "lowestPrice": "Lowest price",
