@@ -6,6 +6,8 @@ import '../../../../core/shared_Preferences.dart';
 import '../../../../core/utils/resources/custom_elevated_button.dart';
 import '../../../../di/injetible_intinalizer.dart';
 import 'cart_item.dart';
+import 'cart_states.dart';
+import 'cart_view_model.dart';
 import 'cubit/cart_view_model.dart';
 
 class CartScreen extends StatefulWidget {
@@ -16,15 +18,13 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  CartViewModel cartViewModel = getIt<CartViewModel>();
-
-
+  CartViewModel cartViewModel = getIt.get<CartViewModel>();
 
   @override
   Widget build(BuildContext context) {
 
     return BlocProvider<CartViewModel>.value(
-      value: cartViewModel..dointent(getCartIntent()),
+      value: cartViewModel..doIntent(getCartIntent()),
       child: BlocBuilder<CartViewModel,CartStates>(
 
         builder: (context,state) {

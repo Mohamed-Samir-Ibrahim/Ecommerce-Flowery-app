@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/resources/custom_elevated_button.dart';
+import 'cart_view_model.dart';
 
 class cartitem extends StatefulWidget {
    cartitem({super.key, required this.cartI});
@@ -27,7 +28,7 @@ int btn= 1;
   void initState() {
   final productId = widget.cartI?.product?.id;
   if(productId!=null){
-    Future.microtask(() =>    context.read<CartViewModel>().dointent(
+    Future.microtask(() =>    context.read<CartViewModel>().doIntent(
       AddCartIntent(productid: productId, quantity: btn)));
   }
     super.initState();
@@ -78,7 +79,7 @@ int btn= 1;
                   
                           IconButton(onPressed: ()async{
                             final productId = widget.cartI?.product?.id;
-                              await context.read<CartViewModel>().deletet(productId!);
+
                   await context.read<CartViewModel>().getCart();
                           }, icon: Icon(Icons.delete)),
                   

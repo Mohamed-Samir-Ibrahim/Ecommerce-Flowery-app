@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/resources/color_manager.dart';
 import '../../../../../core/utils/resources/string_manager.dart';
+import '../../cart/cart_view_model.dart';
 import '../../cart/cubit/cart_view_model.dart';
 
 class ProductItems extends StatelessWidget {
@@ -92,7 +93,7 @@ class ProductItems extends StatelessWidget {
                     SizedBox(height: 10.h),
                     ElevatedButton(
                       onPressed: () {
-                        cartViewModel.dointent(
+                        cartViewModel.doIntent(
                           AddCartIntent(
                             productid: state.products?.products![index].id ?? "",
                             quantity: 1,
