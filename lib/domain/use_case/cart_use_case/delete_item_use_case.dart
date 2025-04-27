@@ -9,6 +9,6 @@ class DeleteItemUseCase {
   cart_repoistory_contract cart;
   DeleteItemUseCase(this.cart);
 
-  Future<ApiResult<DeleteItem>> call()async{
-    return await cart.Delete();
+  Future<ApiResult<DeleteItem>> call(String ProductId)async{
+    return await cart.Delete(ProductId);
 }}

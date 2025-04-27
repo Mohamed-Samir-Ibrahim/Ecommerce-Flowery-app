@@ -79,6 +79,7 @@ int btn= 1;
                   
                           IconButton(onPressed: ()async{
                             final productId = widget.cartI?.product?.id;
+                            await context.read<CartViewModel>().DeleteCart(productId!);
 
                   await context.read<CartViewModel>().getCart();
                           }, icon: Icon(Icons.delete)),
