@@ -16,12 +16,12 @@ class cities_use_case {
 
   }
   Future<ApiResult<List<statesentity>>>getstates(){
-    return  profileRepositoryContract.getstates();
+    return  profileRepositoryContract.getStates();
 
 
   }
   Future<ApiResult<Addaddress>>SaveAddress(AddAddressRequest request){
-    return  profileRepositoryContract.saveaddress(request);
+    return  profileRepositoryContract.saveAddress(request);
 
   }
 

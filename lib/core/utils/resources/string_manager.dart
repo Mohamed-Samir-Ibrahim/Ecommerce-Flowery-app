@@ -113,7 +113,16 @@ static const String search = 'search';
 static const  String area = 'area';
   static const  String save = 'save';
   static const String deliverTo= 'deliverTo';
-
+  static const String myOrders = 'myOrders';
+  static const String savedAddress = 'savedAddress';
+  static const String notification = 'notification';
+  static const String language = 'language';
+  static const String aboutUs = 'aboutUs';
+  static const String termsConditions = 'termsConditions';
+  static const String logout = 'logout';
+  static const String version = 'version';
+  static const String english = 'english';
+  static const String changePassword= 'changePassword';
 
 
 }

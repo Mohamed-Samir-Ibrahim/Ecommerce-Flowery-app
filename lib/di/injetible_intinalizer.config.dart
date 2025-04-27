@@ -110,7 +110,11 @@ import '../domain/use_case/payment_use_case/checkout_session_use_case.dart'
     as _i824;
 import '../domain/use_case/payment_use_case/create_cash_order_use_case.dart'
     as _i87;
+import '../domain/use_case/profile_use_case/change_password.dart' as _i210;
 import '../domain/use_case/profile_use_case/cities_use_case.dart' as _i627;
+import '../domain/use_case/profile_use_case/edit_profile.dart' as _i428;
+import '../domain/use_case/profile_use_case/get_logged_user.dart' as _i752;
+import '../domain/use_case/profile_use_case/log_out.dart' as _i835;
 import '../domain/use_case/user_address_use_case/get_logged_user_address_use_case.dart'
     as _i327;
 import '../presentation/auth/cubit/auth_view_model.dart' as _i851;
@@ -153,14 +157,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i12.cart_remote_data_source_contract>(
       () => _i106.cart_remote_data_source_impl(gh<_i995.WebServices>()),
     );
-    gh.factory<_i24.profileDataSourceContract>(
-      () => _i37.ProfileDataSourceImpl(gh<_i995.WebServices>()),
-    );
     gh.factory<_i658.AuthRemoteDataSourceContract>(
       () => _i793.AuthRemoteDataSourceImplementation(gh<_i995.WebServices>()),
     );
     gh.factory<_i680.HomeRemoteDataSourceContract>(
       () => _i782.HomeRemoteDataSourceImplementation(gh<_i995.WebServices>()),
+    );
+    gh.factory<_i24.ProfileDataSourceContract>(
+      () => _i37.ProfileDataSourceImpl(gh<_i995.WebServices>()),
     );
     gh.factory<_i914.Category_Remote_Data_Source_Contract>(
       () => _i672.CategoryRemoteDataSourceImplementation(
@@ -192,7 +196,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i817.HomeUseCase(gh<_i1053.HomeRepositoryContract>()),
     );
     gh.factory<_i517.ProfileRepositoryContract>(
-      () => _i23.ProfileRepositoryImpl(gh<_i24.profileDataSourceContract>()),
+      () => _i23.ProfileRepositoryImpl(gh<_i24.ProfileDataSourceContract>()),
     );
     gh.factory<_i627.cities_use_case>(
       () => _i627.cities_use_case(gh<_i517.ProfileRepositoryContract>()),
@@ -215,6 +219,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i277.AuthRepositoryImplementation(
         gh<_i658.AuthRemoteDataSourceContract>(),
       ),
+    );
+    gh.factory<_i835.LogOutUseCase>(
+      () => _i835.LogOutUseCase(gh<_i517.ProfileRepositoryContract>()),
     );
     gh.factory<_i477.CategoryUseCase>(
       () => _i477.CategoryUseCase(
@@ -285,8 +292,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i690.GetAllProductUseCase>(),
       ),
     );
-    gh.singleton<_i35.ProfileViewModel>(
-      () => _i35.ProfileViewModel(gh<_i627.cities_use_case>()),
+    gh.factory<_i210.ChangePasswordUseCase>(
+      () => _i210.ChangePasswordUseCase(gh<_i517.ProfileRepositoryContract>()),
+    );
+    gh.factory<_i428.EditProfileUseCase>(
+      () => _i428.EditProfileUseCase(gh<_i517.ProfileRepositoryContract>()),
     );
     gh.factory<_i368.cart_usecase>(
       () => _i368.cart_usecase(gh<_i756.cart_repoistory_contract>()),
@@ -296,6 +306,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i111.getCartUseCase>(
       () => _i111.getCartUseCase(gh<_i756.cart_repoistory_contract>()),
+    );
+    gh.factory<_i752.GetLoggedUserUseCase>(
+      () => _i752.GetLoggedUserUseCase(gh<_i517.ProfileRepositoryContract>()),
     );
     gh.singleton<_i851.AuthViewModel>(
       () => _i851.AuthViewModel(
@@ -313,6 +326,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i327.GetLoggedUserAddressUseCase>(),
         gh<_i368.cart_usecase>(),
         gh<_i111.getCartUseCase>(),
+      ),
+    );
+    gh.singleton<_i35.ProfileViewModel>(
+      () => _i35.ProfileViewModel(
+        gh<_i627.cities_use_case>(),
+        gh<_i835.LogOutUseCase>(),
+        gh<_i752.GetLoggedUserUseCase>(),
+        gh<_i428.EditProfileUseCase>(),
+        gh<_i210.ChangePasswordUseCase>(),
       ),
     );
     return this;

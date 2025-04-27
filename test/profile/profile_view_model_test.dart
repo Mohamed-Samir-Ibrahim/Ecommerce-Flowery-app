@@ -19,7 +19,7 @@ void main() {
 
   setUp(() {
     mockCitiesUseCase = Mockcities_use_case();
-    viewModel = ProfileViewModel(mockCitiesUseCase);
+    viewModel = ProfileViewModel(mockCitiesUseCase,);
   });
 
   test('getCities emits success state with data', () async {
@@ -37,7 +37,7 @@ void main() {
     final fakeStates = [statesentity(city_name_en: 'Nasr City', governorate_id: 1, id: 2, city_name_ar: 'مدينة نصر')];
     when(mockCitiesUseCase.getstates()).thenAnswer((_) async => Success(fakeStates));
 
-    await viewModel.Getstates();
+    await viewModel.getStates();
 
     expect(viewModel.state.status, ProfileStates.success);
     expect(viewModel.state.stateentity, isNotEmpty);
@@ -55,7 +55,7 @@ void main() {
     viewModel.street.text = 'Main Street';
     viewModel.selectedCity = 'Cairo';
 
-    await viewModel.SaveAddress();
+    await viewModel.saveAddress();
 
     expect(viewModel.state.status, ProfileStates.success);
     expect(viewModel.state.saveAddress, equals(fakeAddress));
@@ -72,7 +72,7 @@ void main() {
     viewModel.street.text = 'Main Street';
     viewModel.selectedCity = 'Cairo';
 
-    await viewModel.SaveAddress();
+    await viewModel.saveAddress();
 
     expect(viewModel.state.status, ProfileStates.error);
     expect(viewModel.state.message, "Failed to save address");

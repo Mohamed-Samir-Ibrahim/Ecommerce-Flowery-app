@@ -41,7 +41,7 @@ class _AddressScreenState extends State<AddressScreen> {
       ),
       body: BlocProvider(
         create: (_) => getIt<ProfileViewModel>()
-          ..dointent(GetCitiesIntent()),
+          ..doIntent(GetCitiesIntent()),
         child: BlocBuilder<ProfileViewModel, ProfileState>(
           builder: (context, state) {
             if (state.status == ProfileStates.loading) {
@@ -138,7 +138,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       CustomElevatedButton(
                         label: StringManager.save.tr(),
                         onPressed: () async {
-                          await profileViewModel..dointent(SaveAddressIntent());
+                          await profileViewModel..doIntent(SaveAddressIntent());
                           print("Address: ${profileViewModel.street.text}");
                         },
                       ),

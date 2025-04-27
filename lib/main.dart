@@ -41,8 +41,6 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
       theme:ThemeData.light(),
-
-
       // home: CartScreen(),
       onGenerateRoute: RouteGenerator.generateRoutes,
 

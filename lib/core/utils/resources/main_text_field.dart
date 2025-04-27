@@ -32,6 +32,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
     this.inputFormatters = const [],
     this.obscureText,
     this.fontSize,
+      this.onChangePasswordTap,
+      this.changePasswordText ,
+
     });
 
     final String? Function(String?)? validator;
@@ -55,6 +58,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
   final double? fontSize ;
   final bool autofocus ;
   final List<TextInputFormatter> inputFormatters ;
+  final VoidCallback? onChangePasswordTap;
+  final String? changePasswordText ;
+
 
     @override
     Widget build(BuildContext context) {
@@ -130,6 +136,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
           color: Colors.red,
         ),
       ),
+
     );
+
     }
   }

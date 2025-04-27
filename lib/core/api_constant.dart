@@ -23,4 +23,6 @@ class ApiConstant{
   static const String cashOrders = "api/v1/orders";
   static const String getUserOrders = "api/v1/orders";
   static const String checkoutSession = "api/v1/orders/checkout?url=http://localhost:3000";
+  static const String logoutApi = "api/v1/auth/logout";
+  static const String getCities = "api/v1/cities";
 }

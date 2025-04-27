@@ -17,10 +17,13 @@ import 'package:flowery/presentation/home/tabs/home/home_screen.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../../presentation/auth/screens/change_password_screen.dart';
 import '../../../presentation/auth/screens/login_screen.dart';
 import '../../../presentation/auth/screens/reset_password_screen.dart';
 import '../../../presentation/home/layout_view.dart';
 import '../../../presentation/home/tabs/home/search_screen.dart';
+import '../../../presentation/home/tabs/profile/edit_profile_screen.dart';
+import '../../../presentation/home/tabs/profile/profile_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -68,11 +71,11 @@ class RouteGenerator {
           builder: (context) => BestSellerPage(),
           settings: settings,
         );
-        // case RoutesNames.productsDetailsView:
-        // return MaterialPageRoute(
-        //   builder: (context) => ProductDetailsView(),
-        //   settings: settings,
-        // );
+        case RoutesNames.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (context) => EditProfileScreen(),
+          settings: settings,
+        );
         case RoutesNames.categoriesView:
         return MaterialPageRoute(
           builder: (context) => CategoryScreen(),
@@ -97,11 +100,23 @@ class RouteGenerator {
         builder: (context) => PaymentWebViewPage(),
         settings: settings,
       );
+      case RoutesNames.profileMainScreen:
+        return MaterialPageRoute(
+          builder: (context) => ProfileScreen(),
+          settings: settings,
+        );
+        case RoutesNames.changePassWordScreen:
+      return MaterialPageRoute(
+        builder: (context) => ChangePasswordScreen(),
+        settings: settings,
+      );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const LayoutView(),
           settings: settings,
         );
+
 
 
     }
