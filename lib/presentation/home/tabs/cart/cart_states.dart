@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flowery/data/model/payment_model/checkout_session_model/checkout_session_response.dart';
 import 'package:flowery/data/model/payment_model/create_cash_order_model/creat_cash_order_response.dart';
 import 'package:flowery/data/model/user_address_model/get_logged_user_address.dart';
+import 'package:flowery/domain/entity/cart_entity/delete_item.dart';
 
 import '../../../../domain/entity/cart_entity/GetCartEntity.dart';
 import '../../../../domain/entity/cart_entity/cart_entity.dart';
@@ -12,14 +13,16 @@ enum Status { loading, success, error, }
 class CartStates extends Equatable {
   Status status;
   CartEntity? cartResponseDto;
+  DeleteItem? deleteItem;
   GetCartEntity? getCartEntity;
   CreatCashOrderResponse ?cashOrderResponse;
   CheckoutSessionResponse? checkoutSessionResponse;
   GetLoggedUserAddressResponse? getLoggedUserAddressResponse;
   Exception? exception;
   String? loadingMessage;
-bool ?paymentMethod;
+  bool ?paymentMethod;
   CartStates({required this.status,
+    this.deleteItem,
     this.exception,
     this.loadingMessage,
     this.getLoggedUserAddressResponse,
@@ -37,9 +40,11 @@ bool ?paymentMethod;
     bool ?paymentMethod,
     GetCartEntity? getCartEntity,
     CartEntity? cartResponseDto,
+    DeleteItem? delete,
     String? loadingMessage,
   }) {
     return CartStates(
+        deleteItem: deleteItem ?? this.deleteItem,
         status: status ?? this.status,
         loadingMessage: loadingMessage ?? this.loadingMessage,
         exception: exception ?? this.exception,
@@ -64,7 +69,7 @@ bool ?paymentMethod;
         getLoggedUserAddressResponse,
         loadingMessage,
         checkoutSessionResponse,
-        cashOrderResponse
+        cashOrderResponse,deleteItem
         ,
         cartResponseDto,
         getCartEntity

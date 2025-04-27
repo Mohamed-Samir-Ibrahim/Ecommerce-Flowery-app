@@ -45,12 +45,12 @@ class cart_remote_data_source_impl  extends cart_remote_data_source_contract {
 
 
   @override
-  Future<ApiResult<DeleteItem>> Delete() async{
+  Future<ApiResult<DeleteItem>> Delete(String ProductId) async{
     return executeApi<DeleteItem>(()async{
       var token = await SecureStorageService().getToken();
 
 
-      var result = await webServices.deleteCartItem('673e1cd711599201718280fb',('Bearer $token'));
+      var result = await webServices.deleteCartItem(ProductId,('Bearer $token'));
       return result;
 
 

@@ -2,6 +2,7 @@ import 'package:flowery/core/shared_Preferences.dart';
 import 'package:flowery/data/model/payment_model/payment_request/payment_request.dart';
 import 'package:flowery/data/model/user_address_model/get_logged_user_address.dart';
 import 'package:flowery/domain/common/api_result.dart';
+import 'package:flowery/domain/use_case/cart_use_case/delete_item_use_case.dart';
 import 'package:flowery/domain/use_case/payment_use_case/checkout_session_use_case.dart';
 import 'package:flowery/domain/use_case/payment_use_case/create_cash_order_use_case.dart';
 import 'package:flowery/domain/use_case/user_address_use_case/get_logged_user_address_use_case.dart';
@@ -19,6 +20,7 @@ class CartViewModel extends Cubit<CartStates> {
   CheckoutSessionUseCase checkoutSessionUseCase;
   cart_usecase cart;
   getCartUseCase getcart;
+  DeleteItemUseCase deleteItemUseCase;
   CreateCashOrderUseCase cashOrderUseCase;
   GetLoggedUserAddressUseCase getLoggedUserAddressUseCase;
   bool isCashOrder = true;
@@ -26,7 +28,7 @@ class CartViewModel extends Cubit<CartStates> {
   AddressesBean ?selectedAddress;
   var token = SecureStorageService().getToken();
 
-  CartViewModel(this.checkoutSessionUseCase, this.cashOrderUseCase,this.getLoggedUserAddressUseCase,this.cart,this.getcart)
+  CartViewModel(this.checkoutSessionUseCase, this.cashOrderUseCase,this.getLoggedUserAddressUseCase,this.cart,this.getcart,this.deleteItemUseCase)
       : super(CartStates(status: Status.loading));
 
   void _checkoutSession() async {
@@ -106,11 +108,11 @@ class CartViewModel extends Cubit<CartStates> {
     switch (result) {
       case Success():
         {
-        emit(
-        state.copyWith(
-        status: Status.success,
-        getLoggedUserAddressResponse: result.data,
-        ),);
+          emit(
+            state.copyWith(
+              status: Status.success,
+              getLoggedUserAddressResponse: result.data,
+            ),);
         }
       case Error():
         {
@@ -155,6 +157,23 @@ class CartViewModel extends Cubit<CartStates> {
       case Error() :
     }
   }
+
+   DeleteCart(String ProductId) async {
+    emit(state.copyWith(status: Status.loading));
+    var response = await deleteItemUseCase.cart.Delete(ProductId);
+    switch (response) {
+      case Success() :
+        {
+          emit(state.copyWith(
+              status: Status.success, delete: response.data));
+        }
+      case Error() :
+        {
+          emit(state.copyWith(
+              status: Status.error, exception: response.exception));
+        }
+    }
+  }
   void doIntent(CartIntent cartIntent) {
     switch (cartIntent) {
       case CheckoutSessionIntent():
@@ -166,13 +185,15 @@ class CartViewModel extends Cubit<CartStates> {
           _createCashOrder();
         }
       case GetLoggedUserAddressIntent()
-      :
+          :
         {
           _getLoggedUserAddresses();
         }
-        case AddCartIntent():
+      case DeleteCartIntent():
+        DeleteCart(cartIntent.productid);
+      case AddCartIntent():
         AddCart(cartIntent.productid, cartIntent.quantity);
-        case getCartIntent():
+      case getCartIntent():
         getCart();
 
     }
@@ -180,11 +201,18 @@ class CartViewModel extends Cubit<CartStates> {
   }
 }
 
+
 sealed class CartIntent {}
 
 class CheckoutSessionIntent extends CartIntent {}
 
 class CreateCashOrderIntent extends CartIntent {}
+
+class DeleteCartIntent extends CartIntent {
+  String productid;
+DeleteCartIntent({required this.productid});
+}
+
 
 class GetLoggedUserAddressIntent extends CartIntent {}
 class AddCartIntent extends CartIntent{

@@ -313,6 +313,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i327.GetLoggedUserAddressUseCase>(),
         gh<_i368.cart_usecase>(),
         gh<_i111.getCartUseCase>(),
+        gh<_i1002.DeleteItemUseCase>(),
       ),
     );
     return this;

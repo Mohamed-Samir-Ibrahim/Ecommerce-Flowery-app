@@ -25,8 +25,8 @@ return  await  cart.getCartItems(cartreq: cartreq);
   }
 
   @override
-  Future<ApiResult<DeleteItem>> Delete()async {
-  return await cart.Delete();
+  Future<ApiResult<DeleteItem>> Delete(String ProductId)async {
+  return await cart.Delete(ProductId);
   }
 
 

@@ -8,5 +8,5 @@ import '../../../../domain/entity/cart_entity/GetCartEntity.dart';
 abstract class cart_remote_data_source_contract {
   Future<ApiResult<CartEntity>> getCartItems({required CartRequest cartreq});
   Future<ApiResult<CartEntity>> getcart();
-  Future<ApiResult<DeleteItem>>Delete();
+  Future<ApiResult<DeleteItem>>Delete(String ProductId);
 }

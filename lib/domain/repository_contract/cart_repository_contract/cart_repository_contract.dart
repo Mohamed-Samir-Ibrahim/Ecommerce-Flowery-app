@@ -8,5 +8,6 @@ abstract class cart_repoistory_contract {
 
 Future<ApiResult<CartEntity>>get({required CartRequest cartreq});
 Future<ApiResult<CartEntity>>getcart();
-Future<ApiResult<DeleteItem>>Delete();
+Future<ApiResult<DeleteItem>>Delete(String ProductId);
+
 }
